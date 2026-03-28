@@ -10,7 +10,8 @@
 :root{--gold:#f59e0b;--bg:#0d0d0d;--bg2:#111111;--bg3:#161616;--border:#1f1f1f;--text:#ffffff;--muted:#555555;--muted2:#888888}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+body{background:#0d0d0d;color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+section{background:#0d0d0d}
 .ticker-outer{background:var(--gold);padding:6px 0;overflow:hidden}
 .ticker-track{display:flex;gap:3rem;animation:ticker 30s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
@@ -26,9 +27,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.92);backdrop-fil
 .nav-cta:hover{background:var(--gold);color:var(--bg)}
 .hero{padding:100px 40px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:16px;animation:fadeUp .5s .1s both}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both}
-.hero-title .accent{color:var(--gold)}
-.hero-desc{color:var(--muted2);font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:#ffffff}
+.hero-title .accent{color:#f59e0b}
+.hero-desc{color:#888888;font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .4s both}
 .btn-primary{background:var(--gold);color:var(--bg);padding:13px 32px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{opacity:.88}
@@ -121,7 +122,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div class="hero">
     <div>
       <p class="hero-label">BORSA İSTANBUL ANALİZ MOTORU</p>
-      <h1 class="hero-title">Fırsatı<br>yakalayan<br><span class="accent">kazanır.</span></h1>
+      <h1 class="hero-title">Doğru yerden<br>alan<br><span class="accent">kazanır.</span></h1>
       <p class="hero-desc">530+ BIST hissesini MA, RSI, hacim ve temel analiz filtrelerine göre tara. 7 hazır tarama modeli. Tamamen ücretsiz.</p>
       <div class="hero-btns">
         <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
@@ -130,45 +131,20 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     </div>
     <div class="hero-mock">
       <div class="mock-header">
-        <span class="mock-title">SON TARAMA SONUÇLARI</span>
-        <span class="mock-badge">15 dk gecikmeli</span>
+        <span class="mock-title">FAVORİ HİSSELERİM</span>
+        <span class="mock-badge">Tarayıcında saklanır</span>
       </div>
       <div style="padding:10px 18px;border-bottom:1px solid var(--border);">
         <div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" placeholder="Hisse ara... (GARAN, THYAO...)" style="background:transparent;border:none;outline:none;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;width:100%;" id="stockSearch"/>
+          <input type="text" placeholder="Hisse ekle... (GARAN, THYAO)" style="background:transparent;border:none;outline:none;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;width:100%;" id="favSearch" oninput="onFavSearch(this.value)" onkeydown="onFavKey(event)"/>
+          <button onclick="addFavFromInput()" style="background:var(--gold);border:none;color:#0d0d0d;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">+ Ekle</button>
         </div>
-        <div id="searchResults" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:20px;"></div>
+        <div id="favDropdown" style="display:none;flex-wrap:wrap;gap:4px;margin-top:6px;"></div>
       </div>
-      <div class="mock-row">
-        <div class="mock-ticker">ASELS</div>
-        <div class="mock-info"><div class="mock-name">Aselsan</div></div>
-        <span class="mock-signal sig-gold">Golden Cross</span>
-        <div class="mock-change pos">+3.2%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">EREGL</div>
-        <div class="mock-info"><div class="mock-name">Ereğli Demir</div></div>
-        <span class="mock-signal sig-green">Hacimlenen Dip</span>
-        <div class="mock-change pos">+1.8%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">SASA</div>
-        <div class="mock-info"><div class="mock-name">SASA Polyester</div></div>
-        <span class="mock-signal sig-blue">52H Kırılım</span>
-        <div class="mock-change pos">+5.1%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">KCHOL</div>
-        <div class="mock-info"><div class="mock-name">Koç Holding</div></div>
-        <span class="mock-signal sig-gold">Ucuz Kalmış</span>
-        <div class="mock-change neg">-0.4%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">BIMAS</div>
-        <div class="mock-info"><div class="mock-name">BİM Mağazalar</div></div>
-        <span class="mock-signal sig-green">Akıllı Para</span>
-        <div class="mock-change pos">+2.7%</div>
+      <div id="favList" style="min-height:60px;"></div>
+      <div id="favEmpty" style="padding:20px 18px;font-size:12px;color:var(--muted);text-align:center;display:none;">
+        Henüz favori hisse eklemediniz.<br>Yukarıdan ekleyebilirsiniz.
       </div>
     </div>
   </div>
@@ -274,37 +250,88 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 </footer>
 
 <script>
-const tickers = ['THYAO','GARAN','ASELS','SASA','KCHOL','EREGL','BIMAS','AKBNK','TUPRS','TOASO','FROTO','PGSUS','ISCTR','TKFEN','ENKAI','KRDMD','DOHOL','SAHOL','TAVHL','PETKM','TCELL','ARCLK','VESTL','MGROS','SOKM','LOGO','NETAS','AEFES','BRISA','CCOLA','OTKAR','TTRAK','KARSN','ALGYO','EKGYO','ISGYO','TRGYO'];
+const ALL_TICKERS = ['THYAO','GARAN','AKBNK','EREGL','KCHOL','ASELS','BIMAS','TCELL','TUPRS','FROTO','TOASO','SASA','ISCTR','EKGYO','ENKAI','SAHOL','ARCLK','PGSUS','TAVHL','TKFEN','PETKM','VESTL','MGROS','SOKM','KOZAL','KOZAA','ULKER','CCOLA','BRISA','OTKAR','LOGO','NETAS','AEFES','TTRAK','KARSN','DOHOL'];
 
-const searchInput = document.getElementById('stockSearch');
-const searchResults = document.getElementById('searchResults');
+function getFavs() { try { return JSON.parse(localStorage.getItem('bistscan_favs') || '[]'); } catch { return []; } }
+function saveFavs(f) { localStorage.setItem('bistscan_favs', JSON.stringify(f)); }
 
-if(searchInput) {
-  searchInput.addEventListener('input', function() {
-    const q = this.value.trim().toUpperCase();
-    searchResults.innerHTML = '';
-    if(q.length < 1) return;
-    const matches = tickers.filter(t => t.includes(q)).slice(0, 8);
-    matches.forEach(t => {
-      const chip = document.createElement('a');
-      chip.href = 'https://app.bistscan.com';
-      chip.target = '_blank';
-      chip.textContent = t;
-      chip.style.cssText = 'background:var(--bg);border:1px solid var(--border);color:var(--muted2);padding:3px 10px;border-radius:4px;font-size:11px;font-family:Bebas Neue,sans-serif;letter-spacing:.05em;text-decoration:none;transition:all .15s;cursor:pointer;';
-      chip.onmouseover = () => { chip.style.borderColor = 'var(--gold)'; chip.style.color = 'var(--gold)'; };
-      chip.onmouseout = () => { chip.style.borderColor = 'var(--border)'; chip.style.color = 'var(--muted2)'; };
-      searchResults.appendChild(chip);
-    });
-  });
+function addFav(ticker) {
+  ticker = ticker.trim().toUpperCase();
+  if (!ticker) return;
+  const favs = getFavs();
+  if (favs.includes(ticker)) return;
+  favs.push(ticker);
+  saveFavs(favs);
+  renderFavs();
+  document.getElementById('favSearch').value = '';
+  document.getElementById('favDropdown').style.display = 'none';
 }
-// Gerçek zamanlı ticker
+
+function removeFav(ticker) {
+  saveFavs(getFavs().filter(t => t !== ticker));
+  renderFavs();
+}
+
+function addFavFromInput() { addFav(document.getElementById('favSearch').value); }
+function onFavKey(e) { if (e.key === 'Enter') addFavFromInput(); }
+
+let favTimer = null;
+function onFavSearch(q) {
+  clearTimeout(favTimer);
+  const dd = document.getElementById('favDropdown');
+  if (!q) { dd.style.display = 'none'; return; }
+  favTimer = setTimeout(() => {
+    const matches = ALL_TICKERS.filter(t => t.includes(q.toUpperCase())).slice(0, 8);
+    if (!matches.length) { dd.style.display = 'none'; return; }
+    dd.innerHTML = matches.map(t =>
+      `<span onclick="addFav('${t}')" style="background:var(--bg);border:1px solid var(--border);color:var(--muted2);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'Bebas Neue',monospace;letter-spacing:.05em;cursor:pointer" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'">${t}</span>`
+    ).join('');
+    dd.style.display = 'flex';
+  }, 150);
+}
+
+async function renderFavs() {
+  const favs = getFavs();
+  const list = document.getElementById('favList');
+  const empty = document.getElementById('favEmpty');
+  if (!favs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  list.innerHTML = '<div style="padding:10px 18px;font-size:10px;color:var(--muted)">YÜKLENİYOR...</div>';
+
+  const results = await Promise.all(favs.map(async ticker => {
+    try {
+      const res = await fetch(`https://app.bistscan.com/api/chart/${ticker}`);
+      const d = await res.json();
+      if (!d.success) return {ticker, error:true};
+      const close = d.close[d.close.length-1];
+      const prev = d.close[d.close.length-2];
+      const change = ((close-prev)/prev*100).toFixed(2);
+      // Hacim değişimi — son gün / 20 günlük ortalama
+      const vols = d.volume.filter(v => v > 0);
+      const lastVol = vols[vols.length-1];
+      const avg20 = vols.slice(-21,-1).reduce((a,b)=>a+b,0) / 20;
+      const volRatio = avg20 > 0 ? (lastVol/avg20).toFixed(1) : null;
+      return {ticker, close, change:parseFloat(change), volRatio};
+    } catch { return {ticker, error:true}; }
+  }));
+
+  list.innerHTML = results.map(r => {
+    if (r.error) return `<div class="mock-row" style="opacity:.5"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:var(--muted)">Veri yok</div></div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px;margin-left:auto">×</button></div>`;
+    const cls = r.change >= 0 ? 'pos' : 'neg';
+    const sign = r.change >= 0 ? '+' : '';
+    const volColor = r.volRatio >= 2 ? '#f59e0b' : r.volRatio >= 1.5 ? '#10b981' : '#888';
+    return `<div class="mock-row"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:${volColor}">Hacim ${r.volRatio}x</div></div><div style="font-size:12px;color:#888;margin-right:6px">${r.close} ₺</div><div class="mock-change ${cls}">${sign}${r.change}%</div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:#555;cursor:pointer;font-size:16px;padding-left:6px">×</button></div>`;
+  }).join('');
+}
+
+renderFavs();
+
 async function loadTickers() {
   try {
     const res = await fetch('https://app.bistscan.com/api/tickers');
     const data = await res.json();
     if (!data.length) return;
     const track = document.getElementById('tickerTrack');
-    // İki tur dönsün
     const html = [...data, ...data].map(t => {
       const dir = t.change >= 0 ? 'up' : 'dn';
       const sign = t.change >= 0 ? '▲' : '▼';
