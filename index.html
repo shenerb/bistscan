@@ -13,36 +13,36 @@
 <meta name="description" content="530+ BIST hissesini 21 farklı tarama modeliyle analiz et. Teknik ve temel verilerle fırsatları yakala. Tamamen ücretsiz.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-:root{--gold:#f59e0b;--bg:#0d0d0d;--bg2:#111111;--bg3:#161616;--border:#1f1f1f;--text:#ffffff;--muted:#555555;--muted2:#888888}
+:root{--gold:#534AB7;--bg:#f5f4ef;--bg2:#efede6;--bg3:#e8e6df;--border:#dddbd2;--text:#1a1a2e;--muted:#999999;--muted2:#666666}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#0d0d0d;color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
-section{background:#0d0d0d}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
+section{background:var(--bg)}
 .ticker-outer{background:var(--gold);padding:6px 0;overflow:hidden}
 .ticker-track{display:flex;gap:3rem;animation:ticker 30s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tick{font-size:11px;font-weight:500;color:#0d0d0d;letter-spacing:.05em}
 .tick .up{color:#065f46}.tick .dn{color:#7f1d1d}
-nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;color:var(--text);text-transform:none}
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:13px;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
 .nav-cta{border:1px solid var(--gold);color:var(--gold);background:transparent;padding:7px 20px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s}
-.nav-cta:hover{background:var(--gold);color:var(--bg)}
+.nav-cta:hover{background:var(--gold);color:#fff}
 .hero{padding:100px 40px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:16px;animation:fadeUp .5s .1s both}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:#ffffff}
-.hero-title .accent{color:#f59e0b}
-.hero-desc{color:#888888;font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:var(--text)}
+.hero-title .accent{color:var(--gold)}
+.hero-desc{color:var(--muted2);font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .4s both}
-.btn-primary{background:var(--gold);color:var(--bg);padding:13px 32px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:var(--gold);color:#fff;padding:13px 32px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
 .btn-primary:hover{opacity:.88}
-.btn-secondary{border:1px solid var(--border);color:var(--muted2);padding:13px 28px;border-radius:8px;font-size:14px;text-decoration:none;transition:all .2s}
+.btn-secondary{border:1px solid var(--gold);color:var(--gold);padding:13px 28px;border-radius:8px;font-size:14px;text-decoration:none;transition:all .2s}
 .btn-secondary:hover{border-color:var(--muted2);color:var(--text)}
-.hero-mock{background:var(--bg2);border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .6s .3s both}
-.mock-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.hero-mock{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .6s .3s both}
+.mock-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}
 .mock-title{font-size:12px;font-weight:500;color:var(--muted2);letter-spacing:.05em}
 .mock-badge{background:rgba(245,158,11,.15);color:var(--gold);font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500}
 .mock-row{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--border);gap:12px;transition:background .15s}
@@ -60,30 +60,30 @@ nav{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.92);backdrop-fil
 .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr)}
 .stat-item{padding:32px 40px;border-right:1px solid var(--border)}
 .stat-item:last-child{border-right:none}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.02em;color:var(--text);line-height:1;margin-bottom:6px}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.02em;color:var(--gold);line-height:1;margin-bottom:6px}
 .stat-num.gold{color:var(--gold)}
 .stat-label{font-size:12px;color:var(--muted);letter-spacing:.08em}
 .section{max-width:1100px;margin:0 auto;padding:80px 40px}
 .section-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:12px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:.02em;line-height:1;margin-bottom:48px}
-.scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
-.scan-card{background:var(--bg);padding:24px;transition:background .2s;position:relative}
-.scan-card:hover{background:var(--bg2)}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:.02em;line-height:1;margin-bottom:48px;color:var(--text)}
+.scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;background:transparent;border:none;border-radius:0;overflow:visible}
+.scan-card{background:#fff;border:1px solid var(--border);padding:24px;transition:all .2s;position:relative}
+.scan-card:hover{background:#EEEDFE;border-color:var(--gold)}
 .scan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
 .scan-card:hover::before{opacity:1}
 .scan-icon{font-size:22px;margin-bottom:12px}
 .scan-title{font-size:14px;font-weight:500;margin-bottom:6px}
 .scan-desc{font-size:12px;color:var(--muted2);line-height:1.6}
-.scan-tag{display:inline-block;margin-top:10px;font-size:10px;color:var(--muted);letter-spacing:.06em}
+.scan-tag{display:inline-block;margin-top:10px;font-size:10px;color:var(--gold);letter-spacing:.06em;background:#EEEDFE;padding:2px 8px;border-radius:4px}
 .how-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr)}
 .step{padding:48px 40px;border-right:1px solid var(--border)}
 .step:last-child{border-right:none}
-.step-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--border);line-height:1;margin-bottom:16px}
+.step-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gold);opacity:.3;line-height:1;margin-bottom:16px}
 .step-title{font-size:16px;font-weight:500;margin-bottom:10px}
 .step-desc{font-size:13px;color:var(--muted2);line-height:1.7}
-.cta-section{text-align:center;padding:100px 40px;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(245,158,11,.06) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.cta-section{text-align:center;padding:100px 40px;position:relative;overflow:hidden;background:var(--bg2)}
+.cta-section::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(83,74,183,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,80px);letter-spacing:.02em;line-height:.95;margin-bottom:20px}
 .cta-sub{color:var(--muted2);font-size:15px;margin-bottom:36px}
 footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -124,7 +124,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <a href="https://app.bistscan.com" target="_blank" class="nav-cta">Taramayı Başlat</a>
 </nav>
 
-<section>
+<section style="background:var(--bg)">
   <div class="hero">
     <div>
       <p class="hero-label">BORSA İSTANBUL ANALİZ</p>
@@ -315,6 +315,8 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   </div>
 </div>
 
+
+
 <div class="cta-section">
   <h2 class="cta-title">Hemen<br><span style="color:var(--gold)">başla.</span></h2>
   <p class="cta-sub">Ücretsiz. Kayıt gerektirmez. Tarayıcında çalışır.</p>
@@ -365,6 +367,26 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div class="footer-copy">© 2026 BistScan.com</div>
   <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
 </footer>
+
+<script>
+// 22 Nisan tag dinamik
+(function() {
+  var today = new Date();
+  var apr22 = new Date(2026, 3, 22);
+  var tag = document.getElementById('tag-apr');
+  if (!tag) return;
+  var diff = Math.ceil((apr22 - today) / (1000*60*60*24));
+  if (diff < 0) {
+    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = 'Tamamlandı';
+  } else if (diff === 0) {
+    tag.style.background = '#f5a623'; tag.style.color = '#000'; tag.textContent = 'BUGÜN';
+  } else if (diff <= 7) {
+    tag.style.background = '#1a3a1a'; tag.style.color = '#4caf50'; tag.textContent = diff + ' gün kaldı';
+  } else {
+    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = diff + ' gün kaldı';
+  }
+})();
+</script>
 
 <script>
 const ALL_TICKERS = ['THYAO','GARAN','AKBNK','EREGL','KCHOL','ASELS','BIMAS','TCELL','TUPRS','FROTO','TOASO','SASA','ISCTR','EKGYO','ENKAI','SAHOL','ARCLK','PGSUS','TAVHL','TKFEN','PETKM','VESTL','MGROS','SOKM','KOZAL','KOZAA','ULKER','CCOLA','BRISA','OTKAR','LOGO','NETAS','AEFES','TTRAK','KARSN','DOHOL'];
