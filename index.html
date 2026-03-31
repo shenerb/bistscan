@@ -21,7 +21,7 @@ section{background:var(--bg)}
 .ticker-outer{background:var(--gold);padding:6px 0;overflow:hidden}
 .ticker-track{display:flex;gap:3rem;animation:ticker 30s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tick{font-size:11px;font-weight:500;color:#0d0d0d;letter-spacing:.05em}
+.tick{font-size:11px;font-weight:500;color:#ffffff;letter-spacing:.05em}
 .tick .up{color:#065f46}.tick .dn{color:#7f1d1d}
 nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;color:var(--text);text-transform:none}
@@ -128,8 +128,9 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div class="hero">
     <div>
       <p class="hero-label">BORSA İSTANBUL ANALİZ</p>
-      <h1 class="hero-title">Doğru yerden<br>alan<br><span class="accent">kazanır.</span></h1>
+      <h1 class="hero-title">Doğru Analiz,<br>Net<br><span class="accent">Fırsatlar.</span></h1>
       <p class="hero-desc">530+ BIST hissesini 21 farklı tarama modeliyle analiz et. Teknik ve temel verilerle fırsatları yakala. Tamamen ücretsiz.</p>
+      <p style="font-size:11px;color:#aaa;margin-top:-20px;margin-bottom:8px">⚠️ Yatırım tavsiyesi değildir. Bilgilendirme amaçlıdır.</p>
       <div class="hero-btns">
         <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
         <a href="#taramalar" class="btn-secondary">Özellikleri Gör</a>
@@ -320,6 +321,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 <div class="cta-section">
   <h2 class="cta-title">Hemen<br><span style="color:var(--gold)">başla.</span></h2>
   <p class="cta-sub">Ücretsiz. Kayıt gerektirmez. Tarayıcında çalışır.</p>
+  <p style="font-size:11px;color:#aaa;margin-top:12px">Burada yer alan bilgiler yatırım tavsiyesi niteliği taşımaz. SPK lisanslı danışmanlık hizmeti verilmemektedir.</p>
   <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
 </div>
 
@@ -362,10 +364,21 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   </div>
 </section>
 
-<footer>
-  <div class="footer-logo">Bist<span>ScaN</span></div>
-  <div class="footer-copy">© 2026 BistScan.com</div>
-  <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
+<footer style="flex-direction:column;gap:16px;text-align:center;padding:32px 40px">
+  <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px">
+    <div class="footer-logo">Bist<span>ScaN</span></div>
+    <div style="display:flex;gap:20px;font-size:12px">
+      <a href="https://app.bistscan.com/kvkk" style="color:#aaa;text-decoration:none">KVKK</a>
+      <a href="https://app.bistscan.com/kullanim-sartlari" style="color:#aaa;text-decoration:none">Kullanım Şartları</a>
+      <a href="https://app.bistscan.com/yasal-uyari" style="color:#aaa;text-decoration:none">Yasal Uyarı</a>
+      <a href="https://app.bistscan.com/cerez-politikasi" style="color:#aaa;text-decoration:none">Çerez Politikası</a>
+    </div>
+    <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
+  </div>
+  <div style="font-size:11px;color:#aaa;max-width:700px;line-height:1.7;border-top:1px solid var(--border);padding-top:16px">
+    BistScan'de yer alan tüm içerikler bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Veriler gecikmeli olabilir. 
+    Yatırım kararlarınızı kendi araştırmanıza dayandırınız. © 2026 BistScan.com
+  </div>
 </footer>
 
 <script>
