@@ -9,6 +9,8 @@
 <meta property="og:title" content="BistScaN">
 <meta property="og:description" content="530+ BIST hissesini 24 farklı tarama modeliyle analiz et.">
 <link rel="alternate icon" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<meta name="description" content="530+ BIST hissesini 24 farklı tarama modeliyle analiz et. Teknik ve temel verilerle fırsatları yakala. Tamamen ücretsiz.">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--gold:#534AB7;--bg:#f5f4ef;--bg2:#efede6;--bg3:#e8e6df;--border:#dddbd2;--text:#1a1a2e;--muted:#999999;--muted2:#666666}
@@ -20,9 +22,10 @@ section{background:var(--bg)}
 .ticker-track{display:flex;gap:2rem;animation:ticker 40s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tick{font-size:12px;font-weight:600;color:#ffffff;letter-spacing:.05em}
-.tick .up{color:#00ff88;font-weight:800}.tick .dn{color:#ff3355;font-weight:800}
+.tick .up{color:#00ff88;font-weight:800;text-shadow:0 0 8px rgba(0,255,136,.4)}.tick .dn{color:#ff3355;font-weight:800;text-shadow:0 0 8px rgba(255,51,85,.4)}
+.tick-model{font-size:11px;font-weight:500;letter-spacing:.04em}
 nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;color:var(--text)}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;color:var(--text);text-transform:none}
 .nav-logo span{color:var(--gold)}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:13px;transition:color .2s}
@@ -46,21 +49,27 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-
 .mock-title{font-size:12px;font-weight:500;color:var(--muted2);letter-spacing:.05em}
 .mock-badge{background:rgba(245,158,11,.15);color:var(--gold);font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500}
 .mock-row{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--border);gap:12px;transition:background .15s}
+.mock-row:last-child{border-bottom:none}
 .mock-row:hover{background:var(--bg3)}
 .mock-ticker{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.05em;min-width:60px}
 .mock-info{flex:1}
 .mock-name{font-size:11px;color:var(--muted2)}
+.mock-signal{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500}
+.sig-green{background:rgba(16,185,129,.15);color:#10b981}
+.sig-gold{background:rgba(245,158,11,.15);color:var(--gold)}
+.sig-blue{background:rgba(59,130,246,.15);color:#3b82f6}
 .mock-change{font-size:12px;font-weight:500;min-width:50px;text-align:right}
 .pos{color:#10b981}.neg{color:#ef4444}
 .stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr)}
 .stat-item{padding:32px 40px;border-right:1px solid var(--border)}
 .stat-item:last-child{border-right:none}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.02em;color:var(--gold);line-height:1;margin-bottom:6px}
+.stat-num.gold{color:var(--gold)}
 .stat-label{font-size:12px;color:var(--muted);letter-spacing:.08em}
 .section{max-width:1100px;margin:0 auto;padding:80px 40px}
 .section-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:12px}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:.02em;line-height:1;margin-bottom:48px;color:var(--text)}
-.scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px}
+.scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;background:transparent;border:none;border-radius:0;overflow:visible}
 .scan-card{background:#fff;border:1px solid var(--border);padding:24px;transition:all .2s;position:relative}
 .scan-card:hover{background:#EEEDFE;border-color:var(--gold)}
 .scan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
@@ -77,6 +86,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-
 .step-title{font-size:16px;font-weight:500;margin-bottom:10px}
 .step-desc{font-size:13px;color:var(--muted2);line-height:1.7}
 .cta-section{text-align:center;padding:100px 40px;position:relative;overflow:hidden;background:var(--bg2)}
+.cta-section::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(83,74,183,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
 .cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,80px);letter-spacing:.02em;line-height:.95;margin-bottom:20px}
 .cta-sub{color:var(--muted2);font-size:15px;margin-bottom:36px}
 footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -86,10 +96,13 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 .footer-by span{color:var(--gold)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:768px){
-  nav{padding:0 20px}.nav-links{display:none}
+  nav{padding:0 20px}
+  .nav-links{display:none}
   .hero{grid-template-columns:1fr;padding:60px 20px 40px;gap:40px}
-  .stats{grid-template-columns:1fr}.stat-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 20px}
-  .steps{grid-template-columns:1fr}.step{border-right:none;border-bottom:1px solid var(--border);padding:32px 20px}
+  .stats{grid-template-columns:1fr}
+  .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 20px}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1px solid var(--border);padding:32px 20px}
   .section{padding:48px 20px}
   footer{flex-direction:column;text-align:center}
   .cta-section{padding:60px 20px}
@@ -128,57 +141,24 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     </div>
     <div class="hero-mock">
       <div class="mock-header">
-        <span class="mock-title">SON TARAMA SONUÇLARI</span>
-        <span class="mock-badge">15 Dk Gecikmeli</span>
+        <span class="mock-title">FAVORİ HİSSELERİM</span>
+        <span class="mock-badge">Tarayıcında saklanır</span>
       </div>
-      <div class="mock-row">
-        <div class="mock-ticker">THYAO</div>
-        <div class="mock-info"><div class="mock-name">Golden Cross · RSI 58</div></div>
-        <div class="mock-change pos">+3.2%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">GARAN</div>
-        <div class="mock-info"><div class="mock-name">Akıllı Para · Hacim 2.4x</div></div>
-        <div class="mock-change pos">+1.8%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">ASELS</div>
-        <div class="mock-info"><div class="mock-name">Supertrend · RSI 62</div></div>
-        <div class="mock-change pos">+2.5%</div>
-      </div>
-      <div class="mock-row">
-        <div class="mock-ticker">EREGL</div>
-        <div class="mock-info"><div class="mock-name">Bollinger Sıkışma · RSI 44</div></div>
-        <div class="mock-change neg">-0.4%</div>
-      </div>
-      <div style="padding:14px 18px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px;text-align:center">24 TARAMA MODELİ</div>
-        <div style="line-height:2;text-align:center">
-          <span class="scan-word" style="color:#534AB7">Golden Cross,</span>
-          <span class="scan-word" style="color:#3b82f6">52H Kırılım,</span>
-          <span class="scan-word" style="color:#10b981">Akıllı Para,</span>
-          <span class="scan-word" style="color:#f59e0b">Tavan Tarama,</span>
-          <span class="scan-word" style="color:#8b5cf6">Ucuz Kalmış,</span>
-          <span class="scan-word" style="color:#ef4444">Hacimlenen Dip,</span>
-          <span class="scan-word" style="color:#06b6d4">Momentum Bombası,</span>
-          <span class="scan-word" style="color:#534AB7">Destek Kalkanı,</span>
-          <span class="scan-word" style="color:#f97316">Bollinger Sıkışma,</span>
-          <span class="scan-word" style="color:#84cc16">Stoch RSI,</span>
-          <span class="scan-word" style="color:#3b82f6">MACD Kesişimi,</span>
-          <span class="scan-word" style="color:#ec4899">Doji,</span>
-          <span class="scan-word" style="color:#10b981">Hammer,</span>
-          <span class="scan-word" style="color:#8b5cf6">Supertrend,</span>
-          <span class="scan-word" style="color:#f59e0b">EMA Crossover,</span>
-          <span class="scan-word" style="color:#534AB7">ADX Güçlü Trend,</span>
-          <span class="scan-word" style="color:#06b6d4">Morning Star,</span>
-          <span class="scan-word" style="color:#ef4444">Engulfing,</span>
-          <span class="scan-word" style="color:#84cc16">Değer + Momentum,</span>
-          <span class="scan-word" style="color:#f97316">Ichimoku Bulutu,</span>
-          <span class="scan-word" style="color:#ec4899">Son 1 Yıl Halka Arz,</span>
-          <span class="scan-word" style="color:#534AB7">Minervini Trend,</span>
-          <span class="scan-word" style="color:#10b981">Bulkowski Formasyon,</span>
-          <span class="scan-word" style="color:#f59e0b">RSI Trend Kırılımı</span>
+      <div style="padding:10px 18px;border-bottom:1px solid var(--border);">
+        <div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Hisse ekle... (GARAN, THYAO)" style="background:transparent;border:none;outline:none;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;width:100%;" id="favSearch" oninput="onFavSearch(this.value)" onkeydown="onFavKey(event)"/>
+          <button onclick="addFavFromInput()" style="background:var(--gold);border:none;color:#0d0d0d;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">+ Ekle</button>
         </div>
+        <div id="favDropdown" style="display:none;flex-wrap:wrap;gap:4px;margin-top:6px;"></div>
+      </div>
+      <div id="favList" style="min-height:60px;"></div>
+      <div id="favEmpty" style="padding:20px 18px;font-size:12px;color:var(--muted);text-align:center;display:none;">
+        Henüz favori hisse eklemediniz.<br>Yukarıdan ekleyebilirsiniz.
+      </div>
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+        <div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px;text-align:center">24 TARAMA MODELİ</div>
+        <div style="line-height:2;text-align:center"><span class="scan-word" style="color:#534AB7">Golden Cross,</span><span class="scan-word" style="color:#3b82f6">52H Kırılım,</span><span class="scan-word" style="color:#10b981">Akıllı Para,</span><span class="scan-word" style="color:#f59e0b">Tavan Tarama,</span><span class="scan-word" style="color:#8b5cf6">Ucuz Kalmış,</span><span class="scan-word" style="color:#ef4444">Hacimlenen Dip,</span><span class="scan-word" style="color:#06b6d4">Momentum Bombası,</span><span class="scan-word" style="color:#534AB7">Destek Kalkanı,</span><span class="scan-word" style="color:#f97316">Bollinger Sıkışma,</span><span class="scan-word" style="color:#84cc16">Stoch RSI,</span><span class="scan-word" style="color:#3b82f6">MACD Kesişimi,</span><span class="scan-word" style="color:#ec4899">Doji,</span><span class="scan-word" style="color:#10b981">Hammer,</span><span class="scan-word" style="color:#8b5cf6">Supertrend,</span><span class="scan-word" style="color:#f59e0b">EMA Crossover,</span><span class="scan-word" style="color:#534AB7">ADX Güçlü Trend,</span><span class="scan-word" style="color:#06b6d4">Morning Star,</span><span class="scan-word" style="color:#ef4444">Engulfing,</span><span class="scan-word" style="color:#84cc16">Değer + Momentum,</span><span class="scan-word" style="color:#f97316">Ichimoku Bulutu,</span><span class="scan-word" style="color:#ec4899">Son 1 Yıl Halka Arz,</span><span class="scan-word" style="color:#534AB7">Minervini Trend,</span><span class="scan-word" style="color:#10b981">Bulkowski Formasyon,</span><span class="scan-word" style="color:#f59e0b">RSI Trend Kırılımı</span></div>
       </div>
     </div>
   </div>
@@ -188,11 +168,16 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div class="section" style="text-align:center">
     <p style="font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.15em;font-weight:500;margin-bottom:16px">// GÜÇLÜ ÖZELLİK</p>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);color:#fff;letter-spacing:.02em;line-height:1;margin-bottom:20px">Çoklu Tarama</h2>
-    <p style="font-size:16px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 32px;line-height:1.7">Birden fazla modeli aynı anda seç — sadece <strong style="color:#fff">hepsinde çıkan hisseler</strong> listelenir.</p>
+    <p style="font-size:16px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 32px;line-height:1.7">
+      Birden fazla modeli aynı anda seç — sadece <strong style="color:#fff">hepsinde çıkan hisseler</strong> listelenir. 
+      Daha az gürültü, daha net fırsatlar.
+    </p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px">
       <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">⚡ Golden Cross</div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">×</div>
       <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">📊 MACD Kesişimi</div>
+      <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">×</div>
+      <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">💥 Akıllı Para</div>
       <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">=</div>
       <div style="background:#fff;border-radius:8px;padding:10px 20px;color:#534AB7;font-size:13px;font-weight:700">🎯 Net Fırsatlar</div>
     </div>
@@ -205,30 +190,150 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     <p class="section-label">// TARAMA MODELLERİ</p>
     <h2 class="section-title">24 Farklı Strateji</h2>
     <div class="scans-grid">
-      <div class="scan-card"><div class="scan-icon">🔍</div><div class="scan-title">Özel Filtreleme</div><div class="scan-desc">MA, RSI ve hacim kriterlerini kendin belirle. Kendi stratejine göre tara.</div><div class="scan-tag">MA · RSI · HACİM</div></div>
-      <div class="scan-card"><div class="scan-icon">🌟</div><div class="scan-title">Golden Cross</div><div class="scan-desc">SMA50'nin SMA200'ü yukarı kestiği hisseler. Uzun vadeli yükseliş başlangıcı.</div><div class="scan-tag">SMA50 × SMA200</div></div>
-      <div class="scan-card"><div class="scan-icon">🚀</div><div class="scan-title">52H Kırılım</div><div class="scan-desc">52 haftalık zirveyi kıran hisseler. Güçlü momentum ve hacim artışı aranır.</div><div class="scan-tag">52 HAFTA · 1.5x HACİM</div></div>
-      <div class="scan-card"><div class="scan-icon">💰</div><div class="scan-title">Akıllı Para</div><div class="scan-desc">Hacim 2 katın üzerinde, değişim %2+ ve EMA20 üstü. Kurumsal ilgi işareti.</div><div class="scan-tag">HACİM 2x · EMA20</div></div>
-      <div class="scan-card"><div class="scan-icon">🔔</div><div class="scan-title">Tavan Tarama</div><div class="scan-desc">Günlük %9.5 ve üzeri değişim gösteren tavan yapan hisseleri listele.</div><div class="scan-tag">DEĞİŞİM ≥ %9.5</div></div>
-      <div class="scan-card"><div class="scan-icon">⭐</div><div class="scan-title">Ucuz Kalmış</div><div class="scan-desc">PD/DD'si 1'in altındaki değer hisselerini bul.</div><div class="scan-tag">PD/DD &lt; 1</div></div>
-      <div class="scan-card"><div class="scan-icon">📉</div><div class="scan-title">Hacimlenen Dip</div><div class="scan-desc">RSI 25'in altında ve hacim 2 katın üzerinde. Aşırı satım + ani ilgi artışı.</div><div class="scan-tag">RSI &lt; 25 · HACİM 2x</div></div>
-      <div class="scan-card"><div class="scan-icon">💥</div><div class="scan-title">Momentum Bombası</div><div class="scan-desc">Değişim %3+, hacim 2x+ ve RSI 55-75 arası. Güçlü yükseliş momentumu.</div><div class="scan-tag">DEĞİŞİM %3+ · RSI 55-75</div></div>
-      <div class="scan-card"><div class="scan-icon">🛡️</div><div class="scan-title">Destek Kalkanı</div><div class="scan-desc">SMA200'e %5 yakın ve RSI 40'ın altında. Güçlü destekte dip fırsatı.</div><div class="scan-tag">SMA200 YAKINI · RSI &lt; 40</div></div>
-      <div class="scan-card"><div class="scan-icon">🎯</div><div class="scan-title">Bollinger Sıkışma</div><div class="scan-desc">Bant genişliği minimumda, volatilite düşük. Büyük hareket öncesi sessizlik.</div><div class="scan-tag">BB SIKIŞMA · RSI 35-65</div></div>
-      <div class="scan-card"><div class="scan-icon">📈</div><div class="scan-title">Stoch RSI</div><div class="scan-desc">Stochastic RSI 0.2'nin altında. RSI'dan daha hassas aşırı satım tespiti.</div><div class="scan-tag">STOCHRSI &lt; 0.2</div></div>
-      <div class="scan-card"><div class="scan-icon">⚡</div><div class="scan-title">MACD Kesişimi</div><div class="scan-desc">MACD histogram negatiften pozitife döndü. Güçlü al sinyali.</div><div class="scan-tag">MACD YUKARI KESTİ</div></div>
-      <div class="scan-card"><div class="scan-icon">🕯️</div><div class="scan-title">Doji</div><div class="scan-desc">Açılış ve kapanış birbirine çok yakın. Belirsizlik ve olası dönüş sinyali.</div><div class="scan-tag">GÖVDE &lt; %10</div></div>
-      <div class="scan-card"><div class="scan-icon">🔨</div><div class="scan-title">Hammer</div><div class="scan-desc">Alt gölge gövdenin 2 katından uzun. Dip bölgesinde güçlü dönüş mumu.</div><div class="scan-tag">ALT GÖLGE 2x · RSI &lt; 45</div></div>
-      <div class="scan-card"><div class="scan-icon">🚦</div><div class="scan-title">Supertrend</div><div class="scan-desc">Supertrend göstergesi bearish'ten bullish'e döndü. Trend dönüşünü erkenden yakala.</div><div class="scan-tag">BEARISH → BULLISH</div></div>
-      <div class="scan-card"><div class="scan-icon">⚡</div><div class="scan-title">EMA Crossover</div><div class="scan-desc">EMA9'un EMA21'i yukarı kestiği hisseler. Kısa vadeli al sinyali.</div><div class="scan-tag">EMA9 × EMA21</div></div>
-      <div class="scan-card"><div class="scan-icon">📈</div><div class="scan-title">ADX Güçlü Trend</div><div class="scan-desc">ADX 25 üstünde, son 3 gündür yükseliyor ve hacim 1.5x üstünde.</div><div class="scan-tag">ADX &gt; 25 · HACİM 1.5x</div></div>
-      <div class="scan-card"><div class="scan-icon">🌅</div><div class="scan-title">Morning Star</div><div class="scan-desc">Üç mumlu dip dönüş formasyonu. Büyük düşüş, küçük yıldız, güçlü toparlanma.</div><div class="scan-tag">3 MUMLU FORMASYON</div></div>
-      <div class="scan-card"><div class="scan-icon">🫦</div><div class="scan-title">Engulfing</div><div class="scan-desc">Bugünkü yeşil mum dünkü kırmızı mumu tamamen yutuyor. Güçlü alıcı baskısı.</div><div class="scan-tag">YUTAN MUM · RSI &lt; 60</div></div>
-      <div class="scan-card"><div class="scan-icon">💎</div><div class="scan-title">Değer + Momentum</div><div class="scan-desc">F/K 15 altında, PD/DD 2 altında ve RSI 40-60 arasında. Ucuz ama harekete geçmiş.</div><div class="scan-tag">F/K &lt; 15 · PD/DD &lt; 2 · RSI 40-60</div></div>
-      <div class="scan-card"><div class="scan-icon">☁️</div><div class="scan-title">Ichimoku Bulutu</div><div class="scan-desc">Fiyat Ichimoku bulutunun üstüne çıktı ve Tenkan-sen Kijun-sen'i geçti.</div><div class="scan-tag">BULUT ÜSTÜ · TENKAN &gt; KIJUN</div></div>
-      <div class="scan-card"><div class="scan-icon">📈</div><div class="scan-title">Minervini Trend</div><div class="scan-desc">Tüm önemli ortalamalar üstünde, 52H zirvesine yakın. Kurumsal lider hisseler.</div><div class="scan-tag">7 KOŞUL · GÜÇLÜ TREND</div></div>
-      <div class="scan-card"><div class="scan-icon">🕯️</div><div class="scan-title">Bulkowski Formasyon</div><div class="scan-desc">Three Line Strike, Abandoned Baby ve Upside Tasuki Gap formasyonları.</div><div class="scan-tag">%84 · %70 · %57 BAŞARI</div></div>
-      <div class="scan-card"><div class="scan-icon">📉</div><div class="scan-title">RSI Trend Kırılımı</div><div class="scan-desc">RSI üzerindeki düşen trend çizgisi bugün kırıldı. Fiyattan önce sinyal.</div><div class="scan-tag">RSI TREND · KIRILIM</div></div>
+      <div class="scan-card">
+        <div class="scan-icon">🔍</div>
+        <div class="scan-title">Özel Filtreleme</div>
+        <div class="scan-desc">MA, RSI ve hacim kriterlerini kendin belirle. Kendi stratejine göre tara.</div>
+        <div class="scan-tag">MA · RSI · HACİM</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🌟</div>
+        <div class="scan-title">Golden Cross</div>
+        <div class="scan-desc">SMA50'nin SMA200'ü yukarı kestiği hisseler. Uzun vadeli yükseliş başlangıcı.</div>
+        <div class="scan-tag">SMA50 × SMA200</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🚀</div>
+        <div class="scan-title">52H Kırılım</div>
+        <div class="scan-desc">52 haftalık zirveyi kıran hisseler. Güçlü momentum ve hacim artışı aranır.</div>
+        <div class="scan-tag">52 HAFTA · 1.5x HACİM</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">💰</div>
+        <div class="scan-title">Akıllı Para</div>
+        <div class="scan-desc">Hacim 2 katın üzerinde, değişim %2+ ve EMA20 üstü. Kurumsal ilgi işareti.</div>
+        <div class="scan-tag">HACİM 2x · EMA20</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🔔</div>
+        <div class="scan-title">Tavan Tarama</div>
+        <div class="scan-desc">Günlük %9.5 ve üzeri değişim gösteren tavan yapan hisseleri listele.</div>
+        <div class="scan-tag">DEĞİŞİM ≥ %9.5</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">⭐</div>
+        <div class="scan-title">Ucuz Kalmış</div>
+        <div class="scan-desc">PD/DD'si 1'in altındaki değer hisselerini bul. IsYatirim verileri ile gerçek zamanlı.</div>
+        <div class="scan-tag">PD/DD &lt; 1</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📉</div>
+        <div class="scan-title">Hacimlenen Dip</div>
+        <div class="scan-desc">RSI 25'in altında ve hacim 2 katın üzerinde. Aşırı satım + ani ilgi artışı.</div>
+        <div class="scan-tag">RSI &lt; 25 · HACİM 2x</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">💥</div>
+        <div class="scan-title">Momentum Bombası</div>
+        <div class="scan-desc">Değişim %3+, hacim 2x+ ve RSI 55-75 arası. Güçlü yükseliş momentumu.</div>
+        <div class="scan-tag">DEĞİŞİM %3+ · RSI 55-75</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🛡️</div>
+        <div class="scan-title">Destek Kalkanı</div>
+        <div class="scan-desc">SMA200'e %5 yakın ve RSI 40'ın altında. Güçlü destekte dip fırsatı.</div>
+        <div class="scan-tag">SMA200 YAKINI · RSI &lt; 40</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🎯</div>
+        <div class="scan-title">Bollinger Sıkışma</div>
+        <div class="scan-desc">Bant genişliği minimumda, volatilite düşük. Büyük hareket öncesi sessizlik.</div>
+        <div class="scan-tag">BB SIKIŞMA · RSI 35-65</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📈</div>
+        <div class="scan-title">Stoch RSI</div>
+        <div class="scan-desc">Stochastic RSI 0.2'nin altında. RSI'dan daha hassas aşırı satım tespiti.</div>
+        <div class="scan-tag">STOCHRSI &lt; 0.2</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">⚡</div>
+        <div class="scan-title">MACD Kesişimi</div>
+        <div class="scan-desc">MACD histogram negatiften pozitife döndü. Güçlü al sinyali.</div>
+        <div class="scan-tag">MACD YUKARI KESTİ</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🕯️</div>
+        <div class="scan-title">Doji</div>
+        <div class="scan-desc">Açılış ve kapanış birbirine çok yakın. Belirsizlik ve olası dönüş sinyali.</div>
+        <div class="scan-tag">GÖVDE &lt; %10</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🔨</div>
+        <div class="scan-title">Hammer</div>
+        <div class="scan-desc">Alt gölge gövdenin 2 katından uzun. Dip bölgesinde güçlü dönüş mumu.</div>
+        <div class="scan-tag">ALT GÖLGE 2x · RSI &lt; 45</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🚦</div>
+        <div class="scan-title">Supertrend</div>
+        <div class="scan-desc">Supertrend göstergesi bearish'ten bullish'e döndü. Trend dönüşünü erkenden yakala.</div>
+        <div class="scan-tag">BEARISH → BULLISH</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">⚡</div>
+        <div class="scan-title">EMA Crossover</div>
+        <div class="scan-desc">EMA9'un EMA21'i yukarı kestiği hisseler. Kısa vadeli al sinyali.</div>
+        <div class="scan-tag">EMA9 × EMA21</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📈</div>
+        <div class="scan-title">ADX Güçlü Trend</div>
+        <div class="scan-desc">ADX 25 üstünde, son 3 gündür yükseliyor ve hacim 1.5x üstünde. Güçlü yukarı trend.</div>
+        <div class="scan-tag">ADX &gt; 25 · HACİM 1.5x</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🌅</div>
+        <div class="scan-title">Morning Star</div>
+        <div class="scan-desc">Üç mumlu dip dönüş formasyonu. Büyük düşüş, küçük yıldız, güçlü toparlanma.</div>
+        <div class="scan-tag">3 MUMLU FORMASYON</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🫦</div>
+        <div class="scan-title">Engulfing</div>
+        <div class="scan-desc">Bugünkü yeşil mum dünkü kırmızı mumu tamamen yutuyor. Güçlü alıcı baskısı.</div>
+        <div class="scan-tag">YUTAN MUM · RSI &lt; 60</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">💎</div>
+        <div class="scan-title">Değer + Momentum</div>
+        <div class="scan-desc">F/K 15 altında, PD/DD 2 altında ve RSI 40-60 arasında. Ucuz ama harekete geçmiş.</div>
+        <div class="scan-tag">F/K &lt; 15 · PD/DD &lt; 2 · RSI 40-60</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">☁️</div>
+        <div class="scan-title">Ichimoku Bulutu</div>
+        <div class="scan-desc">Fiyat Ichimoku bulutunun üstüne çıktı ve Tenkan-sen Kijun-sen'i geçti. Japon teknik analizinin en güçlü al sinyali.</div>
+        <div class="scan-tag">BULUT ÜSTÜ · TENKAN &gt; KIJUN</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📈</div>
+        <div class="scan-title">Minervini Trend</div>
+        <div class="scan-desc">Tüm önemli ortalamalar üstünde, 52H zirvesine yakın. Kurumsal lider hisseler.</div>
+        <div class="scan-tag">7 KOŞUL · GÜÇLÜ TREND</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🕯️</div>
+        <div class="scan-title">Bulkowski Formasyon</div>
+        <div class="scan-desc">Three Line Strike, Abandoned Baby ve Upside Tasuki Gap formasyonları.</div>
+        <div class="scan-tag">%84 · %70 · %57 BAŞARI</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📉</div>
+        <div class="scan-title">RSI Trend Kırılımı</div>
+        <div class="scan-desc">RSI üzerindeki düşen trend çizgisi bugün kırıldı. Fiyattan önce sinyal.</div>
+        <div class="scan-tag">RSI TREND · KIRILIM</div>
+      </div>
     </div>
   </div>
 </section>
@@ -239,36 +344,69 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     <h2 class="section-title">3 Adımda Tarama</h2>
   </div>
   <div class="steps">
-    <div class="step"><div class="step-num">01</div><div class="step-title">Modeli seç</div><div class="step-desc">24 hazır tarama modelinden birini seç ya da kendi filtrelerini belirle.</div></div>
-    <div class="step"><div class="step-num">02</div><div class="step-title">Taramayı başlat</div><div class="step-desc">530+ BIST hissesi otomatik olarak taranır. İlerleme çubuğundan canlı takip edebilirsin.</div></div>
-    <div class="step"><div class="step-num">03</div><div class="step-title">Sonuçları incele</div><div class="step-desc">Her hisse için RSI, MACD ve MA grafikleri. F/K, PD/DD, halka açıklık bilgileri.</div></div>
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-title">Modeli seç</div>
+      <div class="step-desc">24 hazır tarama modelinden birini seç ya da kendi filtrelerini belirle. Her model farklı bir yatırım stratejisine göre tasarlandı.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-title">Taramayı başlat</div>
+      <div class="step-desc">530+ BIST hissesi otomatik olarak taranır. İlerleme çubuğundan canlı takip edebilirsin.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-title">Sonuçları incele</div>
+      <div class="step-desc">Her hisse için RSI, MACD ve MA grafikleri. F/K, PD/DD, halka açıklık ve dolaşımdaki lot bilgileri.</div>
+    </div>
   </div>
 </div>
+
+
 
 <div class="cta-section">
   <h2 class="cta-title">Hemen<br><span style="color:var(--gold)">başla.</span></h2>
   <p class="cta-sub">Ücretsiz. Kayıt gerektirmez. Tarayıcında çalışır.</p>
-  <a href="https://app.bistscan.com" target="_blank" class="btn-primary" style="margin-top:24px">Taramayı Başlat →</a>
+  <p style="font-size:11px;color:#aaa;margin-top:12px">Burada yer alan bilgiler yatırım tavsiyesi niteliği taşımaz. SPK lisanslı danışmanlık hizmeti verilmemektedir.</p>
+  <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
 </div>
 
-<section id="hakkinda" style="padding:80px 0;border-top:1px solid var(--border)">
+<section id="hakkinda" style="padding: 80px 0; border-top: 1px solid var(--border);">
   <div class="section">
     <p class="section-label">// HAKKINDA</p>
     <h2 class="section-title">BistScan Nedir?</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:64px">
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 64px;">
+
       <div>
-        <p style="font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:12px">// HİKAYE</p>
-        <p style="font-size:15px;color:var(--muted2);line-height:1.8">BistScan, Borsa İstanbul'u takip eden yatırımcıların teknik analizi daha hızlı ve sistematik yapabilmesi için geliştirildi. Tamamen ücretsiz, kayıt gerektirmez.</p>
+        <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 12px;">// HİKAYE</p>
+        <p style="font-size: 15px; color: var(--muted2); line-height: 1.8;">
+          BistScan, Borsa İstanbul'u takip eden yatırımcıların teknik analizi daha hızlı ve sistematik yapabilmesi için geliştirildi.
+          Tek tek hisse bakmak yerine, 530+ hisseyi saniyeler içinde tarararak fırsat yaratan hisselere odaklanmanı sağlar.
+          Tamamen ücretsiz, kayıt gerektirmez.
+        </p>
       </div>
+
       <div>
-        <p style="font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:12px">// SORUMLULUK REDDİ</p>
-        <p style="font-size:15px;color:var(--muted2);line-height:1.8">BistScan yalnızca bilgi amaçlıdır. Buradaki tarama sonuçları <strong style="color:var(--text)">yatırım tavsiyesi değildir.</strong></p>
+        <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 12px;">// SORUMLULUK REDDİ</p>
+        <p style="font-size: 15px; color: var(--muted2); line-height: 1.8;">
+          BistScan yalnızca bilgi amaçlıdır. Buradaki tarama sonuçları <strong style="color: var(--text);">yatırım tavsiyesi değildir.</strong>
+          Herhangi bir alım-satım kararından önce kendi araştırmanızı yapmanız ve gerekirse lisanslı bir yatırım danışmanına başvurmanız önerilir.
+          Yaşanabilecek maddi kayıplardan BistScan sorumlu tutulamaz.
+        </p>
       </div>
+
     </div>
-    <div style="border-top:1px solid var(--border);padding-top:48px">
-      <p style="font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:20px">// GERİ BİLDİRİM & İLETİŞİM</p>
-      <p style="font-size:15px;color:var(--muted2);line-height:1.8;max-width:600px">Öneri, hata bildirimi veya yeni tarama modeli talepleriniz için aşağıdaki adrese yazabilirsiniz. Her geri bildirimi okuyoruz.</p>
+
+    <div style="border-top: 1px solid var(--border); padding-top: 48px;">
+      <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 20px;">// GERİ BİLDİRİM & İLETİŞİM</p>
+      <p style="font-size: 15px; color: var(--muted2); line-height: 1.8; max-width: 600px;">
+        Öneri, hata bildirimi veya yeni tarama modeli talepleriniz için aşağıdaki adrese yazabilirsiniz.
+        Her geri bildirimi okuyoruz.
+      </p>
+
     </div>
+
   </div>
 </section>
 
@@ -285,41 +423,127 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   </div>
   <div style="font-size:12px;color:#aaa;margin-bottom:8px">📧 <a href="mailto:info@bistscan.com" style="color:#534AB7;text-decoration:none">info@bistscan.com</a></div>
   <div style="font-size:11px;color:#aaa;max-width:700px;line-height:1.7;border-top:1px solid var(--border);padding-top:16px">
-    BistScan'de yer alan tüm içerikler bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. © 2026 BistScan.com
+    BistScan'de yer alan tüm içerikler bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Veriler gecikmeli olabilir. 
+    Yatırım kararlarınızı kendi araştırmanıza dayandırınız. © 2026 BistScan.com
   </div>
 </footer>
 
 <script>
+// 22 Nisan tag dinamik
 (function() {
   var today = new Date();
   var apr22 = new Date(2026, 3, 22);
   var tag = document.getElementById('tag-apr');
   if (!tag) return;
   var diff = Math.ceil((apr22 - today) / (1000*60*60*24));
-  if (diff < 0) { tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = 'Tamamlandı'; }
-  else if (diff === 0) { tag.style.background = '#f5a623'; tag.style.color = '#000'; tag.textContent = 'BUGÜN'; }
-  else { tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = diff + ' gün kaldı'; }
+  if (diff < 0) {
+    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = 'Tamamlandı';
+  } else if (diff === 0) {
+    tag.style.background = '#f5a623'; tag.style.color = '#000'; tag.textContent = 'BUGÜN';
+  } else if (diff <= 7) {
+    tag.style.background = '#1a3a1a'; tag.style.color = '#4caf50'; tag.textContent = diff + ' gün kaldı';
+  } else {
+    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = diff + ' gün kaldı';
+  }
 })();
 </script>
 
-
 <script>
+// Tüm BIST hisseleri - API'den çek, başarısız olursa geniş fallback listesi kullan
+const FALLBACK_TICKERS = ['AEFES','AFYON','AGESA','AGHOL','AHGAZ','AKBNK','AKCNS','AKENR','AKFGY','AKFIS','AKGRT','AKIGY','AKISA','AKPAZ','AKSA','AKSEL','AKSEN','AKSGY','AKSUE','AKTIF','ALARK','ALBRK','ALFAS','ALKAR','ALKIM','ALKLC','ALMAD','ALTINS','ALVES','ANELE','ANGEN','ANHYT','ANSGR','ARASE','ARCLK','ARDYZ','ARENA','ARSAN','ARTMS','ARZUM','ASELS','ASGYO','ASUZU','ATAGY','ATAKP','ATATP','ATEKS','ATLAS','ATSYH','AVGYO','AVHOL','AVOD','AVPGY','AYES','AYCES','AYDEM','AYEN','AYGAZ','AZTEK','BAGFS','BAKAB','BALAT','BANVT','BARMA','BASGZ','BAYRK','BEGYO','BERA','BEYAZ','BFREN','BIMAS','BIOEN','BIONS','BIOTK','BMELK','BMSCH','BMSTL','BNTAS','BOBET','BORLS','BORSK','BOSSA','BOYP','BRKVY','BRKSN','BRLSM','BRMEN','BRNKS','BRSAN','BRSGZ','BRTUR','BRYAT','BSOKE','BTCIM','BUCIM','BURCE','BURVA','BVSAN','CCOLA','CELHA','CEMAS','CEMTS','CENTA','CEOEM','CIMSA','CLEBI','CMBTN','CMENT','CONSE','COSMO','CRDFA','CRFSA','CUSAN','CVKMD','CWENE','DAGHL','DAGI','DAPGM','DARDL','DENGE','DERHL','DERIM','DESA','DESPC','DEVA','DGATE','DGGYO','DGNMO','DIRIT','DITAS','DMSAS','DNISI','DOBUR','DOCO','DOFER','DOGUB','DOHOL','DOKTA','DOLPH','DOMND','DURDO','DYOBY','DZGYO','ECILC','ECZYT','EDATA','EFORC','EGEEN','EGGUB','EGPRO','EGSER','EKGYO','EKSUN','ELITE','EMKEL','EMNIS','ENERY','ENJSA','ENKAI','ENSRI','EPLAS','ERBOS','ERCB','ERDEM','ERGL','EREGL','ERNAM','ESENP','ESCOM','ESEN','ETILR','ETYAT','EUHOL','EUPWR','EUREN','EUYO','EYGYO','FBBYK','FENER','FLAP','FMIZP','FONET','FORMT','FORTE','FROTO','FZLGY','GARAN','GARFA','GEDIK','GEDZA','GENIL','GENTS','GEREL','GESAN','GFRAY','GIPTA','GLBMD','GLCVY','GLYHO','GMTAS','GOKNR','GOLTS','GOODY','GOZDE','GRSEL','GRTRK','GSDDE','GSDHO','GSRAY','GUBRF','GWIND','GZNMI','HALKB','HATEK','HDFGS','HEDEF','HEKTS','HKTM','HLGYO','HOROZ','HRKET','HTTBT','HUBVC','HUNER','HURGZ','ICBCT','IEYHO','IHEVA','IHGZT','IHLAS','IHLGM','IHYAY','IMASM','INDES','INFO','INGRM','INTEM','INVEO','IPEKE','ISCTR','ISFIN','ISGSY','ISGYO','ISKPL','ISKUR','ISMEN','ISYAT','ITTFK','IZENR','IZFAS','IZGYO','IZINV','IZOCM','JANTS','KAPLM','KAREL','KARSN','KARTN','KARYE','KATMR','KAYSE','KCHOL','KENT','KERVN','KERVT','KFEIN','KGYO','KLGYO','KLKIM','KLMSN','KLNMA','KLRHO','KLSYN','KMPUR','KNFRT','KOCMT','KONYA','KORDS','KOZAA','KOZAL','KRDMA','KRDMB','KRDMD','KRGYO','KRPLS','KRSTL','KRTEK','KRVGD','KSTUR','KTLEV','KUTPO','KUYAS','KZBGY','LIDER','LIDFA','LILAK','LINK','LKMNH','LRSHO','LUKSK','LYKHO','MAALT','MACKO','MAGEN','MAKTK','MANAS','MARKA','MARTI','MAVI','MEDTR','MEGMT','MEKAG','MERCN','MERIT','MERKO','METRO','METUR','MIATK','MIGRS','MIPAZ','MMCAS','MNDRS','MNDTR','MNVRO','MOGAN','MOBTL','MPARK','MRGYO','MRKSN','MRMMD','MSGYO','MTRKS','MTRYO','MUTUAL','MZHLD','NATEN','NETAS','NETPZ','NIBAS','NILYT','NKAS','NTHOL','NTTUR','NUGYO','NUHCM','NYKSH','ODAS','ODINE','OFSYM','OMURP','ONCSM','ONRYT','ORCAY','ORGE','ORMA','OSMEN','OSTIM','OTKAR','OTTO','OYAKC','OYLUM','OYAYO','OZKGY','OZRDN','OZSUB','PAGYO','PAMEL','PAPIL','PARSN','PASEU','PCILT','PEGYO','PEKGY','PENTA','PERAB','PETUN','PETKM','PGSUS','PINSU','PKART','PKENT','PLTUR','PNLSN','POLHO','POLTK','PRDGS','PRZMA','PSGYO','PSDTC','PTOFS','PUPUN','QUAGR','RALYH','RAYSG','RGYAS','RNPOL','RODRG','ROYAL','RTALB','RUBNS','RYSAS','SAFKR','SAHOL','SAMAT','SANEL','SANFM','SANKO','SARKY','SASA','SAYAS','SDTTR','SEKFK','SEKUR','SELEC','SELGD','SELVA','SEYKM','SILVR','SISE','SKBNK','SKTAS','SMART','SMRTG','SNGYO','SNICA','SNPAM','SODSN','SOKM','SONME','SRVGY','SUMAS','SUNTK','SURGY','SUWEN','TABGD','TARKM','TATEN','TATGD','TAVHL','TBORG','TCELL','TDGYO','TEZOL','THYAO','TKFEN','TKNSA','TLMAN','TMSN','TNZTP','TOASO','TRCAS','TRGYO','TRILC','TSGYO','TSKB','TTKOM','TTRAK','TUCLK','TUPRS','TUREX','TURGG','TURSG','TZNGY','UKIM','ULKER','ULUSE','ULUUN','UNLU','UNTA','UPgs','USAK','USDTR','UTPYA','VAKBN','VAKFN','VAKKO','VANGD','VBTYZ','VERUS','VEZNR','VKFYO','VKGYO','VKING','VOICE','VRGYO','WINTL','WNDLB','YBTAS','YELDO','YESIL','YGGYO','YIGIT','YKBNK','YKSLN','YKYAT','YLGYO','YONGA','YOTVK','YPKME','YTKSN','YUNSA','ZEDUR','ZIREN','ZRGYO','ZRSAN'];
+
+let ALL_TICKERS = [...FALLBACK_TICKERS];
+
+// API'den güncel listeyi çek
+fetch('https://app.bistscan.com/api/all-tickers')
+  .then(r => r.json())
+  .then(d => { if (Array.isArray(d) && d.length > 0) ALL_TICKERS = d; })
+  .catch(() => {});
+
+function getFavs() { try { return JSON.parse(localStorage.getItem('bistscan_favs') || '[]'); } catch { return []; } }
+function saveFavs(f) { localStorage.setItem('bistscan_favs', JSON.stringify(f)); }
+
+function addFav(ticker) {
+  ticker = ticker.trim().toUpperCase().replace('.IS','');
+  if (!ticker) return;
+  const favs = getFavs();
+  if (favs.includes(ticker)) { renderFavs(); return; }
+  favs.push(ticker);
+  saveFavs(favs);
+  renderFavs();
+  document.getElementById('favSearch').value = '';
+  document.getElementById('favDropdown').style.display = 'none';
+}
+
+function removeFav(ticker) {
+  saveFavs(getFavs().filter(t => t !== ticker));
+  renderFavs();
+}
+
+function addFavFromInput() {
+  const val = document.getElementById('favSearch').value.trim();
+  if (val) addFav(val);
+}
+
+function onFavKey(e) {
+  if (e.key === 'Enter') addFavFromInput();
+}
+
+let favTimer = null;
+function onFavSearch(q) {
+  clearTimeout(favTimer);
+  const dd = document.getElementById('favDropdown');
+  if (!q || q.length < 1) { dd.style.display = 'none'; return; }
+  favTimer = setTimeout(() => {
+    const matches = ALL_TICKERS.filter(t => t.startsWith(q.toUpperCase())).slice(0, 8);
+    const extra = ALL_TICKERS.filter(t => t.includes(q.toUpperCase()) && !t.startsWith(q.toUpperCase())).slice(0, Math.max(0, 8 - matches.length));
+    const all = [...matches, ...extra];
+    if (!all.length) { dd.style.display = 'none'; return; }
+    dd.innerHTML = all.map(t =>
+      `<span onclick="addFav('${t}')" style="background:var(--bg);border:1px solid var(--border);color:var(--muted2);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'Bebas Neue',monospace;letter-spacing:.05em;cursor:pointer" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'">${t}</span>`
+    ).join('');
+    dd.style.display = 'flex';
+  }, 150);
+}
+
+async function renderFavs() {
+  const favs = getFavs();
+  const list = document.getElementById('favList');
+  const empty = document.getElementById('favEmpty');
+  if (!favs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  list.innerHTML = '<div style="padding:10px 18px;font-size:10px;color:var(--muted)">YÜKLENİYOR...</div>';
+
+  const results = await Promise.all(favs.map(async ticker => {
+    try {
+      const res = await fetch(`https://app.bistscan.com/api/chart/${ticker}`);
+      const d = await res.json();
+      if (!d.success) return {ticker, error:true};
+      const close = d.close[d.close.length-1];
+      const prev = d.close[d.close.length-2];
+      const change = ((close-prev)/prev*100).toFixed(2);
+      const vols = d.volume.filter(v => v > 0);
+      const lastVol = vols[vols.length-1];
+      const avg20 = vols.slice(-21,-1).reduce((a,b)=>a+b,0) / 20;
+      const volRatio = avg20 > 0 ? (lastVol/avg20).toFixed(1) : null;
+      return {ticker, close, change:parseFloat(change), volRatio};
+    } catch { return {ticker, error:true}; }
+  }));
+
+  list.innerHTML = results.map(r => {
+    if (r.error) return `<div class="mock-row" style="opacity:.5"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:var(--muted)">Veri yok</div></div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px;margin-left:auto">×</button></div>`;
+    const cls = r.change >= 0 ? 'pos' : 'neg';
+    const sign = r.change >= 0 ? '+' : '';
+    const volColor = r.volRatio >= 2 ? '#f59e0b' : r.volRatio >= 1.5 ? '#10b981' : '#888';
+    return `<div class="mock-row"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:${volColor}">Hacim ${r.volRatio}x</div></div><div style="font-size:12px;color:#888;margin-right:6px">${r.close} ₺</div><div class="mock-change ${cls}">${sign}${r.change}%</div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:#555;cursor:pointer;font-size:16px;padding-left:6px">×</button></div>`;
+  }).join('');
+}
+
+renderFavs();
+
 async function loadTickers() {
   try {
     const res = await fetch('https://app.bistscan.com/api/tickers');
     const data = await res.json();
     if (!data.length) return;
-    const track = document.getElementById('tickerTrack');
-    const html = [...data, ...data].map(t => {
-      const dir = t.change >= 0 ? 'up' : 'dn';
-      const sign = t.change >= 0 ? '\u25b2' : '\u25bc';
-      return `<span class="tick">${t.ticker} <span class="${dir}">${sign}${Math.abs(t.change)}%</span></span>`;
-    }).join('');
-    track.innerHTML = html;
-  } catch(e) {}
-}
-loadTickers();
-</script>
-
-</body>
-</html>
+    const tra
