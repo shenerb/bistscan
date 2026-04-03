@@ -316,6 +316,24 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
         <div class="scan-desc">Fiyat Ichimoku bulutunun üstüne çıktı ve Tenkan-sen Kijun-sen'i geçti. Japon teknik analizinin en güçlü al sinyali.</div>
         <div class="scan-tag">BULUT ÜSTÜ · TENKAN &gt; KIJUN</div>
       </div>
+      <div class="scan-card">
+        <div class="scan-icon">📈</div>
+        <div class="scan-title">Minervini Trend</div>
+        <div class="scan-desc">Tüm önemli ortalamalar üstünde, 52H zirvesine yakın. Kurumsal lider hisseler.</div>
+        <div class="scan-tag">7 KOŞUL · GÜÇLÜ TREND</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">🕯️</div>
+        <div class="scan-title">Bulkowski Formasyon</div>
+        <div class="scan-desc">Three Line Strike, Abandoned Baby ve Upside Tasuki Gap formasyonları.</div>
+        <div class="scan-tag">%84 · %70 · %57 BAŞARI</div>
+      </div>
+      <div class="scan-card">
+        <div class="scan-icon">📉</div>
+        <div class="scan-title">RSI Trend Kırılımı</div>
+        <div class="scan-desc">RSI üzerindeki düşen trend çizgisi bugün kırıldı. Fiyattan önce sinyal.</div>
+        <div class="scan-tag">RSI TREND · KIRILIM</div>
+      </div>
     </div>
   </div>
 </section>
@@ -403,14 +421,14 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     </div>
     <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
   </div>
-  <div style="font-size:12px;color:#aaa;margin-bottom:8px">📧 <a href="mailto:info@bistscan.com" style="color:#534AB7;text-decoration:none">info@bistscan.com</a></div>
+  <div style="font-size:12px;color:#aaa;margin-bottom:8px">📧 <a href="/cdn-cgi/l/email-protection#670e09010827050e1413140406094904080a" style="color:#534AB7;text-decoration:none"><span class="__cf_email__" data-cfemail="056c6b636a45676c76717666646b2b666a68">[email&#160;protected]</span></a></div>
   <div style="font-size:11px;color:#aaa;max-width:700px;line-height:1.7;border-top:1px solid var(--border);padding-top:16px">
     BistScan'de yer alan tüm içerikler bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Veriler gecikmeli olabilir. 
     Yatırım kararlarınızı kendi araştırmanıza dayandırınız. © 2026 BistScan.com
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // 22 Nisan tag dinamik
 (function() {
   var today = new Date();
@@ -520,12 +538,4 @@ async function loadTickers() {
     const html = [...data, ...data].map(t => {
       const dir = t.change >= 0 ? 'up' : 'dn';
       const sign = t.change >= 0 ? '▲' : '▼';
-      return `<span class="tick">${t.ticker} <span class="${dir}">${sign}${Math.abs(t.change).toFixed(1)}%</span></span><span style="color:rgba(255,255,255,.2);margin:0 8px">|</span>`;
-    }).join('');
-    track.innerHTML = html;
-  } catch(e) {}
-}
-loadTickers();
-</script>
-</body>
-</html>
+      return `<span class="tick">${t.ticker} <span
