@@ -128,22 +128,30 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     </div>
     <div class="hero-mock">
       <div class="mock-header">
-        <span class="mock-title">FAVORİ HİSSELERİM</span>
-        <span class="mock-badge">Tarayıcında saklanır</span>
+        <span class="mock-title">SON TARAMA SONUÇLARI</span>
+        <span class="mock-badge">15 Dk Gecikmeli</span>
       </div>
-      <div style="padding:10px 18px;border-bottom:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" placeholder="Hisse ekle... (GARAN, THYAO)" style="background:transparent;border:none;outline:none;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;width:100%;" id="favSearch" oninput="onFavSearch(this.value)" onkeydown="onFavKey(event)"/>
-          <button onclick="addFavFromInput()" style="background:var(--gold);border:none;color:#fff;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;cursor:pointer;white-space:nowrap">+ Ekle</button>
-        </div>
-        <div id="favDropdown" style="display:none;flex-wrap:wrap;gap:4px;margin-top:6px;"></div>
+      <div class="mock-row">
+        <div class="mock-ticker">THYAO</div>
+        <div class="mock-info"><div class="mock-name">Golden Cross · RSI 58</div></div>
+        <div class="mock-change pos">+3.2%</div>
       </div>
-      <div id="favList" style="min-height:60px;"></div>
-      <div id="favEmpty" style="padding:20px 18px;font-size:12px;color:var(--muted);text-align:center;display:none;">
-        Henüz favori hisse eklemediniz.<br>Yukarıdan ekleyebilirsiniz.
+      <div class="mock-row">
+        <div class="mock-ticker">GARAN</div>
+        <div class="mock-info"><div class="mock-name">Akıllı Para · Hacim 2.4x</div></div>
+        <div class="mock-change pos">+1.8%</div>
       </div>
-      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
+      <div class="mock-row">
+        <div class="mock-ticker">ASELS</div>
+        <div class="mock-info"><div class="mock-name">Supertrend · RSI 62</div></div>
+        <div class="mock-change pos">+2.5%</div>
+      </div>
+      <div class="mock-row">
+        <div class="mock-ticker">EREGL</div>
+        <div class="mock-info"><div class="mock-name">Bollinger Sıkışma · RSI 44</div></div>
+        <div class="mock-change neg">-0.4%</div>
+      </div>
+      <div style="padding:14px 18px;border-top:1px solid var(--border)">
         <div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px;text-align:center">24 TARAMA MODELİ</div>
         <div style="line-height:2;text-align:center">
           <span class="scan-word" style="color:#534AB7">Golden Cross,</span>
@@ -294,98 +302,8 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 })();
 </script>
 
+
 <script>
-const FALLBACK_TICKERS = ['THYAO','GARAN','AKBNK','EREGL','KCHOL','ASELS','BIMAS','TCELL','TUPRS','FROTO','TOASO','SASA','ISCTR','EKGYO','ENKAI','SAHOL','ARCLK','PGSUS','TAVHL','TKFEN','PETKM','VESTL','MGROS','SOKM','KOZAL','KOZAA','ULKER','CCOLA','BRISA','OTKAR','AEFES','AGESA','AGHOL','AKGRT','AKSA','AKSEN','ALARK','ALBRK','ALKIM','ANELE','ANHYT','ANSGR','ARSAN','ARZUM','ASGYO','ASUZU','AVGYO','AYGAZ','BAGFS','BANVT','BARMA','BERA','BFREN','BIOEN','BOBET','BORSK','BOSSA','BRYAT','BSOKE','BTCIM','BUCIM','BURCE','BURVA','CEMAS','CEMTS','CIMSA','CLEBI','CWENE','DAGI','DARDL','DENGE','DESA','DEVA','DOHOL','DOKTA','DURDO','DYOBY','ECILC','ECZYT','EGEEN','EGGUB','EKGYO','ELITE','EMKEL','ENJSA','EPLAS','ERBOS','EREGL','ERGL','ESCOM','ETYAT','EUPWR','FENER','FROTO','GARAN','GEDZA','GEREL','GESAN','GLCVY','GLYHO','GOODY','GOZDE','GRSEL','GSRAY','GUBRF','GWIND','HALKB','HATEK','HEKTS','HLGYO','HOROZ','HRKET','HUBVC','HURGZ','ICBCT','IHEVA','IHLAS','INDES','INFO','INVEO','IPEKE','ISCTR','ISFIN','ISGYO','ISKUR','ISMEN','ISYAT','IZENR','IZOCM','JANTS','KAREL','KARSN','KARTN','KATMR','KCHOL','KENT','KERVT','KLKIM','KLMSN','KLRHO','KONYA','KORDS','KOZAA','KOZAL','KRDMD','KRTEK','KRVGD','KUTPO','LIDER','LILAK','LINK','LUKSK','MAALT','MAVI','MEDTR','MERCN','MERIT','MERKO','METRO','MIGRS','MNDRS','MPARK','MSGYO','NATEN','NETAS','NIBAS','NTHOL','NUGYO','NUHCM','ODAS','OTKAR','OYAKC','OYLUM','PAGYO','PARSN','PEGYO','PENTA','PETKM','PGSUS','PKENT','PRDGS','PTOFS','RYSAS','SAHOL','SAMAT','SANKO','SARKY','SASA','SISE','SKBNK','SKTAS','SOKM','SUMAS','TAVHL','TCELL','THYAO','TKFEN','TOASO','TSKB','TTKOM','TTRAK','TUPRS','ULKER','ULUSE','VAKBN','VAKKO','VESTL','YKBNK','YUNSA','ZRGYO','ZRSAN','DIRIT','PRDGS','PKENT','LILAK','YIGIT','MRGYO','TRGYO','SNGYO','EKGYO','ISGYO'];
-
-let ALL_TICKERS = [...FALLBACK_TICKERS];
-
-fetch('https://app.bistscan.com/api/all-tickers')
-  .then(r => r.json())
-  .then(d => { if (Array.isArray(d) && d.length > 0) ALL_TICKERS = d; })
-  .catch(() => {});
-
-function getFavs() { try { return JSON.parse(localStorage.getItem('bistscan_favs') || '[]'); } catch { return []; } }
-function saveFavs(f) { localStorage.setItem('bistscan_favs', JSON.stringify(f)); }
-
-function addFav(ticker) {
-  ticker = ticker.trim().toUpperCase().replace('.IS','');
-  if (!ticker) return;
-  const favs = getFavs();
-  if (favs.includes(ticker)) { renderFavs(); return; }
-  favs.push(ticker);
-  saveFavs(favs);
-  renderFavs();
-  document.getElementById('favSearch').value = '';
-  document.getElementById('favDropdown').style.display = 'none';
-}
-
-function removeFav(ticker) {
-  saveFavs(getFavs().filter(t => t !== ticker));
-  renderFavs();
-}
-
-function addFavFromInput() {
-  const val = document.getElementById('favSearch').value.trim();
-  if (val) addFav(val);
-}
-
-function onFavKey(e) {
-  if (e.key === 'Enter') addFavFromInput();
-}
-
-let favTimer = null;
-function onFavSearch(q) {
-  clearTimeout(favTimer);
-  const dd = document.getElementById('favDropdown');
-  if (!q) { dd.style.display = 'none'; return; }
-  favTimer = setTimeout(() => {
-    const uq = q.toUpperCase();
-    const starts = ALL_TICKERS.filter(t => t.startsWith(uq));
-    const contains = ALL_TICKERS.filter(t => !t.startsWith(uq) && t.includes(uq));
-    const all = [...starts, ...contains].slice(0, 8);
-    if (!all.length) { dd.style.display = 'none'; return; }
-    dd.innerHTML = all.map(t =>
-      `<span onclick="addFav('${t}')" style="background:var(--bg);border:1px solid var(--border);color:var(--muted2);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'Bebas Neue',monospace;cursor:pointer" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'">${t}</span>`
-    ).join('');
-    dd.style.display = 'flex';
-    dd.style.flexWrap = 'wrap';
-    dd.style.gap = '4px';
-  }, 150);
-}
-
-async function renderFavs() {
-  const favs = getFavs();
-  const list = document.getElementById('favList');
-  const empty = document.getElementById('favEmpty');
-  if (!favs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  list.innerHTML = '<div style="padding:10px 18px;font-size:10px;color:var(--muted)">YÜKLENİYOR...</div>';
-  const results = await Promise.all(favs.map(async ticker => {
-    try {
-      const res = await fetch(`https://app.bistscan.com/api/chart/${ticker}`);
-      const d = await res.json();
-      if (!d.success) return {ticker, error:true};
-      const close = d.close[d.close.length-1];
-      const prev = d.close[d.close.length-2];
-      const change = ((close-prev)/prev*100).toFixed(2);
-      const vols = d.volume.filter(v => v > 0);
-      const lastVol = vols[vols.length-1];
-      const avg20 = vols.slice(-21,-1).reduce((a,b)=>a+b,0) / 20;
-      const volRatio = avg20 > 0 ? (lastVol/avg20).toFixed(1) : null;
-      return {ticker, close, change:parseFloat(change), volRatio};
-    } catch { return {ticker, error:true}; }
-  }));
-  list.innerHTML = results.map(r => {
-    if (r.error) return `<div class="mock-row" style="opacity:.5"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:var(--muted)">Veri yok</div></div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px;margin-left:auto">×</button></div>`;
-    const cls = r.change >= 0 ? 'pos' : 'neg';
-    const sign = r.change >= 0 ? '+' : '';
-    const volColor = r.volRatio >= 2 ? '#f59e0b' : r.volRatio >= 1.5 ? '#10b981' : '#888';
-    return `<div class="mock-row"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:${volColor}">Hacim ${r.volRatio}x</div></div><div style="font-size:12px;color:#888;margin-right:6px">${r.close} ₺</div><div class="mock-change ${cls}">${sign}${r.change}%</div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:#555;cursor:pointer;font-size:16px;padding-left:6px">×</button></div>`;
-  }).join('');
-}
-
-renderFavs();
-
 async function loadTickers() {
   try {
     const res = await fetch('https://app.bistscan.com/api/tickers');
@@ -394,13 +312,12 @@ async function loadTickers() {
     const track = document.getElementById('tickerTrack');
     const html = [...data, ...data].map(t => {
       const dir = t.change >= 0 ? 'up' : 'dn';
-      const sign = t.change >= 0 ? '▲' : '▼';
+      const sign = t.change >= 0 ? '\u25b2' : '\u25bc';
       return `<span class="tick">${t.ticker} <span class="${dir}">${sign}${Math.abs(t.change)}%</span></span>`;
     }).join('');
     track.innerHTML = html;
   } catch(e) {}
 }
-
 loadTickers();
 </script>
 
