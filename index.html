@@ -19,33 +19,38 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 section{background:var(--bg)}
-.ticker-outer{background:var(--gold);padding:7px 0;overflow:hidden}
-.ticker-track{display:flex;gap:2rem;animation:ticker 40s linear infinite;white-space:nowrap}
+.ticker-outer{background:var(--bg);padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05);overflow:hidden}
+.ticker-track{display:flex;gap:1.5rem;animation:ticker 40s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tick{font-size:12px;font-weight:600;color:#ffffff;letter-spacing:.05em}
-.tick .up{color:#00ff88;font-weight:800;text-shadow:0 0 8px rgba(0,255,136,.4)}.tick .dn{color:#ff3355;font-weight:800;text-shadow:0 0 8px rgba(255,51,85,.4)}
+.tick{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:#ffffff;padding:6px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 2px 8px rgba(0,0,0,0.03)}
+.tick .up{color:#00d873;font-weight:800;text-shadow:0 0 8px rgba(0,216,115,.3)}.tick .dn{color:#ff3355;font-weight:800;text-shadow:0 0 8px rgba(255,51,85,.3)}
+.text-gradient{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:bold;}
+.tick-name{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:800;font-size:13px;letter-spacing:0.02em}
 .tick-model{font-size:11px;font-weight:500;letter-spacing:.04em}
-nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-family:'DM Sans',sans-serif;font-size:22px;font-weight:700;letter-spacing:.05em;color:var(--text);text-transform:none}
-.nav-logo span{color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(221, 219, 210, 0.5);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 30px rgba(0,0,0,0.03)}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;color:#0a1930;text-transform:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,0.1))}
+.nav-logo span{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:13px;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{border:1px solid var(--gold);color:var(--gold);background:transparent;padding:7px 20px;border-radius:6px;font-size:12px;font-weight:500;text-decoration:none;transition:all .2s}
-.nav-cta:hover{background:var(--gold);color:#fff}
+.nav-cta{border:1px solid rgba(43,128,255,0.3);color:#2b80ff;background:rgba(43,128,255,0.04);padding:10px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s ease;box-shadow:0 2px 8px rgba(43,128,255,0.05)}
+.nav-cta:hover{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;border-color:transparent;transform:translateY(-2px);box-shadow:0 4px 15px rgba(165,65,255,0.3)}
 .hero{padding:100px 40px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:16px;animation:fadeUp .5s .1s both}
+.hero-label{font-size:11px;background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;letter-spacing:.15em;font-weight:700;margin-bottom:16px;animation:fadeUp .5s .1s both;display:inline-block}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:var(--text)}
-.hero-title .accent{color:var(--gold)}
+.hero-title .accent{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
 .hero-desc{color:var(--muted2);font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .4s both}
 .scan-words{margin-bottom:28px;animation:fadeUp .5s .35s both;line-height:1.9;max-width:420px}
 .scan-word{font-size:14px;font-weight:500;margin-right:6px;transition:opacity .3s}
-.btn-primary{background:var(--gold);color:#fff;padding:13px 32px;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none;transition:opacity .2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{opacity:.88}
-.btn-secondary{border:1px solid var(--gold);color:var(--gold);padding:13px 28px;border-radius:8px;font-size:14px;text-decoration:none;transition:all .2s}
-.btn-secondary:hover{border-color:var(--muted2);color:var(--text)}
-.hero-mock{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;animation:fadeUp .6s .3s both}
+.btn-primary{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(165,65,255,0.25)}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(165,65,255,0.4)}
+.btn-navy{background:#0a1930;color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(10,25,48,0.25)}
+.btn-navy:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(10,25,48,0.4)}
+.btn-secondary{background:#fff;border:1px solid rgba(43,128,255,0.2);color:#0a1930;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 2px 8px rgba(0,0,0,0.02)}
+.btn-secondary:hover{border-color:transparent;color:#fff;background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);transform:translateY(-3px);box-shadow:0 6px 15px rgba(165,65,255,0.3)}
+.hero-mock{background:#fff;border:1px solid rgba(0,0,0,0.05);border-radius:20px;overflow:hidden;animation:fadeUp .6s .3s both;box-shadow:0 24px 80px rgba(0,0,0,0.07)}
+@keyframes floatLogo{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
 .mock-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}
 .mock-title{font-size:12px;font-weight:500;color:var(--muted2);letter-spacing:.05em}
 .mock-badge{background:rgba(245,158,11,.15);color:var(--gold);font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500}
@@ -71,12 +76,11 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-
 .section-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:12px}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:.02em;line-height:1;margin-bottom:48px;color:var(--text)}
 .scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;background:transparent;border:none;border-radius:0;overflow:visible}
-.scan-card{background:#fff;border:1px solid var(--border);padding:24px;transition:all .2s;position:relative}
-.scan-card:hover{background:#EEEDFE;border-color:var(--gold)}
-.scan-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold);opacity:0;transition:opacity .2s}
-.scan-card:hover::before{opacity:1}
-.scan-icon{font-size:22px;margin-bottom:12px}
-.scan-title{font-size:14px;font-weight:500;margin-bottom:6px}
+.scan-card{background:#fff;border:1px solid rgba(0,0,0,0.04);padding:28px;border-radius:20px;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;box-shadow:0 6px 24px rgba(0,0,0,0.03)}
+.scan-card:hover{border-color:var(--gold);transform:translateY(-8px);box-shadow:0 16px 40px rgba(83,74,183,0.12)}
+.scan-icon{font-size:26px;margin-bottom:16px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-block}
+.scan-card:hover .scan-icon{transform:scale(1.2) translateY(-2px)}
+.scan-title{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text)}
 .scan-desc{font-size:12px;color:var(--muted2);line-height:1.6}
 .scan-tag{display:inline-block;margin-top:10px;font-size:10px;color:var(--gold);letter-spacing:.06em;background:#EEEDFE;padding:2px 8px;border-radius:4px}
 .how-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -91,8 +95,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-
 .cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,80px);letter-spacing:.02em;line-height:.95;margin-bottom:20px}
 .cta-sub{color:var(--muted2);font-size:15px;margin-bottom:36px}
 footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em}
-.footer-logo span{color:var(--gold)}
+.footer-logo{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#0a1930;text-transform:none}
+.footer-logo span{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
 .footer-copy,.footer-by{font-size:12px;color:var(--muted)}
 .footer-by span{color:var(--gold)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -114,7 +118,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 
 <div class="ticker-outer">
   <div class="ticker-track" id="tickerTrack">
-    <span class="tick">Yükleniyor...</span>
+    <span class="tick"><span class="tick-name">Yükleniyor...</span></span>
   </div>
 </div>
 
@@ -122,12 +126,13 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div class="nav-logo">Bist<span>ScaN</span></div>
   <ul class="nav-links">
     <li><a href="#taramalar">Taramalar</a></li>
-    <li><a href="https://app.bistscan.com/sinyal-takip" target="_blank" style="color:var(--gold); font-weight:bold;">Sinyal Takip 🚀</a></li>
+    <li><a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="text-gradient">Sinyal Takip 🚀</a></li>
+    <li><a href="#" onclick="openIOSModal(); return false;" style="font-weight:700; color:#534AB7;">📱 iPhone'a Kur</a></li>
     <li><a href="#nasil">Nasıl Çalışır</a></li>
     <li><a href="#hakkinda">Hakkında</a></li>
   </ul>
   <div style="display: flex; gap: 12px; align-items: center;">
-    <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg, #FFD700 0%, #FF3333 100%); color:#000; padding:10px 20px; border-radius:8px; text-decoration:none; font-size:14px; font-weight:700; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(255, 51, 51, 0.3);" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 20px rgba(255, 51, 51, 0.4)'; this.style.background='linear-gradient(135deg, #FFE033 0%, #FF4D4D 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(255, 51, 51, 0.3)'; this.style.background='linear-gradient(135deg, #FFD700 0%, #FF3333 100%)';">
+    <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:10px 20px; border-radius:12px; text-decoration:none; font-size:14px; font-weight:700; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(165, 65, 255, 0.3);" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 20px rgba(165, 65, 255, 0.4)'; this.style.background='linear-gradient(90deg, #4b94ff 0%, #ba63ff 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(165, 65, 255, 0.3)'; this.style.background='linear-gradient(90deg, #2b80ff 0%, #a541ff 100%)';">
       <svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px; height:14px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
       <span>Takip Et</span>
     </a>
@@ -135,40 +140,22 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   </div>
 </nav>
 
-<section style="background:var(--bg)">
-  <div class="hero">
+<section style="background-image:radial-gradient(rgba(200,198,188,0.7) 1px, transparent 1px);background-size:28px 28px;position:relative;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent, var(--bg) 95%);pointer-events:none;"></div>
+  <div class="hero" style="position:relative;z-index:1;">
     <div>
       <p class="hero-label">BORSA İSTANBUL ANALİZ</p>
       <h1 class="hero-title">Doğru Analiz,<br>Net<br><span class="accent">Fırsatlar.</span></h1>
-      <p class="hero-desc">530+ BIST hissesini 24 farklı tarama modeliyle analiz et. Teknik ve temel verilerle fırsatları yakala. Tamamen ücretsiz.</p>
+      <p class="hero-desc" style="font-size:16px; line-height:1.7; max-width:460px;">Borsa İstanbul'da işlem gören <strong style="color:var(--text); font-weight:700;">tüm hisse senetlerini</strong> gelişmiş algoritmalar ve indikatörlerle saniyeler içinde tarayın. Yükseliş potansiyeli taşıyan fırsatları herkesten önce yakalayın. <br><br><span class="text-gradient" style="font-size:17px;">%100 Ücretsiz Analiz Edin.</span></p>
       <p style="font-size:11px;color:#aaa;margin-top:-20px;margin-bottom:16px">⚠️ Yatırım tavsiyesi değildir. Bilgilendirme amaçlıdır.</p>
       <div class="hero-btns">
         <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
-        <a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="btn-secondary" style="background:var(--gold); color:#fff; border:none; box-shadow:0 4px 12px rgba(83,74,183,0.3);">Sinyal Takip Modülü 🚀</a>
+        <a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="btn-navy">Sinyal Takip Modülü 🚀</a>
         <a href="#taramalar" class="btn-secondary">Özellikleri Gör</a>
       </div>
     </div>
-    <div class="hero-mock">
-      <div class="mock-header">
-        <span class="mock-title">FAVORİ HİSSELERİM</span>
-        <span class="mock-badge">Tarayıcında saklanır</span>
-      </div>
-      <div style="padding:10px 18px;border-bottom:1px solid var(--border);">
-        <div style="display:flex;align-items:center;gap:8px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 12px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#555" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <input type="text" placeholder="Hisse ekle... (GARAN, THYAO)" style="background:transparent;border:none;outline:none;color:var(--muted2);font-size:12px;font-family:'DM Sans',sans-serif;width:100%;" id="favSearch" oninput="onFavSearch(this.value)" onkeydown="onFavKey(event)"/>
-          <button onclick="addFavFromInput()" style="background:var(--gold);border:none;color:#0d0d0d;font-size:10px;font-weight:600;padding:4px 10px;border-radius:4px;cursor:pointer;font-family:'DM Sans',sans-serif;white-space:nowrap">+ Ekle</button>
-        </div>
-        <div id="favDropdown" style="display:none;flex-wrap:wrap;gap:4px;margin-top:6px;"></div>
-      </div>
-      <div id="favList" style="min-height:60px;"></div>
-      <div id="favEmpty" style="padding:20px 18px;font-size:12px;color:var(--muted);text-align:center;display:none;">
-        Henüz favori hisse eklemediniz.<br>Yukarıdan ekleyebilirsiniz.
-      </div>
-      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border)">
-        <div style="font-size:9px;color:var(--muted);letter-spacing:.1em;margin-bottom:8px;text-align:center">24 TARAMA MODELİ</div>
-        <div style="line-height:2;text-align:center"><span class="scan-word" style="color:#534AB7">Golden Cross,</span><span class="scan-word" style="color:#3b82f6">52H Kırılım,</span><span class="scan-word" style="color:#10b981">Akıllı Para,</span><span class="scan-word" style="color:#f59e0b">Tavan Tarama,</span><span class="scan-word" style="color:#8b5cf6">Ucuz Kalmış,</span><span class="scan-word" style="color:#ef4444">Hacimlenen Dip,</span><span class="scan-word" style="color:#06b6d4">Momentum Bombası,</span><span class="scan-word" style="color:#534AB7">Destek Kalkanı,</span><span class="scan-word" style="color:#f97316">Bollinger Sıkışma,</span><span class="scan-word" style="color:#84cc16">Stoch RSI,</span><span class="scan-word" style="color:#3b82f6">MACD Kesişimi,</span><span class="scan-word" style="color:#ec4899">Doji,</span><span class="scan-word" style="color:#10b981">Hammer,</span><span class="scan-word" style="color:#8b5cf6">Supertrend,</span><span class="scan-word" style="color:#f59e0b">EMA Crossover,</span><span class="scan-word" style="color:#534AB7">ADX Güçlü Trend,</span><span class="scan-word" style="color:#06b6d4">Morning Star,</span><span class="scan-word" style="color:#ef4444">Engulfing,</span><span class="scan-word" style="color:#84cc16">Değer + Momentum,</span><span class="scan-word" style="color:#f97316">Ichimoku Bulutu,</span><span class="scan-word" style="color:#ec4899">Son 1 Yıl Halka Arz</span></div>
-      </div>
+    <div class="hero-graphic" style="display:flex; justify-content:center; align-items:center; animation: fadeUp 0.6s 0.3s both;">
+      <img src="sb-logo.png" alt="SB Scan Bot" style="width:100%; max-width:320px; border-radius: 24px; box-shadow: 0 40px 80px rgba(0,0,0,0.2), 0 0 40px rgba(43, 128, 255, 0.15), 0 0 40px rgba(165, 65, 255, 0.15); filter: drop-shadow(0 0 10px rgba(255,165,0,0.2)); object-fit: contain; image-rendering: -webkit-optimize-contrast; transform: translateZ(0);">
     </div>
   </div>
 </section>
@@ -423,7 +410,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
   <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px">
     <div class="footer-logo">Bist<span>ScaN</span></div>
     <div style="display:flex;gap:20px;font-size:12px;align-items:center;">
-      <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #FFD700 0%, #FF3333 100%); color:#000; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:12px; font-weight:700; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(255, 51, 51, 0.2);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(255, 51, 51, 0.3)'; this.style.background='linear-gradient(135deg, #FFE033 0%, #FF4D4D 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 3px 10px rgba(255, 51, 51, 0.2)'; this.style.background='linear-gradient(135deg, #FFD700 0%, #FF3333 100%)';">
+      <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:8px 16px; border-radius:10px; text-decoration:none; font-size:13px; font-weight:700; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(165, 65, 255, 0.2);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 6px 15px rgba(165, 65, 255, 0.3)'; this.style.background='linear-gradient(90deg, #4b94ff 0%, #ba63ff 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 3px 10px rgba(165, 65, 255, 0.2)'; this.style.background='linear-gradient(90deg, #2b80ff 0%, #a541ff 100%)';">
         <svg viewBox="0 0 24 24" aria-hidden="true" style="width:12px; height:12px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
         <span>Takip Et</span>
       </a>
@@ -440,6 +427,36 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     Yatırım kararlarınızı kendi araştırmanıza dayandırınız. © 2026 BistScan.com
   </div>
 </footer>
+
+<div id="iosModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center; opacity:0; transition: opacity 0.3s;" onclick="if(event.target===this) closeIOSModal();">
+  <div style="background:var(--bg); padding:32px; border-radius:24px; max-width:400px; width:90%; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.2); border:1px solid rgba(0,0,0,0.05); text-align:center;">
+    <button onclick="closeIOSModal()" style="position:absolute; top:16px; right:16px; background:transparent; border:none; font-size:24px; cursor:pointer; color:var(--muted2);">&times;</button>
+    <div style="font-size:48px; margin-bottom:16px;">📱</div>
+    <h3 style="font-family:'Bebas Neue',sans-serif; font-size:32px; margin-bottom:12px; color:var(--text);">iPhone'a Kurulum</h3>
+    <p style="color:var(--muted2); font-size:15px; line-height:1.6; margin-bottom:24px;">BistScan'i telefonunuza mobil uygulama olarak eklemek çok kolay. Safari'de izleyin:</p>
+    <div style="display:flex; flex-direction:column; gap:16px; text-align:left;">
+      <div style="display:flex; align-items:center; gap:16px; background:var(--bg2); padding:16px; border-radius:16px; border:1px solid var(--border);">
+        <div style="width:40px; height:40px; background:#fff; border-radius:10px; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.05); flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b80ff" stroke-width="2"><path d="M12 15V3m0 0l4 4m-4-4L8 7m-4 5v8a2 2 0 002 2h12a2 2 0 002-2v-8"/></svg>
+        </div>
+        <div>
+          <strong style="color:var(--text); display:block; font-size:14px; margin-bottom:4px;">1. Paylaş'a Dokunun</strong>
+          <span style="color:var(--muted); font-size:12px;">Safari'nin alt menüsündeki paylaş ikonuna tıklayın.</span>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; gap:16px; background:var(--bg2); padding:16px; border-radius:16px; border:1px solid var(--border);">
+        <div style="width:40px; height:40px; background:#fff; border-radius:10px; display:flex; justify-content:center; align-items:center; box-shadow:0 4px 10px rgba(0,0,0,0.05); flex-shrink:0;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2b80ff" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        </div>
+        <div>
+          <strong style="color:var(--text); display:block; font-size:14px; margin-bottom:4px;">2. Ana Ekrana Ekle</strong>
+          <span style="color:var(--muted); font-size:12px;">Açılan menüden "Ana Ekrana Ekle" (➕) seçeneğini seçin.</span>
+        </div>
+      </div>
+    </div>
+    <button onclick="closeIOSModal()" class="btn-primary" style="width:100%; justify-content:center; margin-top:24px;">Anladım</button>
+  </div>
+</div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // 22 Nisan tag dinamik
@@ -507,9 +524,10 @@ function onFavSearch(q) {
 }
 
 async function renderFavs() {
-  const favs = getFavs();
   const list = document.getElementById('favList');
   const empty = document.getElementById('favEmpty');
+  if(!list || !empty) return;
+  const favs = JSON.parse(localStorage.getItem('bist_favs') || '["THYAO", "EREGL", "FROTO", "AKBNK", "TUPRS"]');
   if (!favs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   list.innerHTML = '<div style="padding:10px 18px;font-size:10px;color:var(--muted)">YÜKLENİYOR...</div>';
@@ -551,11 +569,23 @@ async function loadTickers() {
     const html = [...data, ...data].map(t => {
       const dir = t.change >= 0 ? 'up' : 'dn';
       const sign = t.change >= 0 ? '▲' : '▼';
-      return `<span class="tick">${t.ticker} <span class="${dir}">${sign}${Math.abs(t.change).toFixed(1)}%</span></span><span style="color:rgba(255,255,255,.2);margin:0 8px">|</span>`;
+      return `<span class="tick"><span class="tick-name">${t.ticker}</span> <span class="${dir}">${sign}${Math.abs(t.change).toFixed(1)}%</span></span>`;
     }).join('');
     track.innerHTML = html;
   } catch(e) {}
 }
 loadTickers();
+
+function openIOSModal() {
+  const m = document.getElementById('iosModal');
+  m.style.display = 'flex';
+  setTimeout(()=>m.style.opacity='1', 10);
+}
+function closeIOSModal() {
+  const m = document.getElementById('iosModal');
+  m.style.opacity = '0';
+  setTimeout(()=>m.style.display='none', 300);
+}
 </script>
-  <
+</body>
+</html>
