@@ -4,429 +4,462 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BistScaN</title>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="description" content="530+ BIST hissesini 24 farklı tarama modeliyle analiz et. Tamamen ücretsiz.">
-<meta property="og:title" content="BistScaN">
-<meta property="og:description" content="530+ BIST hissesini 24 farklı tarama modeliyle analiz et.">
-<link rel="alternate icon" href="favicon.png">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<meta name="description" content="530+ BIST hissesini 24 farklı tarama modeliyle analiz et. Teknik ve temel verilerle fırsatları yakala. Tamamen ücretsiz.">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-:root{--gold:#534AB7;--bg:#f5f4ef;--bg2:#efede6;--bg3:#e8e6df;--border:#dddbd2;--text:#1a1a2e;--muted:#999999;--muted2:#666666}
+:root{--gold:#534AB7;--accent:#7F77DD;--bg:#f5f4ef;--bg2:#efede6;--bg3:#e8e6df;--border:#dddbd2;--text:#1a1a2e;--muted:#aaa;--muted2:#888}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
-section{background:var(--bg)}
-.ticker-outer{background:var(--bg);padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05);overflow:hidden}
-.ticker-track{display:flex;gap:1.5rem;animation:ticker 40s linear infinite;white-space:nowrap}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tick{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:#ffffff;padding:6px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 2px 8px rgba(0,0,0,0.03)}
-.tick .up{color:#00d873;font-weight:800;text-shadow:0 0 8px rgba(0,216,115,.3)}.tick .dn{color:#ff3355;font-weight:800;text-shadow:0 0 8px rgba(255,51,85,.3)}
-.text-gradient{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:bold;}
-.tick-name{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:800;font-size:13px;letter-spacing:0.02em}
-.tick-model{font-size:11px;font-weight:500;letter-spacing:.04em}
-nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(221, 219, 210, 0.5);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 30px rgba(0,0,0,0.03)}
-.nav-logo{font-family:'DM Sans',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;color:#0a1930;text-transform:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,0.1))}
-.nav-logo span{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
-.nav-links{display:flex;gap:28px;list-style:none}
-.nav-links a{color:var(--muted2);text-decoration:none;font-size:13px;transition:color .2s}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{border:1px solid rgba(43,128,255,0.3);color:#2b80ff;background:rgba(43,128,255,0.04);padding:10px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s ease;box-shadow:0 2px 8px rgba(43,128,255,0.05)}
-.nav-cta:hover{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;border-color:transparent;transform:translateY(-2px);box-shadow:0 4px 15px rgba(165,65,255,0.3)}
-.hero{padding:100px 40px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-label{font-size:11px;background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;letter-spacing:.15em;font-weight:700;margin-bottom:16px;animation:fadeUp .5s .1s both;display:inline-block}
-.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:var(--text)}
-.hero-title .accent{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
-.hero-desc{color:var(--muted2);font-size:15px;line-height:1.7;max-width:420px;margin-bottom:36px;animation:fadeUp .5s .3s both}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .4s both}
-.scan-words{margin-bottom:28px;animation:fadeUp .5s .35s both;line-height:1.9;max-width:420px}
-.scan-word{font-size:14px;font-weight:500;margin-right:6px;transition:opacity .3s}
-.btn-primary{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(165,65,255,0.25)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(165,65,255,0.4)}
-.btn-navy{background:#0a1930;color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(10,25,48,0.25)}
-.btn-navy:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(10,25,48,0.4)}
-.btn-secondary{background:#fff;border:1px solid rgba(43,128,255,0.2);color:#0a1930;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 2px 8px rgba(0,0,0,0.02)}
-.btn-secondary:hover{border-color:transparent;color:#fff;background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);transform:translateY(-3px);box-shadow:0 6px 15px rgba(165,65,255,0.3)}
-.hero-mock{background:#fff;border:1px solid rgba(0,0,0,0.05);border-radius:20px;overflow:hidden;animation:fadeUp .6s .3s both;box-shadow:0 24px 80px rgba(0,0,0,0.07)}
-@keyframes floatLogo{0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)}}
-.mock-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--bg2)}
-.mock-title{font-size:12px;font-weight:500;color:var(--muted2);letter-spacing:.05em}
-.mock-badge{background:rgba(245,158,11,.15);color:var(--gold);font-size:10px;padding:3px 10px;border-radius:100px;font-weight:500}
-.mock-row{display:flex;align-items:center;padding:12px 18px;border-bottom:1px solid var(--border);gap:12px;transition:background .15s}
-.mock-row:last-child{border-bottom:none}
-.mock-row:hover{background:var(--bg3)}
-.mock-ticker{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.05em;min-width:60px}
-.mock-info{flex:1}
-.mock-name{font-size:11px;color:var(--muted2)}
-.mock-signal{font-size:10px;padding:3px 8px;border-radius:4px;font-weight:500}
-.sig-green{background:rgba(16,185,129,.15);color:#10b981}
-.sig-gold{background:rgba(245,158,11,.15);color:var(--gold)}
-.sig-blue{background:rgba(59,130,246,.15);color:#3b82f6}
-.mock-change{font-size:12px;font-weight:500;min-width:50px;text-align:right}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}
+
+nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;height:56px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{font-family:'DM Sans',sans-serif;font-size:20px;font-weight:700;letter-spacing:.05em;flex-shrink:0;text-transform:none}
+.nav-logo span{color:var(--gold)}
+.nav-hint{font-size:11px;color:var(--muted);letter-spacing:.05em;flex-shrink:0}
+
+/* STOCK SEARCH */
+.nav-search{position:relative;flex:1;max-width:500px}
+.nav-search input{width:100%;background:#fff;border:1px solid var(--border);border-radius:8px;padding:7px 12px 7px 32px;color:var(--text);font-size:12px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+.nav-search input:focus{border-color:var(--gold)}
+.nav-search .search-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;pointer-events:none}
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg2);border:1px solid var(--border);border-radius:8px;overflow:hidden;z-index:200;display:none}
+.search-dropdown.visible{display:block}
+.search-item{padding:10px 14px;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:background .15s}
+.search-item:hover{background:var(--bg3)}
+.search-item .s-ticker{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:.05em}
+.search-item .s-hint{font-size:10px;color:var(--muted2)}
+
+.container{max-width:1200px;margin:0 auto;padding:32px 24px}
+.page-layout{display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:start}
+.side-col-inner{margin-top:124px}
+.main-col{}
+.side-col{position:sticky;top:64px}
+.market-widget{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px}
+.mw-title{font-size:10px;color:var(--gold);letter-spacing:.12em;font-weight:500;margin-bottom:12px}
+.bist-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.bist-val{font-size:20px;font-weight:700;color:var(--text)}
+.bist-chg{font-size:13px;font-weight:600}
+.chg-up{color:#4caf50}
+.chg-down{color:#f44336}
+.mbar{text-align:center;padding:8px 4px;background:var(--bg);border-radius:6px}
+.mbar-num{font-size:16px;font-weight:700}
+.mbar-label{font-size:9px;color:var(--muted2);margin-top:2px}
+.up-color{color:#4caf50}
+.down-color{color:#f44336}
+.flat-color{color:#888}
+.scans-title{font-size:10px;color:var(--muted2);letter-spacing:.1em;margin-bottom:8px}
+.scan-result-item{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-radius:6px;margin-bottom:3px;background:var(--bg2)}
+.sri-name{font-size:10px;color:var(--text)}
+.sri-found{font-size:10px;color:var(--gold);font-weight:600}
+.sri-time{font-size:9px;color:var(--muted)}
+.sri-empty{font-size:11px;color:var(--muted);text-align:center;padding:12px 0}
+@media(max-width:768px){.page-layout{grid-template-columns:1fr}.side-col{display:none}}
+.scan-label{font-size:11px;color:var(--gold);letter-spacing:.12em;font-weight:500;margin-bottom:12px}
+.scan-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:8px;margin-bottom:24px}
+.scan-btn{background:#fff;border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:8px;font-size:12px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s;text-align:left;line-height:1.4}
+.scan-btn:hover{border-color:var(--gold);color:var(--gold)}
+.scan-btn.active{border-color:var(--gold);color:#fff;background:var(--gold)}
+.scan-btn .btn-icon{font-size:16px;display:block;margin-bottom:4px}
+.scan-btn .btn-name{font-weight:500;display:block}
+.scan-btn .btn-desc{font-size:10px;color:inherit;opacity:.7;display:block;margin-top:2px}
+.scan-btn .btn-help{position:absolute;top:6px;right:8px;font-size:10px;color:var(--muted);background:var(--bg2);border:1px solid var(--border);border-radius:50%;width:16px;height:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;font-weight:600;z-index:2}
+.scan-btn .btn-help:hover{background:var(--gold);color:#fff;border-color:var(--gold)}
+.scan-btn{position:relative}
+.edu-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center}
+.edu-modal.open{display:flex}
+.edu-box{background:#fff;border-radius:12px;padding:24px;max-width:480px;width:90%;max-height:80vh;overflow-y:auto;position:relative}
+.edu-close{position:absolute;top:12px;right:14px;background:transparent;border:none;font-size:18px;cursor:pointer;color:var(--muted)}
+.edu-title{font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px}
+.edu-tag{font-size:10px;color:var(--gold);background:#EEEDFE;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:12px}
+.edu-body{font-size:13px;color:#555;line-height:1.8}
+.edu-body strong{color:var(--text)}
+.edu-when{margin-top:12px;padding:10px;background:var(--bg2);border-radius:8px;font-size:12px;color:#666;border-left:3px solid var(--gold)}
+
+.filter-panel{background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:24px;display:none}
+.filter-panel.visible{display:block}
+.filter-row{display:flex;gap:20px;flex-wrap:wrap;align-items:flex-end}
+.filter-item{display:flex;flex-direction:column;gap:4px}
+.filter-item label{font-size:11px;color:var(--muted2);letter-spacing:.05em}
+.filter-item input[type=range]{width:130px;accent-color:var(--gold)}
+.filter-val{font-size:12px;color:var(--gold);font-family:monospace}
+.filter-row-cb{display:flex;gap:16px;flex-wrap:wrap;align-items:center;margin-top:10px}
+.cb-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted2);cursor:pointer}
+.run-btn{background:var(--gold);color:#fff;border:none;padding:10px 28px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:12px}
+.run-btn.multi-active{background:linear-gradient(90deg,#534AB7,#378ADD);color:#fff}
+.scan-btn.sel-1{border-color:#534AB7!important;background:#EEEDFE!important;color:#534AB7!important}
+.scan-btn.sel-2{border-color:#378ADD!important;background:#E6F1FB!important;color:#185FA5!important}
+.scan-btn.sel-3{border-color:#1D9E75!important;background:#E1F5EE!important;color:#0F6E56!important}
+.scan-btn.sel-disabled{opacity:.3;pointer-events:none}
+.multi-badge{position:absolute;top:5px;right:5px;width:14px;height:14px;border-radius:50%;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1}
+.b-1{background:#534AB7;color:#fff}
+.b-2{background:#378ADD;color:#fff}
+.b-3{background:#1D9E75;color:#fff}
+.selected-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;min-height:28px;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer}
+.chip-1{background:#EEEDFE;color:#534AB7;border:1px solid #534AB7}
+.chip-2{background:#E6F1FB;color:#185FA5;border:1px solid #185FA5}
+.chip-3{background:#E1F5EE;color:#0F6E56;border:1px solid #0F6E56}
+.chip-hint{font-size:10px;color:var(--muted);font-style:italic}
+.run-btn:hover{opacity:.88}
+.run-btn:disabled{opacity:.5;cursor:not-allowed}
+.run-btn.pulse{animation:pulse-gold .6s ease-out}
+@keyframes pulse-gold{0%{box-shadow:0 0 0 0 rgba(83,74,183,.5)}70%{box-shadow:0 0 0 12px rgba(83,74,183,0)}100%{box-shadow:0 0 0 0 rgba(83,74,183,0)}}
+.float-btn{display:none;position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--bg);border:none;border-radius:24px;padding:12px 28px;font-size:13px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;z-index:999;box-shadow:0 4px 20px rgba(83,74,183,.3);transition:all .3s}
+.float-btn.visible{display:block}
+@media(max-width:768px){.float-btn.visible{display:block}}
+
+/* PROGRESS */
+.progress-wrap{background:#fff;border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:none}
+.progress-wrap.visible{display:block}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-label{font-size:12px;color:var(--muted2)}
+.progress-count{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--gold)}
+.progress-bar-bg{background:var(--border);border-radius:4px;height:4px}
+.progress-bar{background:var(--gold);height:4px;border-radius:4px;transition:width .3s;width:0%}
+
+.status{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted2);margin-bottom:16px;min-height:20px}
+.spinner{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.csv-btn{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:6px 14px;border-radius:6px;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.csv-btn:hover{border-color:var(--gold);color:var(--gold)}
+.csv-btn{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:6px 14px;border-radius:6px;font-size:11px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all .2s}
+.csv-btn:hover{border-color:var(--gold);color:var(--gold)}
+.results-count{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.02em}
+.results-count span{color:var(--gold)}
+.results-grid{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.result-row{background:#fff;display:grid;grid-template-columns:80px 1fr auto auto auto;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;transition:background .15s}
+.result-row:hover,.result-row.expanded{background:#EEEDFE}
+.r-ticker{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:.05em}
+.r-signals{display:flex;gap:5px;flex-wrap:wrap}
+.r-signal{font-size:10px;padding:3px 7px;border-radius:4px;font-weight:500}
+.sig-rsi{background:rgba(139,92,246,.15);color:#8b5cf6}
+.sig-vol{background:rgba(59,130,246,.15);color:#3b82f6}
+.sig-ma{background:rgba(245,158,11,.15);color:var(--gold)}
+.sig-ipo-up{background:rgba(16,185,129,.15);color:#059669;font-weight:600}
+.sig-ipo-down{background:rgba(239,68,68,.15);color:#dc2626;font-weight:600}
+.r-close{font-size:14px;font-weight:500;text-align:right}
+.r-change{font-size:13px;font-weight:500;text-align:right;min-width:52px}
+.r-rsi{font-size:12px;color:var(--muted2);text-align:right;min-width:44px}
 .pos{color:#10b981}.neg{color:#ef4444}
-.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:grid;grid-template-columns:repeat(3,1fr)}
-.stat-item{padding:32px 40px;border-right:1px solid var(--border)}
-.stat-item:last-child{border-right:none}
-.stat-num{font-family:'Bebas Neue',sans-serif;font-size:48px;letter-spacing:.02em;color:var(--gold);line-height:1;margin-bottom:6px}
-.stat-num.gold{color:var(--gold)}
-.stat-label{font-size:12px;color:var(--muted);letter-spacing:.08em}
-.section{max-width:1100px;margin:0 auto;padding:80px 40px}
-.section-label{font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:12px}
-.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);letter-spacing:.02em;line-height:1;margin-bottom:48px;color:var(--text)}
-.scans-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;background:transparent;border:none;border-radius:0;overflow:visible}
-.scan-card{background:#fff;border:1px solid rgba(0,0,0,0.04);padding:28px;border-radius:20px;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;box-shadow:0 6px 24px rgba(0,0,0,0.03)}
-.scan-card:hover{border-color:var(--gold);transform:translateY(-8px);box-shadow:0 16px 40px rgba(83,74,183,0.12)}
-.scan-icon{font-size:26px;margin-bottom:16px;transition:transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-block}
-.scan-card:hover .scan-icon{transform:scale(1.2) translateY(-2px)}
-.scan-title{font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text)}
-.scan-desc{font-size:12px;color:var(--muted2);line-height:1.6}
-.scan-tag{display:inline-block;margin-top:10px;font-size:10px;color:var(--gold);letter-spacing:.06em;background:#EEEDFE;padding:2px 8px;border-radius:4px}
-.how-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.steps{display:grid;grid-template-columns:repeat(3,1fr)}
-.step{padding:48px 40px;border-right:1px solid var(--border)}
-.step:last-child{border-right:none}
-.step-num{font-family:'Bebas Neue',sans-serif;font-size:64px;color:var(--gold);opacity:.3;line-height:1;margin-bottom:16px}
-.step-title{font-size:16px;font-weight:500;margin-bottom:10px}
-.step-desc{font-size:13px;color:var(--muted2);line-height:1.7}
-.cta-section{text-align:center;padding:100px 40px;position:relative;overflow:hidden;background:var(--bg2)}
-.cta-section::before{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(83,74,183,.08) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
-.cta-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,7vw,80px);letter-spacing:.02em;line-height:.95;margin-bottom:20px}
-.cta-sub{color:var(--muted2);font-size:15px;margin-bottom:36px}
-footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.footer-logo{font-family:'DM Sans',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#0a1930;text-transform:none}
-.footer-logo span{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent}
-.footer-copy,.footer-by{font-size:12px;color:var(--muted)}
-.footer-by span{color:var(--gold)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  .hero{grid-template-columns:1fr;padding:60px 20px 40px;gap:40px}
-  .stats{grid-template-columns:1fr}
-  .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 20px}
-  .steps{grid-template-columns:1fr}
-  .step{border-right:none;border-bottom:1px solid var(--border);padding:32px 20px}
-  .section{padding:48px 20px}
-  footer{flex-direction:column;text-align:center}
-  .cta-section{padding:60px 20px}
+.r-arrow{font-size:11px;color:var(--muted);transition:transform .2s}
+.result-row.expanded .r-arrow{transform:rotate(180deg)}
+
+.chart-panel{background:var(--bg2);border-top:1px solid var(--border);padding:20px 18px;display:none}
+.chart-panel.visible{display:block}
+.chart-tabs{display:flex;gap:4px;margin-bottom:14px}
+.chart-tab{background:transparent;border:1px solid var(--border);color:var(--muted2);padding:5px 14px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s}
+.chart-tab.active{border-color:var(--gold);color:var(--gold)}
+.chart-wrap{position:relative;height:220px}
+.chart-wrap-sm{position:relative;height:120px;margin-top:12px;display:none}
+
+.empty{text-align:center;padding:48px 24px;color:var(--muted2)}
+.empty-icon{font-size:28px;margin-bottom:10px}
+
+/* MODAL - single stock view */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:500;display:none;align-items:flex-start;justify-content:center;padding-top:60px}
+.modal-overlay.visible{display:flex}
+.modal{background:#fff;border:1px solid var(--border);border-radius:14px;width:100%;max-width:720px;max-height:80vh;overflow-y:auto;padding:24px}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-ticker{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:.05em}
+.modal-close{background:transparent;border:1px solid var(--border);color:var(--muted2);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:16px}
+.modal-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:20px}
+.modal-stat{background:var(--bg3);border-radius:8px;padding:12px}
+.modal-stat-label{font-size:10px;color:var(--muted2);letter-spacing:.06em;margin-bottom:4px}
+.modal-stat-val{font-size:18px;font-weight:500}
+
+@media(max-width:600px){
+  nav{padding:0 12px;gap:8px}
+  .nav-search{max-width:100%;flex:1}
+  .container{padding:20px 14px}
+  .scan-grid{grid-template-columns:repeat(2,1fr)}
+  .result-row{grid-template-columns:70px 1fr auto auto}
+  .r-rsi{display:none}
+  .modal-stats{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
 <body>
 
-<div class="ticker-outer">
-  <div class="ticker-track" id="tickerTrack">
-    <span class="tick"><span class="tick-name">Yükleniyor...</span></span>
-  </div>
-</div>
+<div class="container" style="padding-top: 16px;">
+<div class="page-layout">
+<div class="main-col">
 
-<nav>
-  <div class="nav-logo">Bist<span>ScaN</span></div>
-  <ul class="nav-links">
-    <li><a href="#taramalar">Taramalar</a></li>
-    <li><a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="text-gradient">Sinyal Takip 🚀</a></li>
-    <li><a href="#" onclick="openIOSModal(); return false;" style="font-weight:700; color:#534AB7;">📱 iPhone'a Kur</a></li>
-    <li><a href="#nasil">Nasıl Çalışır</a></li>
-    <li><a href="#hakkinda">Hakkında</a></li>
-  </ul>
-  <div style="display: flex; gap: 12px; align-items: center;">
-    <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:10px 20px; border-radius:12px; text-decoration:none; font-size:14px; font-weight:700; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(165, 65, 255, 0.3);" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 20px rgba(165, 65, 255, 0.4)'; this.style.background='linear-gradient(90deg, #4b94ff 0%, #ba63ff 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(165, 65, 255, 0.3)'; this.style.background='linear-gradient(90deg, #2b80ff 0%, #a541ff 100%)';">
-      <svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px; height:14px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
-      <span>Takip Et</span>
-    </a>
-    <a href="https://app.bistscan.com" target="_blank" class="nav-cta">Taramayı Başlat</a>
+  <div style="display:flex; flex-direction:column; gap:12px; margin-bottom:16px; width:100%;">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%;">
+      <div class="nav-logo" style="display:flex; align-items:center;">
+        <a href="https://www.bistscan.com" style="display:flex; align-items:center; text-decoration:none;">
+          <img src="{{ url_for('static', filename='sb-logo.png') }}" alt="BistScan" style="height:36px; border-radius:10px; filter: drop-shadow(0 0 8px rgba(165,65,255,0.3));">
+        </a>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:center;">
+        <a href="#" onclick="openIOSModal(); return false;" style="font-weight:700; color:var(--text); text-decoration:none; display:inline-flex; align-items:center; background:#EEEDFE; padding:10px 14px; border-radius:8px; font-size:12px; border:1px solid #ddd; white-space:nowrap;">
+          📱 iPhone'a Kur
+        </a>
+        <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:10px 14px; border-radius:8px; text-decoration:none; font-size:12px; font-weight:700; box-shadow:0 4px 15px rgba(165, 65, 255, 0.3); white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 8px 15px rgba(165, 65, 255, 0.4)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(165, 65, 255, 0.3)';">
+          <svg viewBox="0 0 24 24" aria-hidden="true" style="width:12px; height:12px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
+          <span>Takip Et</span>
+        </a>
+      </div>
+    </div>
+    <div class="nav-search" style="max-width:100%; width:100%;">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="stockSearch" placeholder="Hisse ara... GARAN, THYAO" autocomplete="off" oninput="onSearch(this.value)" onkeydown="onSearchKey(event)" style="padding: 10px 14px 10px 36px; font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); width:100%;">
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
   </div>
-</nav>
 
-<section style="background-image:radial-gradient(rgba(200,198,188,0.7) 1px, transparent 1px);background-size:28px 28px;position:relative;">
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent, var(--bg) 95%);pointer-events:none;"></div>
-  <div class="hero" style="position:relative;z-index:1;">
+  <div style="background: linear-gradient(135deg, #1a1a2e, #33334d); border-radius: 12px; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.1); flex-wrap: wrap; gap: 16px; border-left: 4px solid var(--gold);">
     <div>
-      <p class="hero-label">BORSA İSTANBUL ANALİZ</p>
-      <h1 class="hero-title">Doğru Analiz,<br>Net<br><span class="accent">Fırsatlar.</span></h1>
-      <p class="hero-desc" style="font-size:16px; line-height:1.7; max-width:460px;">Borsa İstanbul'da işlem gören <strong style="color:var(--text); font-weight:700;">tüm hisse senetlerini</strong> gelişmiş algoritmalar ve indikatörlerle saniyeler içinde tarayın. Yükseliş potansiyeli taşıyan fırsatları herkesten önce yakalayın. <br><br><span class="text-gradient" style="font-size:17px;">%100 Ücretsiz Analiz Edin.</span></p>
-      <p style="font-size:11px;color:#aaa;margin-top:-20px;margin-bottom:16px">⚠️ Yatırım tavsiyesi değildir. Bilgilendirme amaçlıdır.</p>
-      <div class="hero-btns">
-        <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
-        <a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="btn-navy">Sinyal Takip Modülü 🚀</a>
-        <a href="#taramalar" class="btn-secondary">Özellikleri Gör</a>
-      </div>
+      <div style="color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: 0.05em; line-height: 1;">🔥 Sinyal Takip Modülü</div>
+      <div style="color: rgba(255,255,255,0.7); font-size: 13px; margin-top: 6px; letter-spacing: 0.02em;">BistScan algoritmalarının yakaladığı fırsatların anlık performansını takip edin.</div>
     </div>
-    <div class="hero-graphic" style="display:flex; justify-content:center; align-items:center; animation: fadeUp 0.6s 0.3s both;">
-      <img src="static/sb-logo.png" alt="SB Scan Bot" style="width:100%; max-width:320px; border-radius: 24px; box-shadow: 0 40px 80px rgba(0,0,0,0.2), 0 0 40px rgba(43, 128, 255, 0.15), 0 0 40px rgba(165, 65, 255, 0.15); filter: drop-shadow(0 0 10px rgba(255,165,0,0.2)); object-fit: contain; image-rendering: -webkit-optimize-contrast; transform: translateZ(0);">
-    </div>
+    <a href="/sinyal-takip" target="_blank" style="background: var(--gold); color: #fff; padding: 10px 24px; border-radius: 8px; text-decoration: none; font-size: 13px; font-weight: 600; transition: all 0.2s; white-space: nowrap; box-shadow: 0 4px 12px rgba(83,74,183,0.3);" onmouseover="this.style.opacity='0.85';this.style.transform='translateY(-2px)';" onmouseout="this.style.opacity='1';this.style.transform='none';">
+      Modülü İncele →
+    </a>
   </div>
-</section>
 
-<section style="padding:60px 0;background:linear-gradient(135deg,#534AB7 0%,#7F77DD 100%)">
-  <div class="section" style="text-align:center">
-    <p style="font-size:11px;color:rgba(255,255,255,.7);letter-spacing:.15em;font-weight:500;margin-bottom:16px">// GÜÇLÜ ÖZELLİK</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);color:#fff;letter-spacing:.02em;line-height:1;margin-bottom:20px">Çoklu Tarama</h2>
-    <p style="font-size:16px;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 32px;line-height:1.7">
-      Birden fazla modeli aynı anda seç — sadece <strong style="color:#fff">hepsinde çıkan hisseler</strong> listelenir. 
-      Daha az gürültü, daha net fırsatlar.
-    </p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px">
-      <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">⚡ Golden Cross</div>
-      <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">×</div>
-      <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">📊 MACD Kesişimi</div>
-      <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">×</div>
-      <div style="background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:500">💥 Akıllı Para</div>
-      <div style="color:rgba(255,255,255,.5);font-size:20px;align-self:center">=</div>
-      <div style="background:#fff;border-radius:8px;padding:10px 20px;color:#534AB7;font-size:13px;font-weight:700">🎯 Net Fırsatlar</div>
-    </div>
-    <p style="font-size:12px;color:rgba(255,255,255,.6)">Maksimum 3 model — kesişim modunda çalışır</p>
+  <p class="scan-label">// TARAMA MODELİ SEÇ</p>
+  <div id="selectedChips" class="selected-chips">
+    <span class="chip-hint">Bir veya birden fazla model seçin (maks. 3)</span>
   </div>
-</section>
+  <button class="run-btn" id="runBtn" onclick="runScan()" disabled style="margin-bottom:16px;margin-top:0;width:100%">Model Seçin</button>
+  <div class="scan-grid">
+    <button class="scan-btn" data-type="filter" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('filter')">?</span>
+      <span class="btn-icon">🔍</span>
+      <span class="btn-name">Özel Filtre</span>
+      <span class="btn-desc">MA · RSI · Hacim</span>
+    </button>
+    <button class="scan-btn" data-type="golden_cross" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('golden_cross')">?</span>
+      <span class="btn-icon">🌟</span>
+      <span class="btn-name">Golden Cross</span>
+      <span class="btn-desc">SMA50 × SMA200</span>
+    </button>
+    <button class="scan-btn" data-type="breakout_52w" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('breakout_52w')">?</span>
+      <span class="btn-icon">🚀</span>
+      <span class="btn-name">52H Kırılım</span>
+      <span class="btn-desc">Zirve kırılımı</span>
+    </button>
+    <button class="scan-btn" data-type="smart_money" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('smart_money')">?</span>
+      <span class="btn-icon">💰</span>
+      <span class="btn-name">Akıllı Para</span>
+      <span class="btn-desc">Hacim 2x + EMA20</span>
+    </button>
+    <button class="scan-btn" data-type="ceiling" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('ceiling')">?</span>
+      <span class="btn-icon">🔔</span>
+      <span class="btn-name">Tavan Tarama</span>
+      <span class="btn-desc">≥ %9.5 değişim</span>
+    </button>
+    <button class="scan-btn" data-type="value" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('value')">?</span>
+      <span class="btn-icon">⭐</span>
+      <span class="btn-name">Ucuz Kalmış</span>
+      <span class="btn-desc">PD/DD &lt; 1</span>
+    </button>
+    <button class="scan-btn" data-type="volume_dip" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('volume_dip')">?</span>
+      <span class="btn-icon">📉</span>
+      <span class="btn-name">Hacimlenen Dip</span>
+      <span class="btn-desc">RSI &lt; 25 · Hacim 2x</span>
+    </button>
+    <button class="scan-btn" data-type="momentum" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('momentum')">?</span>
+      <span class="btn-icon">💥</span>
+      <span class="btn-name">Momentum Bombası</span>
+      <span class="btn-desc">%3+ · RSI 55-75</span>
+    </button>
+    <button class="scan-btn" data-type="destek" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('destek')">?</span>
+      <span class="btn-icon">🛡️</span>
+      <span class="btn-name">Destek Kalkanı</span>
+      <span class="btn-desc">SMA200 · RSI &lt; 40</span>
+    </button>
+    <button class="scan-btn" data-type="bollinger" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('bollinger')">?</span>
+      <span class="btn-icon">🎯</span>
+      <span class="btn-name">Bollinger Sıkışma</span>
+      <span class="btn-desc">Patlama öncesi düşük volatilite</span>
+    </button>
+    <button class="scan-btn" data-type="stoch_rsi" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('stoch_rsi')">?</span>
+      <span class="btn-icon">📈</span>
+      <span class="btn-name">Stoch RSI</span>
+      <span class="btn-desc">Aşırı satım · StochRSI &lt; 0.2</span>
+    </button>
+    <button class="scan-btn" data-type="macd_kesisim" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('macd_kesisim')">?</span>
+      <span class="btn-icon">⚡</span>
+      <span class="btn-name">MACD Kesişimi</span>
+      <span class="btn-desc">Al sinyali · MACD yukarı kesti</span>
+    </button>
+    <button class="scan-btn" data-type="doji" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('doji')">?</span>
+      <span class="btn-icon">🕯️</span>
+      <span class="btn-name">Doji</span>
+      <span class="btn-desc">Belirsizlik · dönüş mumu</span>
+    </button>
+    <button class="scan-btn" data-type="hammer" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('hammer')">?</span>
+      <span class="btn-icon">🔨</span>
+      <span class="btn-name">Hammer</span>
+      <span class="btn-desc">Dip dönüş · alt gölge uzun</span>
+    </button>
+    <button class="scan-btn" data-type="supertrend" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('supertrend')">?</span>
+      <span class="btn-icon">🚦</span>
+      <span class="btn-name">Supertrend</span>
+      <span class="btn-desc">Trend dönüşü · bearish → bullish</span>
+    </button>
+    <button class="scan-btn" data-type="ema_crossover" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('ema_crossover')">?</span>
+      <span class="btn-icon">⚡</span>
+      <span class="btn-name">EMA Crossover</span>
+      <span class="btn-desc">EMA9 × EMA21 · kısa vadeli al</span>
+    </button>
+    <button class="scan-btn" data-type="adx_trend" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('adx_trend')">?</span>
+      <span class="btn-icon">📈</span>
+      <span class="btn-name">ADX Güçlü Trend</span>
+      <span class="btn-desc">ADX &gt; 25 · yukarı yönlü güç</span>
+    </button>
+    <button class="scan-btn" data-type="morning_star" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('morning_star')">?</span>
+      <span class="btn-icon">🌅</span>
+      <span class="btn-name">Morning Star</span>
+      <span class="btn-desc">3 mumlu dip dönüş formasyonu</span>
+    </button>
+    <button class="scan-btn" data-type="engulfing" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('engulfing')">?</span>
+      <span class="btn-icon">🫦</span>
+      <span class="btn-name">Engulfing</span>
+      <span class="btn-desc">Yutan mum · güçlü dönüş sinyali</span>
+    </button>
+    <button class="scan-btn" data-type="deger_momentum" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('deger_momentum')">?</span>
+      <span class="btn-icon">💎</span>
+      <span class="btn-name">Değer + Momentum</span>
+      <span class="btn-desc">F/K &lt; 15 · PD/DD &lt; 2 · RSI 40-60</span>
+    </button>
+    <button class="scan-btn" data-type="ichimoku" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('ichimoku')">?</span>
+      <span class="btn-icon">☁️</span>
+      <span class="btn-name">Ichimoku Bulutu</span>
+      <span class="btn-desc">Fiyat bulut üstünde · Tenkan &gt; Kijun</span>
+    </button>
+    <button class="scan-btn" data-type="minervini" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('minervini')">?</span>
+      <span class="btn-icon">📈</span>
+      <span class="btn-name">Minervini Trend</span>
+      <span class="btn-desc">7 koşullu güçlü trend şablonu</span>
+    </button>
+    <button class="scan-btn" data-type="bulkowski" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('bulkowski')">?</span>
+      <span class="btn-icon">🕯️</span>
+      <span class="btn-name">Bulkowski Formasyon</span>
+      <span class="btn-desc">Three Line Strike · Abandoned Baby · Tasuki Gap</span>
+    </button>
+    <button class="scan-btn" data-type="rsi_trend_break" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('rsi_trend_break')">?</span>
+      <span class="btn-icon">📉</span>
+      <span class="btn-name">RSI Trend Kırılımı</span>
+      <span class="btn-desc">RSI düşen trend çizgisi bugün kırıldı</span>
+    </button>
+    <button class="scan-btn" data-type="recent_ipo" onclick="selectScan(this)">
+      <span class="btn-help" onclick="event.stopPropagation();showEdu('recent_ipo')">?</span>
+      <span class="btn-icon">🆕</span>
+      <span class="btn-name">Son 1 Yıl Halka Arz</span>
+      <span class="btn-desc">Mart 2025 – Mart 2026 arası arzlar</span>
+    </button>
+  </div>
 
-<section style="padding:60px 0;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="section" style="text-align:center">
-    <p style="font-size:11px;color:var(--gold);letter-spacing:.15em;font-weight:500;margin-bottom:16px">// GÜÇLÜ ÖZELLİK</p>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,56px);color:var(--text);letter-spacing:.02em;line-height:1;margin-bottom:20px">Sinyal Performans Takibi</h2>
-    <p style="font-size:16px;color:var(--muted2);max-width:560px;margin:0 auto 32px;line-height:1.7">
-      Yakalanan fırsatları takip etmek artık çok daha kolay. BistScan otomatik filtrelerden geçen hisselerin <strong style="color:var(--gold)">başarı oranını ve net getirisini</strong> tablo üzerinden hesaplar.
-    </p>
-    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:36px">
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 20px;color:var(--text);font-size:13px;font-weight:500">📥 Yakalanan Fiyat</div>
-      <div style="color:var(--muted);font-size:18px;align-self:center">→</div>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px 20px;color:var(--text);font-size:13px;font-weight:500">⚡ 15 Dk Gecikmeli Fiyat</div>
-      <div style="color:var(--muted);font-size:18px;align-self:center">=</div>
-      <div style="background:var(--gold);border-radius:8px;padding:10px 20px;color:#fff;font-size:13px;font-weight:700">Güncel Performans</div>
+</div>
+<div class="side-col">
+  <div class="side-col-inner">
+  <div class="market-widget">
+    <div class="mw-title">// PİYASA ÖZETİ</div>
+    <div class="bist-row">
+      <div>
+        <div style="font-size:9px;color:var(--muted2);margin-bottom:2px">BIST 100</div>
+        <div class="bist-val" id="bist-val">—</div>
+      </div>
+      <div class="bist-chg" id="bist-chg">—</div>
     </div>
-    <a href="https://app.bistscan.com/sinyal-takip" target="_blank" class="btn-primary" style="box-shadow:0 4px 12px rgba(83,74,183,0.2);">Sinyal Takip Modülünü İncele →</a>
-  </div>
-</section>
 
-<section id="taramalar">
-  <div class="section">
-    <p class="section-label">// TARAMA MODELLERİ</p>
-    <h2 class="section-title">24 Farklı Strateji</h2>
-    <div class="scans-grid">
-      <div class="scan-card">
-        <div class="scan-icon">🔍</div>
-        <div class="scan-title">Özel Filtreleme</div>
-        <div class="scan-desc">MA, RSI ve hacim kriterlerini kendin belirle. Kendi stratejine göre tara.</div>
-        <div class="scan-tag">MA · RSI · HACİM</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🌟</div>
-        <div class="scan-title">Golden Cross</div>
-        <div class="scan-desc">SMA50'nin SMA200'ü yukarı kestiği hisseler. Uzun vadeli yükseliş başlangıcı.</div>
-        <div class="scan-tag">SMA50 × SMA200</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🚀</div>
-        <div class="scan-title">52H Kırılım</div>
-        <div class="scan-desc">52 haftalık zirveyi kıran hisseler. Güçlü momentum ve hacim artışı aranır.</div>
-        <div class="scan-tag">52 HAFTA · 1.5x HACİM</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">💰</div>
-        <div class="scan-title">Akıllı Para</div>
-        <div class="scan-desc">Hacim 2 katın üzerinde, değişim %2+ ve EMA20 üstü. Kurumsal ilgi işareti.</div>
-        <div class="scan-tag">HACİM 2x · EMA20</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🔔</div>
-        <div class="scan-title">Tavan Tarama</div>
-        <div class="scan-desc">Günlük %9.5 ve üzeri değişim gösteren tavan yapan hisseleri listele.</div>
-        <div class="scan-tag">DEĞİŞİM ≥ %9.5</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">⭐</div>
-        <div class="scan-title">Ucuz Kalmış</div>
-        <div class="scan-desc">PD/DD'si 1'in altındaki değer hisselerini bul. IsYatirim verileri ile gerçek zamanlı.</div>
-        <div class="scan-tag">PD/DD &lt; 1</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">📉</div>
-        <div class="scan-title">Hacimlenen Dip</div>
-        <div class="scan-desc">RSI 25'in altında ve hacim 2 katın üzerinde. Aşırı satım + ani ilgi artışı.</div>
-        <div class="scan-tag">RSI &lt; 25 · HACİM 2x</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">💥</div>
-        <div class="scan-title">Momentum Bombası</div>
-        <div class="scan-desc">Değişim %3+, hacim 2x+ ve RSI 55-75 arası. Güçlü yükseliş momentumu.</div>
-        <div class="scan-tag">DEĞİŞİM %3+ · RSI 55-75</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🛡️</div>
-        <div class="scan-title">Destek Kalkanı</div>
-        <div class="scan-desc">SMA200'e %5 yakın ve RSI 40'ın altında. Güçlü destekte dip fırsatı.</div>
-        <div class="scan-tag">SMA200 YAKINI · RSI &lt; 40</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🎯</div>
-        <div class="scan-title">Bollinger Sıkışma</div>
-        <div class="scan-desc">Bant genişliği minimumda, volatilite düşük. Büyük hareket öncesi sessizlik.</div>
-        <div class="scan-tag">BB SIKIŞMA · RSI 35-65</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">📈</div>
-        <div class="scan-title">Stoch RSI</div>
-        <div class="scan-desc">Stochastic RSI 0.2'nin altında. RSI'dan daha hassas aşırı satım tespiti.</div>
-        <div class="scan-tag">STOCHRSI &lt; 0.2</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">⚡</div>
-        <div class="scan-title">MACD Kesişimi</div>
-        <div class="scan-desc">MACD histogram negatiften pozitife döndü. Güçlü al sinyali.</div>
-        <div class="scan-tag">MACD YUKARI KESTİ</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🕯️</div>
-        <div class="scan-title">Doji</div>
-        <div class="scan-desc">Açılış ve kapanış birbirine çok yakın. Belirsizlik ve olası dönüş sinyali.</div>
-        <div class="scan-tag">GÖVDE &lt; %10</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🔨</div>
-        <div class="scan-title">Hammer</div>
-        <div class="scan-desc">Alt gölge gövdenin 2 katından uzun. Dip bölgesinde güçlü dönüş mumu.</div>
-        <div class="scan-tag">ALT GÖLGE 2x · RSI &lt; 45</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🚦</div>
-        <div class="scan-title">Supertrend</div>
-        <div class="scan-desc">Supertrend göstergesi bearish'ten bullish'e döndü. Trend dönüşünü erkenden yakala.</div>
-        <div class="scan-tag">BEARISH → BULLISH</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">⚡</div>
-        <div class="scan-title">EMA Crossover</div>
-        <div class="scan-desc">EMA9'un EMA21'i yukarı kestiği hisseler. Kısa vadeli al sinyali.</div>
-        <div class="scan-tag">EMA9 × EMA21</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">📈</div>
-        <div class="scan-title">ADX Güçlü Trend</div>
-        <div class="scan-desc">ADX 25 üstünde, son 3 gündür yükseliyor ve hacim 1.5x üstünde. Güçlü yukarı trend.</div>
-        <div class="scan-tag">ADX &gt; 25 · HACİM 1.5x</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🌅</div>
-        <div class="scan-title">Morning Star</div>
-        <div class="scan-desc">Üç mumlu dip dönüş formasyonu. Büyük düşüş, küçük yıldız, güçlü toparlanma.</div>
-        <div class="scan-tag">3 MUMLU FORMASYON</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">🫦</div>
-        <div class="scan-title">Engulfing</div>
-        <div class="scan-desc">Bugünkü yeşil mum dünkü kırmızı mumu tamamen yutuyor. Güçlü alıcı baskısı.</div>
-        <div class="scan-tag">YUTAN MUM · RSI &lt; 60</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">💎</div>
-        <div class="scan-title">Değer + Momentum</div>
-        <div class="scan-desc">F/K 15 altında, PD/DD 2 altında ve RSI 40-60 arasında. Ucuz ama harekete geçmiş.</div>
-        <div class="scan-tag">F/K &lt; 15 · PD/DD &lt; 2 · RSI 40-60</div>
-      </div>
-      <div class="scan-card">
-        <div class="scan-icon">☁️</div>
-        <div class="scan-title">Ichimoku Bulutu</div>
-        <div class="scan-desc">Fiyat Ichimoku bulutunun üstüne çıktı ve Tenkan-sen Kijun-sen'i geçti. Japon teknik analizinin en güçlü al sinyali.</div>
-        <div class="scan-tag">BULUT ÜSTÜ · TENKAN &gt; KIJUN</div>
-      </div>
-    </div>
+    <div class="scans-title">// SON TARAMALAR</div>
+    <div id="last-scans-list"><div class="sri-empty">Henüz tarama yapılmadı</div></div>
   </div>
-</section>
+  </div>
+</div>
+</div>
 
-<div class="how-section" id="nasil">
-  <div class="section">
-    <p class="section-label">// NASIL ÇALIŞIR</p>
-    <h2 class="section-title">3 Adımda Tarama</h2>
+  <div class="filter-panel" id="filterPanel">
+    <div class="filter-row">
+      <div class="filter-item">
+        <label>MA YAKINLIK</label>
+        <input type="range" min="1" max="10" value="5" id="maTol" oninput="document.getElementById('maTolVal').textContent=this.value+'%'">
+        <span class="filter-val" id="maTolVal">5%</span>
+      </div>
+      <div class="filter-item">
+        <label>HACİM EŞIĞI</label>
+        <input type="range" min="0" max="50" value="15" id="volThr" oninput="document.getElementById('volThrVal').textContent=(this.value/10).toFixed(1)+'x'">
+        <span class="filter-val" id="volThrVal">1.5x</span>
+      </div>
+      <div class="filter-item">
+        <label>RSI EŞIĞI</label>
+        <input type="range" min="10" max="50" value="30" id="rsiThr" oninput="document.getElementById('rsiThrVal').textContent=this.value">
+        <span class="filter-val" id="rsiThrVal">30</span>
+      </div>
+    </div>
+    <div class="filter-row-cb">
+      <label class="cb-item"><input type="checkbox" id="useMa" checked> MA Filtresi</label>
+      <label class="cb-item"><input type="checkbox" id="useVol" checked> Hacim Filtresi</label>
+      <label class="cb-item"><input type="checkbox" id="useRsi"> RSI Filtresi</label>
+    </div>
   </div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">01</div>
-      <div class="step-title">Modeli seç</div>
-      <div class="step-desc">24 hazır tarama modelinden birini seç ya da kendi filtrelerini belirle. Her model farklı bir yatırım stratejisine göre tasarlandı.</div>
+
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-top">
+      <span class="progress-label" id="progressLabel">Taranıyor...</span>
+      <span class="progress-count" id="progressCount">0 / 0</span>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <div class="step-title">Taramayı başlat</div>
-      <div class="step-desc">530+ BIST hissesi otomatik olarak taranır. İlerleme çubuğundan canlı takip edebilirsin.</div>
+    <div class="progress-bar-bg"><div class="progress-bar" id="progressBar"></div></div>
+  </div>
+
+  <div class="status" id="status"></div>
+  <div id="resultsArea"></div>
+  <div id="scanDisclaimer" style="display:none;margin-top:16px;padding:10px 14px;background:#f5f4ef;border:1px solid #dddbd2;border-radius:8px;font-size:11px;color:#888;line-height:1.6">⚠️ Bu sonuçlar teknik kriterlere göre otomatik oluşturulmuştur. Yatırım tavsiyesi değildir. Veriler gecikmeli olabilir.</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalContent">
+    <div class="modal-header">
+      <div class="modal-ticker" id="modalTicker">—</div>
+      <button class="modal-close" onclick="closeModalBtn()">✕</button>
     </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <div class="step-title">Sonuçları incele</div>
-      <div class="step-desc">Her hisse için RSI, MACD ve MA grafikleri. F/K, PD/DD, halka açıklık ve dolaşımdaki lot bilgileri.</div>
+    <div class="modal-stats" id="modalStats"></div>
+    <div class="chart-tabs">
+      <button class="chart-tab active" onclick="modalTab(event,'price')">Fiyat & MA</button>
+      <button class="chart-tab" onclick="modalTab(event,'rsi')">RSI</button>
+      <button class="chart-tab" onclick="modalTab(event,'macd')">MACD</button>
+      <button class="chart-tab" onclick="modalTab(event,'signals')">🔍 Sinyaller</button>
+    </div>
+    <div class="chart-wrap" id="modal-price-wrap"><canvas id="modal-price-chart"></canvas></div>
+    <div class="chart-wrap-sm" id="modal-rsi-wrap"><canvas id="modal-rsi-chart"></canvas></div>
+    <div class="chart-wrap-sm" id="modal-macd-wrap"><canvas id="modal-macd-chart"></canvas></div>
+    <div id="modal-signals-wrap" style="display:none;padding:4px 0">
+      <div id="modal-signals-content" style="font-size:13px;color:var(--muted2);text-align:center;padding:20px 0">Yükleniyor...</div>
     </div>
   </div>
 </div>
-
-
-
-<div class="cta-section">
-  <h2 class="cta-title">Hemen<br><span style="color:var(--gold)">başla.</span></h2>
-  <p class="cta-sub">Ücretsiz. Kayıt gerektirmez. Tarayıcında çalışır.</p>
-  <p style="font-size:11px;color:#aaa;margin-top:12px">Burada yer alan bilgiler yatırım tavsiyesi niteliği taşımaz. SPK lisanslı danışmanlık hizmeti verilmemektedir.</p>
-  <a href="https://app.bistscan.com" target="_blank" class="btn-primary">Taramayı Başlat →</a>
-</div>
-
-<section id="hakkinda" style="padding: 80px 0; border-top: 1px solid var(--border);">
-  <div class="section">
-    <p class="section-label">// HAKKINDA</p>
-    <h2 class="section-title">BistScan Nedir?</h2>
-
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; margin-bottom: 64px;">
-
-      <div>
-        <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 12px;">// HİKAYE</p>
-        <p style="font-size: 15px; color: var(--muted2); line-height: 1.8;">
-          BistScan, Borsa İstanbul'u takip eden yatırımcıların teknik analizi daha hızlı ve sistematik yapabilmesi için geliştirildi.
-          Tek tek hisse bakmak yerine, 530+ hisseyi saniyeler içinde tarararak fırsat yaratan hisselere odaklanmanı sağlar.
-          Tamamen ücretsiz, kayıt gerektirmez.
-        </p>
-      </div>
-
-      <div>
-        <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 12px;">// SORUMLULUK REDDİ</p>
-        <p style="font-size: 15px; color: var(--muted2); line-height: 1.8;">
-          BistScan yalnızca bilgi amaçlıdır. Buradaki tarama sonuçları <strong style="color: var(--text);">yatırım tavsiyesi değildir.</strong>
-          Herhangi bir alım-satım kararından önce kendi araştırmanızı yapmanız ve gerekirse lisanslı bir yatırım danışmanına başvurmanız önerilir.
-          Yaşanabilecek maddi kayıplardan BistScan sorumlu tutulamaz.
-        </p>
-      </div>
-
-    </div>
-
-    <div style="border-top: 1px solid var(--border); padding-top: 48px;">
-      <p style="font-size: 13px; color: var(--gold); letter-spacing: 1px; margin-bottom: 20px;">// GERİ BİLDİRİM & İLETİŞİM</p>
-      <p style="font-size: 15px; color: var(--muted2); line-height: 1.8; max-width: 600px;">
-        Öneri, hata bildirimi veya yeni tarama modeli talepleriniz için aşağıdaki adrese yazabilirsiniz.
-        Her geri bildirimi okuyoruz.
-      </p>
-
-    </div>
-
-  </div>
-</section>
-
-<footer style="flex-direction:column;gap:16px;text-align:center;padding:32px 40px">
-  <div style="display:flex;justify-content:space-between;align-items:center;width:100%;flex-wrap:wrap;gap:12px">
-    <div class="footer-logo">Bist<span>ScaN</span></div>
-    <div style="display:flex;gap:20px;font-size:12px;align-items:center;">
-      <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:8px 16px; border-radius:10px; text-decoration:none; font-size:13px; font-weight:700; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(165, 65, 255, 0.2);" onmouseover="this.style.transform='translateY(-2px) scale(1.02)'; this.style.boxShadow='0 6px 15px rgba(165, 65, 255, 0.3)'; this.style.background='linear-gradient(90deg, #4b94ff 0%, #ba63ff 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 3px 10px rgba(165, 65, 255, 0.2)'; this.style.background='linear-gradient(90deg, #2b80ff 0%, #a541ff 100%)';">
-        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:12px; height:12px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
-        <span>Takip Et</span>
-      </a>
-      <a href="https://app.bistscan.com/kvkk" style="color:#aaa;text-decoration:none">KVKK</a>
-      <a href="https://app.bistscan.com/kullanim-sartlari" style="color:#aaa;text-decoration:none">Kullanım Şartları</a>
-      <a href="https://app.bistscan.com/yasal-uyari" style="color:#aaa;text-decoration:none">Yasal Uyarı</a>
-      <a href="https://app.bistscan.com/cerez-politikasi" style="color:#aaa;text-decoration:none">Çerez Politikası</a>
-    </div>
-    <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
-  </div>
-  <div style="font-size:12px;color:#aaa;margin-bottom:8px">📧 <a href="/cdn-cgi/l/email-protection#a5cccbc3cae5c7ccd6d1d6c6c4cb8bc6cac8" style="color:#534AB7;text-decoration:none"><span class="__cf_email__" data-cfemail="d7beb9b1b897b5bea4a3a4b4b6b9f9b4b8ba">[email&#160;protected]</span></a></div>
-  <div style="font-size:11px;color:#aaa;max-width:700px;line-height:1.7;border-top:1px solid var(--border);padding-top:16px">
-    BistScan'de yer alan tüm içerikler bilgilendirme amaçlıdır ve yatırım tavsiyesi niteliği taşımaz. Veriler gecikmeli olabilir. 
-    Yatırım kararlarınızı kendi araştırmanıza dayandırınız. © 2026 BistScan.com
-  </div>
-</footer>
 
 <div id="iosModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center; opacity:0; transition: opacity 0.3s;" onclick="if(event.target===this) closeIOSModal();">
   <div style="background:var(--bg); padding:32px; border-radius:24px; max-width:400px; width:90%; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.2); border:1px solid rgba(0,0,0,0.05); text-align:center;">
@@ -454,138 +487,669 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
         </div>
       </div>
     </div>
-    <button onclick="closeIOSModal()" class="btn-primary" style="width:100%; justify-content:center; margin-top:24px;">Anladım</button>
+    <button onclick="closeIOSModal()" style="background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;border:none;width:100%; justify-content:center; margin-top:24px; cursor:pointer;">Anladım</button>
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// 22 Nisan tag dinamik
-(function() {
-  var today = new Date();
-  var apr22 = new Date(2026, 3, 22);
-  var tag = document.getElementById('tag-apr');
-  if (!tag) return;
-  var diff = Math.ceil((apr22 - today) / (1000*60*60*24));
-  if (diff < 0) {
-    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = 'Tamamlandı';
-  } else if (diff === 0) {
-    tag.style.background = '#f5a623'; tag.style.color = '#000'; tag.textContent = 'BUGÜN';
-  } else if (diff <= 7) {
-    tag.style.background = '#1a3a1a'; tag.style.color = '#4caf50'; tag.textContent = diff + ' gün kaldı';
-  } else {
-    tag.style.background = '#1a1a1a'; tag.style.color = '#666'; tag.textContent = diff + ' gün kaldı';
-  }
-})();
-</script>
-
 <script>
-let ALL_TICKERS = [];
-// Tüm BIST hisselerini API'den çek
-fetch('https://app.bistscan.com/api/all-tickers').then(r=>r.json()).then(d=>{ALL_TICKERS=d;}).catch(()=>{
-  ALL_TICKERS=['THYAO','GARAN','AKBNK','EREGL','KCHOL','ASELS','BIMAS','TCELL','TUPRS','FROTO','TOASO','SASA','ISCTR','EKGYO','ENKAI','SAHOL','ARCLK','PGSUS','TAVHL','TKFEN','PETKM','VESTL','MGROS','SOKM','ULKER','CCOLA','BRISA','OTKAR'];
-});
-
-function getFavs() { try { return JSON.parse(localStorage.getItem('bistscan_favs') || '[]'); } catch { return []; } }
-function saveFavs(f) { localStorage.setItem('bistscan_favs', JSON.stringify(f)); }
-
-function addFav(ticker) {
-  ticker = ticker.trim().toUpperCase();
-  if (!ticker) return;
-  const favs = getFavs();
-  if (favs.includes(ticker)) return;
-  favs.push(ticker);
-  saveFavs(favs);
-  renderFavs();
-  document.getElementById('favSearch').value = '';
-  document.getElementById('favDropdown').style.display = 'none';
-}
-
-function removeFav(ticker) {
-  saveFavs(getFavs().filter(t => t !== ticker));
-  renderFavs();
-}
-
-function addFavFromInput() { addFav(document.getElementById('favSearch').value); }
-function onFavKey(e) { if (e.key === 'Enter') addFavFromInput(); }
-
-let favTimer = null;
-function onFavSearch(q) {
-  clearTimeout(favTimer);
-  const dd = document.getElementById('favDropdown');
-  if (!q) { dd.style.display = 'none'; return; }
-  favTimer = setTimeout(() => {
-    const matches = ALL_TICKERS.filter(t => t.includes(q.toUpperCase())).slice(0, 8);
-    if (!matches.length) { dd.style.display = 'none'; return; }
-    dd.innerHTML = matches.map(t =>
-      `<span onclick="addFav('${t}')" style="background:var(--bg);border:1px solid var(--border);color:var(--muted2);padding:3px 10px;border-radius:4px;font-size:11px;font-family:'Bebas Neue',monospace;letter-spacing:.05em;cursor:pointer" onmouseover="this.style.color='var(--gold)';this.style.borderColor='var(--gold)'" onmouseout="this.style.color='var(--muted2)';this.style.borderColor='var(--border)'">${t}</span>`
-    ).join('');
-    dd.style.display = 'flex';
-  }, 150);
-}
-
-async function renderFavs() {
-  const list = document.getElementById('favList');
-  const empty = document.getElementById('favEmpty');
-  if(!list || !empty) return;
-  const favs = JSON.parse(localStorage.getItem('bist_favs') || '["THYAO", "EREGL", "FROTO", "AKBNK", "TUPRS"]');
-  if (!favs.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
-  list.innerHTML = '<div style="padding:10px 18px;font-size:10px;color:var(--muted)">YÜKLENİYOR...</div>';
-
-  const results = await Promise.all(favs.map(async ticker => {
-    try {
-      const res = await fetch(`https://app.bistscan.com/api/chart/${ticker}`);
-      const d = await res.json();
-      if (!d.success) return {ticker, error:true};
-      const close = d.close[d.close.length-1];
-      const prev = d.close[d.close.length-2];
-      const change = ((close-prev)/prev*100).toFixed(2);
-      // Hacim değişimi — son gün / 20 günlük ortalama
-      const vols = d.volume.filter(v => v > 0);
-      const lastVol = vols[vols.length-1];
-      const avg20 = vols.slice(-21,-1).reduce((a,b)=>a+b,0) / 20;
-      const volRatio = avg20 > 0 ? (lastVol/avg20).toFixed(1) : null;
-      return {ticker, close, change:parseFloat(change), volRatio};
-    } catch { return {ticker, error:true}; }
-  }));
-
-  list.innerHTML = results.map(r => {
-    if (r.error) return `<div class="mock-row" style="opacity:.5"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:var(--muted)">Veri yok</div></div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:16px;margin-left:auto">×</button></div>`;
-    const cls = r.change >= 0 ? 'pos' : 'neg';
-    const sign = r.change >= 0 ? '+' : '';
-    const volColor = r.volRatio >= 2 ? '#f59e0b' : r.volRatio >= 1.5 ? '#10b981' : '#888';
-    return `<div class="mock-row"><div class="mock-ticker">${r.ticker}</div><div class="mock-info"><div class="mock-name" style="color:${volColor}">Hacim ${r.volRatio}x</div></div><div style="font-size:12px;color:#888;margin-right:6px">${r.close} ₺</div><div class="mock-change ${cls}">${sign}${r.change}%</div><button onclick="removeFav('${r.ticker}')" style="background:transparent;border:none;color:#555;cursor:pointer;font-size:16px;padding-left:6px">×</button></div>`;
-  }).join('');
-}
-
-renderFavs();
-
-async function loadTickers() {
-  try {
-    const res = await fetch('https://app.bistscan.com/api/tickers');
-    const data = await res.json();
-    if (!data.length) return;
-    const track = document.getElementById('tickerTrack');
-    const html = [...data, ...data].map(t => {
-      const dir = t.change >= 0 ? 'up' : 'dn';
-      const sign = t.change >= 0 ? '▲' : '▼';
-      return `<span class="tick"><span class="tick-name">${t.ticker}</span> <span class="${dir}">${sign}${Math.abs(t.change).toFixed(1)}%</span></span>`;
-    }).join('');
-    track.innerHTML = html;
-  } catch(e) {}
-}
-loadTickers();
-
 function openIOSModal() {
   const m = document.getElementById('iosModal');
+  if(!m) return;
   m.style.display = 'flex';
   setTimeout(()=>m.style.opacity='1', 10);
 }
 function closeIOSModal() {
   const m = document.getElementById('iosModal');
+  if(!m) return;
   m.style.opacity = '0';
   setTimeout(()=>m.style.display='none', 300);
 }
+
+const EDU_DATA = {
+  filter: {name:"Özel Filtre", tag:"MA · RSI · HACİM", body:"Kendi belirlediğin kriterlere göre hisse tara. <strong>MA</strong>: Fiyatın belirli günlük ortalamasına yakın olup olmadığını ölçer. <strong>RSI</strong>: 0-100 arası değer alır, 30 altı aşırı satım, 70 üstü aşırı alım. <strong>Hacim</strong>: Ortalamanın kaç katı işlem yapıldığını gösterir.", when:"Kendi stratejini uygulamak ve birden fazla kriteri bir arada kullanmak istediğinde."},
+  golden_cross: {name:"Golden Cross", tag:"SMA50 × SMA200", body:"<strong>50 günlük hareketli ortalama</strong>, <strong>200 günlük hareketli ortalamayı</strong> aşağıdan yukarıya kestiğinde oluşur. Uzun vadeli trend değişiminin en güçlü sinyallerinden biridir. Kurumsal yatırımcıların takip ettiği klasik bir formasyon.", when:"Uzun vadeli yatırım yapacaksın ve güçlü trend başlangıcı arıyorsun."},
+  breakout_52w: {name:"52H Kırılım", tag:"52 HAFTA ZİRVESİ", body:"Hissenin son <strong>52 haftanın en yüksek fiyatını</strong> kırdığı anı yakalar. Bu kırılım genellikle güçlü alıcı baskısı ve kurumsal ilgiyle birlikte gelir. Momentum yatırımcılarının favorisidir.", when:"Trendin çok güçlü olduğu dönemlerde, momentum takip stratejisi uygularken."},
+  smart_money: {name:"Akıllı Para", tag:"HACİM 2x + EMA20", body:"Hacim normalin <strong>2 katından fazla</strong> olup fiyat EMA20 üzerinde ve %2+ değişim gösteren hisseler. Büyük oyuncuların (kurumların) alım yaptığının işareti sayılır.", when:"Kurumsal alım hareketlerini erken yakalamak ve trend başlangıcını tespit etmek istediğinde."},
+  ceiling: {name:"Tavan Tarama", tag:"≥ %9.5 DEĞİŞİM", body:"Günlük değişimi <strong>%9.5 ve üzerinde</strong> olan yani tavana yaklaşan veya tavan yapan hisseleri listeler. Yüksek momentum ve ani ilgi artışının göstergesi.", when:"Kısa vadeli momentum yakalamak veya hangi hisselerde büyük hareketler olduğunu görmek için."},
+  value: {name:"Ucuz Kalmış", tag:"PD/DD < 1", body:"<strong>F/K (Fiyat/Kazanç)</strong>: Şirketin kaç yılda kendini geri ödeyeceğini gösterir, düşük olması ucuz demek. <strong>PD/DD</strong>: 1in altı, hissenin defter değerinin altında işlem gördüğü anlamına gelir.", when:"Uzun vadeli, temele dayalı değer yatırımı yapacaksın."},
+  volume_dip: {name:"Hacimlenen Dip", tag:"RSI < 25 · HACİM 2x", body:"RSI <strong>25in altında</strong> (aşırı satım) ve hacim normalin 2 katı üzerinde. Aşırı satılan bir hissede ani alım ilgisi — potansiyel dip dönüşü sinyali.", when:"Dip avı yapıyor ve ani toparlanma fırsatı arıyorsun."},
+  momentum: {name:"Momentum Bombası", tag:"%3+ · RSI 55-75", body:"Günlük değişim <strong>%3 ve üzeri</strong>, hacim 2x artmış ve RSI 55-75 arasında. Ne aşırı alım ne aşırı satım — güçlü ama sürdürülebilir yükseliş momentumu.", when:"Hareket başlamış ama henüz aşırı alım bölgesine girmemiş hisseleri yakalamak için."},
+  destek: {name:"Destek Kalkanı", tag:"SMA200 · RSI < 40", body:"Fiyat <strong>200 günlük hareketli ortalamaya</strong> %5 yakınken RSI 40in altında. Güçlü uzun vadeli destek seviyesinde aşırı satılmış hisse — klasik dip fırsatı.", when:"Güçlü destekte orta-uzun vadeli alım fırsatı arıyorsun."},
+  bollinger: {name:"Bollinger Sıkışma", tag:"DÜŞÜK VOLATİLİTE", body:"<strong>Bollinger Bantları</strong> daraldığında volatilite minimum seviyeye iner. Tarihsel olarak bu sıkışmaların ardından büyük fiyat hareketleri gelir. Yön belli değildir ama patlama yakındır.", when:"Sessiz kalmış, yakında büyük hareket yapacak hisseleri önceden tespit etmek için."},
+  stoch_rsi: {name:"Stoch RSI", tag:"STOCHRSI < 0.2", body:"<strong>Stochastic RSI</strong>, RSIdan daha hassas bir osilatördür. 0.2nin altı güçlü aşırı satım sinyali verir. Normal RSIdan daha erken ve daha duyarlı sinyal üretir.", when:"Kısa vadeli dip dönüşlerini yakalamak ve daha hassas sinyal almak istediğinde."},
+  macd_kesisim: {name:"MACD Kesişimi", tag:"MACD YUKARI KESTİ", body:"<strong>MACD</strong>: Hızlı ve yavaş hareketli ortalama farkından oluşur. MACD çizgisi sinyal çizgisini aşağıdan yukarıya kestiğinde güçlü al sinyali verir.", when:"Trend dönüşünü erken yakalamak ve momentum değişimini tespit etmek için."},
+  doji: {name:"Doji", tag:"DÖNÜŞ MUMU", body:"<strong>Doji mumu</strong>: Açılış ve kapanış fiyatı neredeyse eşit. Alıcı ve satıcıların güç dengesi anlamına gelir. Trend sonunda görülünce güçlü dönüş sinyali olabilir.", when:"Mevcut trendin zayıfladığını ve olası bir dönüşü erken fark etmek için."},
+  hammer: {name:"Hammer", tag:"DİP DÖNÜŞ MUMU", body:"<strong>Çekiç (Hammer)</strong>: Alt gölge gövdenin 2 katından uzun, üst gölge yok. Satıcılar fiyatı aşağı çekmiş ama alıcılar geri kazanmış. Dip bölgesinde güçlü dönüş sinyali.", when:"Düşüş trendinin sonunda güçlü alıcı baskısını ve dip dönüşünü tespit etmek için."},
+  supertrend: {name:"Supertrend", tag:"TREND DÖNÜŞÜ", body:"<strong>Supertrend</strong>: ATR tabanlı trend göstergesi. Bearishten bullishe döndüğünde güçlü al sinyali verir. Hem trend yönünü hem de destek/direnç seviyelerini gösterir.", when:"Net trend dönüşlerini yakalamak ve yanlış sinyalleri filtrelemek için."},
+  ema_crossover: {name:"EMA Crossover", tag:"EMA9 × EMA21", body:"<strong>EMA9</strong> (9 günlük üstel ortalama) <strong>EMA21i</strong> yukarı kestiğinde kısa vadeli al sinyali. Golden Crossun daha hızlı ve kısa vadeli versiyonu. Swing traderlarin favorisi.", when:"Kısa-orta vadeli trend dönüşlerini ve momentum başlangıcını yakalamak için."},
+  adx_trend: {name:"ADX Güçlü Trend", tag:"ADX > 25", body:"<strong>ADX</strong>: Trendin gücünü 0-100 arası ölçer. 25 üzeri güçlü trend. +DI > -DI olması yukarı yönlü güçlü trendin devam ettiğini gösterir. Yön değil güç ölçer.", when:"Güçlü ve sürdürülebilir trend içindeki hisseleri filtrelemek için."},
+  morning_star: {name:"Morning Star", tag:"3 MUMLU FORMASYON", body:"<strong>Sabah Yıldızı</strong>: Üç mumlu dip dönüş formasyonu. 1. Büyük kırmızı mum 2. Küçük gövdeli yıldız mum 3. Büyük yeşil mum. Güçlü satış baskısının bittiğini gösterir.", when:"Düşüş trendinin kesin olarak bittiğini teyit etmek ve güvenli dip almak için."},
+  engulfing: {name:"Engulfing", tag:"YUTAN MUM", body:"<strong>Boğa Yutma</strong>: Yeşil mum, önceki kırmızı mumu tamamen yutar. Alıcıların satıcılara tam anlamıyla üstün geldiğinin güçlü sinyali. En güvenilir tek mum formasyonlarından.", when:"Düşüş sonrası güçlü dönüş sinyali arıyorsun ve yüksek doğruluk istiyorsun."},
+  deger_momentum: {name:"Değer + Momentum", tag:"F/K < 15 · RSI 40-60", body:"Hem <strong>ucuz</strong> (F/K < 15, PD/DD < 2) hem de <strong>harekete geçmiş</strong> (RSI 40-60 arası). Değer tuzağına düşmemiş, piyasa fark etmeye başlamış hisse.", when:"Hem ucuz hem harekete geçmiş, risk/ödül dengesi iyi hisseler arıyorsun."},
+  ichimoku: {name:"Ichimoku Bulutu", tag:"BULUT ÜSTÜ", body:"<strong>Ichimoku</strong>: Japon teknik analizinin en kapsamlı göstergesi. Destek/direnç, trend yönü ve momentumu tek göstergede birleştirir. Fiyat bulutun üstünde ve Tenkan > Kijun ise güçlü al sinyali.", when:"Çok boyutlu trend analizi yapmak ve güçlü trend teyidi almak istediğinde."},
+  minervini: {name:"Minervini Trend Template", tag:"7 KOŞUL · GÜÇLÜ TREND", body:"Mark Minervini'nin iki kez US Investing Championship kazanmasını sağlayan strateji. Hissenin tüm önemli hareketli ortalamalar üzerinde olmasını, 52 hafta zirvesine yakın ve tabanından %30 uzakta bulunmasını şart koşar. Kurumsal alımların hedefindeki lider hisseleri erkenden tespit eder.", when:"Güçlü trend içindeki, kurumsal ilgi gören lider hisseleri bulmak istediğinde."},
+  bulkowski: {name:"Bulkowski Bullish Formasyonlar", tag:"THREE LINE STRIKE · ABANDONED BABY · TASUKI GAP", body:"Thomas Bulkowski'nin 1000+ formasyonu istatistiksel olarak test ettiği çalışmadan en yüksek performanslı bullish formasyonlar. <strong>Three Line Strike</strong> %84, <strong>Abandoned Baby</strong> %70, <strong>Upside Tasuki Gap</strong> %57 başarı oranına sahip.", when:"İstatistiksel olarak güçlü mum formasyonlarına dayalı dönüş ve devam sinyalleri almak için."},
+  rsi_trend_break: {name:"RSI Düşen Trend Kırılımı", tag:"RSI TREND · KIRILIM NOKTASI", body:"RSI göstergesi üzerinde son iki pivot yüksekten geçen düşen trend çizgisi çizilir. RSI bu çizgiyi bugün yukarı kırarsa sinyal verilir. Fiyat henüz hareket etmeden RSI'nın öncülük ettiği erken kırılımları yakalar.", when:"Fiyat hareketi başlamadan önce RSI'da güç kazanımını ve trend kırılımını erken tespit etmek için."},
+  recent_ipo: {name:"Son 1 Yıl Halka Arz", tag:"MART 2025 – MART 2026", body:"Son 1 yılda Borsa Istanbula kote olan <strong>yeni hisseleri</strong> listeler. Halka arz fiyatına göre getiri gösterilir. Yeni hisseler genellikle yüksek volatilite ve fırsat barındırır.", when:"Yeni halka arz olan hisselerin performansını takip etmek ve fırsat bulmak için."},
+};
+
+function showEdu(type) {
+  const d = EDU_DATA[type];
+  if (!d) return;
+  document.getElementById('eduTag').textContent = d.tag;
+  document.getElementById('eduTitle').textContent = d.name;
+  document.getElementById('eduBody').innerHTML = d.body;
+  document.getElementById('eduWhen').innerHTML = '📌 <strong>Ne zaman kullan?</strong> ' + d.when;
+  document.getElementById('eduModal').classList.add('open');
+}
+
+function closeEduModal(e) {
+  if (e.target === document.getElementById('eduModal')) {
+    document.getElementById('eduModal').classList.remove('open');
+  }
+}
+
+let currentScan = null;
+let pollTimer = null;
+let rowCharts = {};
+const SCAN_NAMES = {
+  filter:"Özel Filtre",ceiling:"Tavan Tarama",golden_cross:"Golden Cross",
+  breakout_52w:"52H Kırılım",smart_money:"Akıllı Para",value:"Ucuz Kalmış",
+  volume_dip:"Hacimlenen Dip",momentum:"Momentum Bombası",destek:"Destek Kalkanı",
+  bollinger:"Bollinger Sıkışma",stoch_rsi:"Stoch RSI",macd_kesisim:"MACD Kesişimi",
+  doji:"Doji",hammer:"Hammer",supertrend:"Supertrend",ema_crossover:"EMA Crossover",
+  adx_trend:"ADX Güçlü Trend",morning_star:"Morning Star",engulfing:"Engulfing",
+  deger_momentum:"Değer + Momentum",ichimoku:"Ichimoku Bulutu",recent_ipo:"Son 1 Yıl Halka Arz",minervini:"Minervini Trend",bulkowski:"Bulkowski Formasyon",rsi_trend_break:"RSI Trend Kırılımı"
+};
+const SEL_COLORS = ['sel-1','sel-2','sel-3'];
+const CHIP_COLORS = ['chip-1','chip-2','chip-3'];
+const BADGE_COLORS = ['b-1','b-2','b-3'];
+let selectedScans = [];  // max 3 tarama tipi
+
+function downloadCSV() {
+  const rows = document.querySelectorAll('.result-row');
+  if (!rows.length) return;
+  const scan = selectedScans.map(t => SCAN_NAMES[t] || t).join(' x ');
+  const date = new Date().toLocaleDateString('tr-TR');
+  let csv = 'Hisse,Fiyat,Değişim %,RSI,Hacim Oranı\n';
+  rows.forEach(row => {
+    const ticker = row.dataset.ticker || '';
+    const close = row.querySelector('.r-close')?.textContent?.replace(' ₺','') || '';
+    const change = row.querySelector('.r-change')?.textContent || '';
+    const rsi = row.querySelector('.sig-rsi')?.textContent?.replace('RSI ','') || '';
+    const vol = row.querySelector('.sig-vol')?.textContent?.replace('x Hacim','x') || '';
+    csv += `${ticker},${close},${change},${rsi},${vol}\n`;
+  });
+  const blob = new Blob([csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bistscan_${scan}_${date}.csv`.replace(/[^a-zA-Z0-9_.-]/g,'_');
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function loadMarketSummary() {
+  try {
+    const r = await fetch('/api/market/summary');
+    const d = await r.json();
+    if (d.bist100 && d.bist100.value) {
+      document.getElementById('bist-val').textContent = d.bist100.value.toLocaleString('tr-TR');
+      const chg = d.bist100.change;
+      const el = document.getElementById('bist-chg');
+      el.textContent = (chg >= 0 ? '+' : '') + chg + '%';
+      el.className = 'bist-chg ' + (chg >= 0 ? 'chg-up' : 'chg-down');
+    }
+
+    if (d.last_scans && d.last_scans.length > 0) {
+      const list = document.getElementById('last-scans-list');
+      list.innerHTML = d.last_scans.map(s =>
+        `<div class="scan-result-item">
+          <div>
+            <div class="sri-name">${s.name}</div>
+            <div class="sri-time">${s.time}</div>
+          </div>
+          <div class="sri-found">${s.found} hisse</div>
+        </div>`
+      ).join('');
+    }
+  } catch(e) {}
+}
+
+loadMarketSummary();
+setInterval(loadMarketSummary, 60000);
+let modalCharts = {};
+
+// ── SCAN ──
+function scrollAndRun() {
+  document.getElementById('progressWrap').scrollIntoView({behavior:'smooth', block:'start'});
+  setTimeout(() => runScan(), 300);
+}
+
+function updateChips() {
+  const chips = document.getElementById('selectedChips');
+  const runBtn = document.getElementById('runBtn');
+  if (selectedScans.length === 0) {
+    chips.innerHTML = '<span class="chip-hint">Bir veya birden fazla model seçin (maks. 3)</span>';
+    runBtn.disabled = true;
+    runBtn.textContent = 'Model Seçin';
+    runBtn.className = 'run-btn';
+  } else {
+    chips.innerHTML = selectedScans.map((t,i) =>
+      `<span class="chip ${CHIP_COLORS[i]}" onclick="removeFromSelection('${t}')">
+        ${SCAN_NAMES[t] || t} ×
+      </span>`
+    ).join('');
+    runBtn.disabled = false;
+    runBtn.className = selectedScans.length > 1 ? 'run-btn multi-active pulse' : 'run-btn pulse';
+    runBtn.textContent = selectedScans.length > 1
+      ? `${selectedScans.length} Modeli Tara →`
+      : 'Taramayı Başlat →';
+  }
+  // Kartları güncelle
+  document.querySelectorAll('.scan-btn').forEach(b => {
+    const t = b.dataset.type;
+    const idx = selectedScans.indexOf(t);
+    b.classList.remove('sel-1','sel-2','sel-3','sel-disabled');
+    const badge = b.querySelector('.multi-badge');
+    if (badge) badge.remove();
+    if (idx >= 0) {
+      b.classList.add(SEL_COLORS[idx]);
+      const bd = document.createElement('span');
+      bd.className = `multi-badge ${BADGE_COLORS[idx]}`;
+      bd.textContent = idx + 1;
+      b.appendChild(bd);
+    } else if (selectedScans.length >= 3) {
+      b.classList.add('sel-disabled');
+    }
+  });
+  // Filter panel
+  document.getElementById('filterPanel').classList.toggle(
+    'visible', selectedScans.includes('filter') && selectedScans.length === 1
+  );
+}
+
+function removeFromSelection(type) {
+  selectedScans = selectedScans.filter(t => t !== type);
+  currentScan = selectedScans[0] || null;
+  updateChips();
+}
+
+function selectScan(btn) {
+  const type = btn.dataset.type;
+  const idx = selectedScans.indexOf(type);
+  if (idx >= 0) {
+    // Zaten seçili — kaldır
+    selectedScans.splice(idx, 1);
+  } else {
+    if (selectedScans.length >= 3) return;
+    selectedScans.push(type);
+  }
+  currentScan = selectedScans[0] || null;
+  updateChips();
+}
+
+let currentESS = null;
+let scanResultCount = 0;
+
+async function runMultiScan() {
+  // Çoklu tarama: her taramayı sırayla yap, kesişimi bul
+  const types = [...selectedScans];
+  const resultSets = [];
+
+  document.getElementById('resultsArea').innerHTML = '';
+  document.getElementById('progressWrap').classList.add('visible');
+  document.getElementById('progressBar').style.width = '0%';
+  scanResultCount = 0;
+
+  for (let i = 0; i < types.length; i++) {
+    const type = types[i];
+    setStatus('loading', `Tarama ${i+1}/${types.length}: ${SCAN_NAMES[type]}...`);
+    const tickers = await new Promise((resolve) => {
+      const found = new Set();
+      let resolved = false;
+      const ess = new EventSource(`/api/scan/stream?type=${type}`);
+      ess.onmessage = (e) => {
+        const msg = JSON.parse(e.data);
+        if (msg.type === 'progress' || msg.type === 'start') {
+          const pct = msg.total > 0 ? Math.round(((i / types.length) + (msg.scanned || 0) / msg.total / types.length) * 100) : 0;
+          document.getElementById('progressBar').style.width = pct + '%';
+          document.getElementById('progressCount').textContent = `Model ${i+1}/${types.length}`;
+        } else if (msg.type === 'result') {
+          found.add(msg.result.ticker);
+          appendResult(msg.result, scanResultCount++);
+        } else if (msg.type === 'done') {
+          if (!resolved) { resolved = true; ess.close(); resolve(found); }
+        }
+      };
+      ess.onerror = () => { if (!resolved) { resolved = true; ess.close(); resolve(found); } };
+    });
+    resultSets.push(tickers);
+  }
+
+  // Kesişim bul
+  let intersection = resultSets[0] || new Set();
+  for (let i = 1; i < resultSets.length; i++) {
+    intersection = new Set([...intersection].filter(t => resultSets[i].has(t)));
+  }
+
+  document.getElementById('progressWrap').classList.remove('visible');
+  document.getElementById('progressBar').style.width = '100%';
+
+  // Sonuçları filtrele — sadece kesişimdekiler, tekrarları kaldır
+  const allRows = document.querySelectorAll('.result-row');
+  const seenTickers = new Set();
+  allRows.forEach(row => {
+    const ticker = row.dataset.ticker;
+    const idx = row.id.replace('row-','');
+    const panel = document.getElementById('chart-' + idx);
+    if (intersection.has(ticker) && !seenTickers.has(ticker)) {
+      seenTickers.add(ticker);
+    } else {
+      row.remove();
+      if (panel) panel.remove();
+    }
+  });
+
+  const disc = document.getElementById('scanDisclaimer'); if (disc) disc.style.display='block';
+  document.getElementById('progressWrap').classList.remove('visible');
+  setStatus('done', `${types.length} modelin kesişimi — ${intersection.size} hisse bulundu.`);
+  const header = document.createElement('div');
+  header.className = 'results-header';
+  header.innerHTML = `<div class="results-count"><span>${intersection.size}</span> hisse bulundu</div><div style="display:flex;align-items:center;gap:10px"><span style="font-size:11px;color:var(--muted)">${types.map(t => SCAN_NAMES[t]).join(' × ')}</span><button class="csv-btn" onclick="downloadCSV()">⬇ CSV İndir</button></div>`;
+  document.getElementById('resultsArea').prepend(header);
+
+  const runBtn = document.getElementById('runBtn');
+  if (runBtn) runBtn.disabled = false;
+}
+
+function runScan() {
+  if (selectedScans.length === 0) return;
+
+  // Scroll to progress
+  setTimeout(() => {
+    document.getElementById('progressWrap').scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+
+  if (selectedScans.length > 1) {
+    runMultiScan();
+    return;
+  }
+
+  currentScan = selectedScans[0];
+  if (currentESS) { currentESS.close(); currentESS = null; }
+
+  const runBtn = document.getElementById('runBtn');
+  if (runBtn) runBtn.disabled = true;
+
+  document.getElementById('resultsArea').innerHTML = '';
+  document.getElementById('progressWrap').classList.add('visible');
+  document.getElementById('progressBar').style.width = '0%';
+  document.getElementById('progressCount').textContent = '0 / ...';
+  setStatus('loading', 'Tarama başlatılıyor...');
+  scanResultCount = 0;
+
+  let params = `type=${currentScan}`;
+  if (currentScan === 'filter') {
+    params += `&ma_tol=${parseInt(document.getElementById('maTol').value)/100}`;
+    params += `&vol_thr=${parseInt(document.getElementById('volThr').value)/10}`;
+    params += `&rsi_thr=${parseInt(document.getElementById('rsiThr').value)}`;
+    params += `&use_ma=${document.getElementById('useMa').checked}`;
+    params += `&use_vol=${document.getElementById('useVol').checked}`;
+    params += `&use_rsi=${document.getElementById('useRsi').checked}`;
+  }
+
+  currentESS = new EventSource(`/api/scan/stream?${params}`);
+
+  currentESS.onmessage = (e) => {
+    const msg = JSON.parse(e.data);
+
+    if (msg.type === 'start') {
+      document.getElementById('progressCount').textContent = `0 / ${msg.total}`;
+      document.getElementById('progressLabel').textContent = 'Veriler yükleniyor...';
+    } else if (msg.type === 'prefetch') {
+      document.getElementById('progressLabel').textContent = 'Veriler yükleniyor... ⏳';
+    } else if (msg.type === 'progress') {
+      const pct = msg.total > 0 ? Math.round(msg.scanned / msg.total * 100) : 0;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = `${msg.scanned} / ${msg.total}`;
+      document.getElementById('progressLabel').textContent = `Taranıyor... ${msg.found} hisse bulundu`;
+    } else if (msg.type === 'result') {
+      const pct = msg.total > 0 ? Math.round(msg.scanned / msg.total * 100) : 0;
+      document.getElementById('progressBar').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = `${msg.scanned} / ${msg.total}`;
+      document.getElementById('progressLabel').textContent = `Taranıyor... ${msg.found} hisse bulundu`;
+      appendResult(msg.result, scanResultCount++);
+    } else if (msg.type === 'done') {
+      currentESS.close(); currentESS = null;
+      document.getElementById('progressWrap').classList.remove('visible');
+      setStatus('done', `Tamamlandı — ${msg.found} hisse bulundu.`);
+      if (msg.found === 0) {
+        document.getElementById('resultsArea').innerHTML = '<div class="empty"><div class="empty-icon">🔍</div><div>Kritere uyan hisse bulunamadı.</div></div>';
+      } else {
+        const header = document.createElement('div');
+        header.className = 'results-header';
+        header.innerHTML = `<div class="results-count"><span>${msg.found}</span> hisse bulundu</div><button class="csv-btn" onclick="downloadCSV()">⬇ CSV İndir</button>`;
+        document.getElementById('resultsArea').prepend(header);
+        setTimeout(() => document.getElementById('resultsArea').scrollIntoView({behavior:'smooth', block:'start'}), 200);
+      }
+      if (runBtn) runBtn.disabled = false;
+    }
+  };
+
+  currentESS.onerror = () => {
+    currentESS.close(); currentESS = null;
+    document.getElementById('progressWrap').classList.remove('visible');
+    setStatus('error', 'Bağlantı hatası. Sayfayı yenileyip tekrar deneyin.');
+    if (runBtn) runBtn.disabled = false;
+  };
+}
+
+let resultIndex = 0;
+function appendResult(r, idx) {
+  let grid = document.getElementById('resultsGrid');
+  if (!grid) {
+    grid = document.createElement('div');
+    grid.id = 'resultsGrid';
+    grid.className = 'results-grid';
+    document.getElementById('resultsArea').appendChild(grid);
+  }
+
+  const chgClass = r.change >= 0 ? 'pos' : 'neg';
+  const chgSign = r.change >= 0 ? '+' : '';
+
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = `
+    <div class="result-row" id="row-${idx}" data-ticker="${r.ticker}" data-vol-ratio="${r.vol_ratio}" onclick="toggleChart(${idx},'${r.ticker}')">
+      <div class="r-ticker">${r.ticker}</div>
+      <div class="r-signals">
+        <span class="r-signal sig-rsi">RSI ${r.rsi}</span>
+        ${r.vol_ratio > 0 ? `<span class="r-signal sig-vol">${r.vol_ratio}x Hacim</span>` : ''}
+        ${r.fk ? `<span class="r-signal sig-ma">F/K ${r.fk}</span>` : ''}
+        ${r.pddd ? `<span class="r-signal sig-ma">PD/DD ${r.pddd}</span>` : ''}
+        ${r.halka_aciklik ? `<span class="r-signal sig-ma">H.Açık %${r.halka_aciklik}</span>` : ''}
+        ${r.lot ? `<span class="r-signal sig-vol">Lot ${Number(r.lot).toLocaleString('tr-TR')}</span>` : ''}
+        ${r.ipo_price ? `<span class="r-signal">Arz: ${r.ipo_price}₺</span>` : ''}
+        ${r.ipo_return != null ? `<span class="r-signal ${r.ipo_return >= 0 ? 'sig-ipo-up' : 'sig-ipo-down'}">${r.ipo_return >= 0 ? '+' : ''}${r.ipo_return}% arz'dan</span>` : ''}
+      </div>
+      <div class="r-close">${r.close} ₺</div>
+      <div class="r-change ${chgClass}">${chgSign}${r.change}%</div>
+      <div class="r-arrow" onclick="event.stopPropagation();openStock('${r.ticker}',${r.vol_ratio})">▼</div>
+    </div>
+    <div class="chart-panel" id="chart-${idx}">
+      <div class="chart-tabs">
+        <button class="chart-tab active" onclick="switchTab(event,${idx},'price')">Fiyat & MA</button>
+        <button class="chart-tab" onclick="switchTab(event,${idx},'rsi')">RSI</button>
+        <button class="chart-tab" onclick="switchTab(event,${idx},'macd')">MACD</button>
+      </div>
+      <div class="chart-wrap" id="price-wrap-${idx}"><div style="display:flex;align-items:center;justify-content:center;height:100%;color:var(--muted2);font-size:13px">Grafik yükleniyor...</div></div>
+      <div class="chart-wrap-sm" id="rsi-wrap-${idx}"><canvas id="rsi-chart-${idx}"></canvas></div>
+      <div class="chart-wrap-sm" id="macd-wrap-${idx}"><canvas id="macd-chart-${idx}"></canvas></div>
+    </div>`;
+  grid.appendChild(wrapper.firstElementChild);
+  grid.appendChild(wrapper.lastElementChild);
+}
+
+async function toggleChart(i, ticker) {
+  const row = document.getElementById(`row-${i}`);
+  const panel = document.getElementById(`chart-${i}`);
+  const isOpen = panel.classList.contains('visible');
+
+  document.querySelectorAll('.chart-panel.visible').forEach(p => p.classList.remove('visible'));
+  document.querySelectorAll('.result-row.expanded').forEach(r => r.classList.remove('expanded'));
+
+  if (!isOpen) {
+    row.classList.add('expanded');
+    panel.classList.add('visible');
+    if (!rowCharts[i]) {
+      const res = await fetch(`/api/chart/${ticker}`);
+      const data = await res.json();
+      if (data.success) {
+        rowCharts[i] = data;
+        drawRowCharts(i, data);
+      }
+    }
+  }
+}
+
+function drawRowCharts(i, d) {
+  const wrap = document.getElementById(`price-wrap-${i}`);
+  wrap.innerHTML = `<canvas id="price-chart-${i}"></canvas>`;
+  const ctx = document.getElementById(`price-chart-${i}`).getContext('2d');
+  const avgVol = d.volume.reduce((a,b)=>a+b,0)/d.volume.length;
+  new Chart(ctx, {type:'bar', data:{labels:d.dates, datasets:[
+    {label:'Hacim', data:d.volume, backgroundColor:d.volume.map(v=>v>=avgVol*1.5?'rgba(83,74,183,0.5)':'rgba(83,74,183,0.15)'), yAxisID:'yVol', order:2},
+    {label:'Kapanış', data:d.close, type:'line', borderColor:'#534AB7', borderWidth:2, pointRadius:0, tension:0.1, yAxisID:'yPrice', order:1},
+    {label:'MA20', data:d.ma20, type:'line', borderColor:'#f59e0b', borderWidth:1, pointRadius:0, tension:0.1, yAxisID:'yPrice', order:1},
+    {label:'MA50', data:d.ma50, type:'line', borderColor:'#10b981', borderWidth:1, pointRadius:0, tension:0.1, yAxisID:'yPrice', order:1},
+    {label:'MA200', data:d.ma200, type:'line', borderColor:'#ef4444', borderWidth:1, pointRadius:0, tension:0.1, yAxisID:'yPrice', order:1},
+  ]}, options:{...chartOpts(), scales:{
+    x:{ticks:{color:'#888',font:{size:10},maxTicksLimit:8}, grid:{color:'rgba(0,0,0,0.06)'}},
+    yPrice:{type:'linear', position:'left', ticks:{color:'#888',font:{size:10}}, grid:{color:'rgba(0,0,0,0.06)'}},
+    yVol:{type:'linear', position:'right', ticks:{color:'#aaa',font:{size:9}, callback:v=>v>=1e6?(v/1e6).toFixed(0)+'M':v}, grid:{display:false}},
+  }}});
+
+  const rc = document.getElementById(`rsi-chart-${i}`).getContext('2d');
+  new Chart(rc, {type:'line', data:{labels:d.dates, datasets:[
+    {label:'RSI', data:d.rsi, borderColor:'#8b5cf6', borderWidth:1.5, pointRadius:0, tension:0.1}
+  ]}, options:{...chartOpts(), scales:{x:{display:false}, y:{min:0,max:100, grid:{color:'rgba(0,0,0,0.06)'}, ticks:{color:'#888',font:{size:10}}}}}});
+
+  const mc = document.getElementById(`macd-chart-${i}`).getContext('2d');
+  new Chart(mc, {type:'bar', data:{labels:d.dates, datasets:[
+    {label:'MACD', data:d.macd, type:'line', borderColor:'#3b82f6', borderWidth:1.5, pointRadius:0},
+    {label:'Signal', data:d.macd_signal, type:'line', borderColor:'#f59e0b', borderWidth:1, pointRadius:0},
+    {label:'Histogram', data:d.macd_hist, backgroundColor:d.macd_hist.map(v=>v>=0?'rgba(16,185,129,.5)':'rgba(239,68,68,.5)')},
+  ]}, options:chartOpts()});
+}
+
+function switchTab(e, i, type) {
+  e.stopPropagation();
+  document.querySelectorAll(`#chart-${i} .chart-tab`).forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById(`price-wrap-${i}`).style.display = type==='price'?'block':'none';
+  document.getElementById(`rsi-wrap-${i}`).style.display = type==='rsi'?'block':'none';
+  document.getElementById(`macd-wrap-${i}`).style.display = type==='macd'?'block':'none';
+}
+
+function chartOpts() {
+  return {responsive:true, maintainAspectRatio:false, animation:false,
+    plugins:{legend:{labels:{color:'#666', font:{size:10}, boxWidth:12}}},
+    scales:{
+      x:{ticks:{color:'#888',font:{size:10},maxTicksLimit:8}, grid:{color:'rgba(0,0,0,0.06)'}},
+      y:{ticks:{color:'#888',font:{size:10}}, grid:{color:'rgba(0,0,0,0.06)'}}
+    }};
+}
+
+// ── STOCK SEARCH ──
+let searchTimer = null;
+async function onSearch(q) {
+  clearTimeout(searchTimer);
+  const dd = document.getElementById('searchDropdown');
+  if (q.length < 1) { dd.classList.remove('visible'); return; }
+  searchTimer = setTimeout(async () => {
+    const res = await fetch(`/api/search?q=${q.toUpperCase()}`);
+    const matches = await res.json();
+    if (!matches.length) { dd.classList.remove('visible'); return; }
+    dd.innerHTML = matches.map(t => `
+      <div class="search-item" onclick="openStock('${t}')">
+        <span class="s-ticker">${t}</span>
+        <span class="s-hint">Grafiği gör →</span>
+      </div>`).join('');
+    dd.classList.add('visible');
+  }, 200);
+}
+
+function onSearchKey(e) {
+  if (e.key === 'Escape') document.getElementById('searchDropdown').classList.remove('visible');
+  if (e.key === 'Enter') {
+    const q = e.target.value.trim().toUpperCase();
+    if (q) openStock(q);
+  }
+}
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.nav-search')) document.getElementById('searchDropdown').classList.remove('visible');
+});
+
+async function openStock(ticker, knownVolRatio) {
+  // Tarama sonucundan vol_ratio al
+  if (knownVolRatio == null) {
+    const rows = document.querySelectorAll(`[data-ticker="${ticker}"]`);
+    if (rows.length) knownVolRatio = parseFloat(rows[0].dataset.volRatio) || null;
+  }
+  document.getElementById('searchDropdown').classList.remove('visible');
+  document.getElementById('stockSearch').value = ticker;
+  document.getElementById('modalTicker').textContent = ticker;
+  document.getElementById('modalStats').innerHTML = '<div style="color:var(--muted2);font-size:12px;grid-column:span 4">Yükleniyor...</div>';
+  document.getElementById('modalOverlay').classList.add('visible');
+
+  // Sinyaller panelini sıfırla
+  document.getElementById('modal-signals-content').innerHTML = '<div style="color:var(--muted2);font-size:12px;padding:20px 0;text-align:center">Yükleniyor...</div>';
+  document.getElementById('modal-signals-wrap').style.display = 'none';
+
+  // Destroy old charts
+  Object.values(modalCharts).forEach(c => c.destroy());
+  modalCharts = {};
+  ['price','rsi','macd'].forEach(t => {
+    const w = document.getElementById(`modal-${t}-wrap`);
+    if (w) { w.style.display = t==='price'?'block':'none'; w.innerHTML = `<canvas id="modal-${t}-chart"></canvas>`; }
+  });
+  document.querySelectorAll('.modal .chart-tab').forEach((t,i) => t.classList.toggle('active', i===0));
+
+  const res = await fetch(`/api/stock/${ticker}`);
+  const data = await res.json();
+  if (!data.success) {
+    document.getElementById('modalStats').innerHTML = '<div style="color:#ef4444;font-size:13px;grid-column:span 4">Veri bulunamadı.</div>';
+    return;
+  }
+  const r = data.result;
+  const chgClass = r.change >= 0 ? 'pos' : 'neg';
+  document.getElementById('modalStats').innerHTML = `
+    <div class="modal-stat"><div class="modal-stat-label">KAPANIŞ</div><div class="modal-stat-val">${r.close} ₺</div></div>
+    <div class="modal-stat"><div class="modal-stat-label">DEĞİŞİM</div><div class="modal-stat-val ${chgClass}">${r.change >= 0 ? '+' : ''}${r.change}%</div></div>
+    <div class="modal-stat"><div class="modal-stat-label">RSI</div><div class="modal-stat-val">${r.rsi}</div></div>
+    <div class="modal-stat"><div class="modal-stat-label">HACİM ORAN</div><div class="modal-stat-val">${knownVolRatio != null ? knownVolRatio + 'x' : (r.vol_ratio != null ? r.vol_ratio + 'x' : '—')}</div></div>
+    <div class="modal-stat" id="stat-fk"><div class="modal-stat-label">F/K</div><div class="modal-stat-val">...</div></div>
+    <div class="modal-stat" id="stat-pddd"><div class="modal-stat-label">PD/DD</div><div class="modal-stat-val">...</div></div>
+    <div class="modal-stat"><div class="modal-stat-label">H.AÇIKLIK</div><div class="modal-stat-val" id="stat-halka">...</div></div>
+    <div class="modal-stat"><div class="modal-stat-label">DOL.LOT</div><div class="modal-stat-val" id="stat-lot">...</div></div>`;
+
+  // Fundamental veriyi async çek
+  fetch(`/api/fundamental/${ticker}`).then(fr => fr.json()).then(fund => {
+    document.getElementById('stat-fk').querySelector('.modal-stat-val').textContent = fund.fk || '—';
+    document.getElementById('stat-pddd').querySelector('.modal-stat-val').textContent = fund.pddd || '—';
+    document.getElementById('stat-halka').textContent = fund.halka_aciklik ? `%${fund.halka_aciklik}` : '—';
+    document.getElementById('stat-lot').textContent = fund.lot ? Number(fund.lot).toLocaleString('tr-TR') : '—';
+  }).catch(() => {
+    document.getElementById('stat-fk').querySelector('.modal-stat-val').textContent = '—';
+    document.getElementById('stat-pddd').querySelector('.modal-stat-val').textContent = '—';
+  });
+
+  const d = r.chart;
+  const pc = document.getElementById('modal-price-chart').getContext('2d');
+  const avgVolM = d.volume.reduce((a,b)=>a+b,0)/d.volume.length;
+  modalCharts.price = new Chart(pc, {type:'bar', data:{labels:d.dates, datasets:[
+    {label:'Hacim', data:d.volume, backgroundColor:d.volume.map(v=>v>=avgVolM*1.5?'rgba(83,74,183,0.5)':'rgba(83,74,183,0.15)'), yAxisID:'yVol', order:2},
+    {label:'Kapanış', data:d.close, type:'line', borderColor:'#534AB7', borderWidth:2, pointRadius:0, tension:0.1, yAxisID:'yPrice', order:1},
+    {label:'MA20', data:d.ma20, type:'line', borderColor:'#f59e0b', borderWidth:1, pointRadius:0, yAxisID:'yPrice', order:1},
+    {label:'MA50', data:d.ma50, type:'line', borderColor:'#10b981', borderWidth:1, pointRadius:0, yAxisID:'yPrice', order:1},
+    {label:'MA200', data:d.ma200, type:'line', borderColor:'#ef4444', borderWidth:1, pointRadius:0, yAxisID:'yPrice', order:1},
+  ]}, options:{...chartOpts(), scales:{
+    x:{ticks:{color:'#888',font:{size:10},maxTicksLimit:8}, grid:{color:'rgba(0,0,0,0.06)'}},
+    yPrice:{type:'linear', position:'left', ticks:{color:'#888',font:{size:10}}, grid:{color:'rgba(0,0,0,0.06)'}},
+    yVol:{type:'linear', position:'right', ticks:{color:'#aaa',font:{size:9}, callback:v=>v>=1e6?(v/1e6).toFixed(0)+'M':v}, grid:{display:false}},
+  }}});
+
+  const rsiC = document.getElementById('modal-rsi-chart').getContext('2d');
+  modalCharts.rsi = new Chart(rsiC, {type:'line', data:{labels:d.dates, datasets:[
+    {label:'RSI', data:d.rsi, borderColor:'#8b5cf6', borderWidth:1.5, pointRadius:0}
+  ]}, options:{...chartOpts(), scales:{x:{display:false}, y:{min:0,max:100,grid:{color:'rgba(0,0,0,0.06)'},ticks:{color:'#888',font:{size:10}}}}}});
+
+  const macdC = document.getElementById('modal-macd-chart').getContext('2d');
+  modalCharts.macd = new Chart(macdC, {type:'bar', data:{labels:d.dates, datasets:[
+    {label:'MACD', data:d.macd, type:'line', borderColor:'#3b82f6', borderWidth:1.5, pointRadius:0},
+    {label:'Signal', data:d.macd_signal, type:'line', borderColor:'#f59e0b', borderWidth:1, pointRadius:0},
+    {label:'Histogram', data:d.macd_hist, backgroundColor:d.macd_hist.map(v=>v>=0?'rgba(16,185,129,.5)':'rgba(239,68,68,.5)')},
+  ]}, options:chartOpts()});
+
+  // Sinyalleri arka planda çek
+  fetch(`/api/scan/ticker/${ticker}`)
+    .then(res => res.json())
+    .then(sig => {
+      if (!sig.success) {
+        document.getElementById('modal-signals-content').innerHTML = '<div style="color:#ef4444;font-size:12px;text-align:center;padding:16px">Sinyal verisi alınamadı.</div>';
+        return;
+      }
+      const ALL_SCANS = ['golden_cross','breakout_52w','smart_money','value','ceiling','volume_dip','momentum',
+        'destek','bollinger','stoch_rsi','macd_kesisim','doji','hammer','supertrend',
+        'ema_crossover','adx_trend','morning_star','engulfing','deger_momentum','ichimoku','recent_ipo','minervini','bulkowski','rsi_trend_break'];
+      const active = new Set(sig.signals);
+      const rows = ALL_SCANS.map(key => {
+        const name = SCAN_NAMES[key] || key;
+        const on = active.has(key);
+        return `<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;margin-bottom:4px;background:${on?'#EEEDFE':'var(--bg2)'}">
+          <span style="font-size:12px;font-weight:${on?'600':'400'};color:${on?'var(--gold)':'var(--muted2)'}">${name}</span>
+          <span style="font-size:11px;font-weight:600;color:${on?'#10b981':'#ddd'}">${on?'✓ AKTİF':'—'}</span>
+        </div>`;
+      }).join('');
+      const summary = active.size > 0
+        ? `<div style="font-size:11px;color:var(--gold);font-weight:600;margin-bottom:12px;padding:8px 12px;background:#EEEDFE;border-radius:8px">${active.size} sinyal aktif</div>`
+        : `<div style="font-size:11px;color:var(--muted2);margin-bottom:12px;padding:8px 12px;background:var(--bg2);border-radius:8px">Şu an aktif sinyal yok</div>`;
+      document.getElementById('modal-signals-content').innerHTML = summary + rows;
+    })
+    .catch(() => {
+      document.getElementById('modal-signals-content').innerHTML = '<div style="color:#ef4444;font-size:12px;text-align:center;padding:16px">Bağlantı hatası.</div>';
+    });
+}
+
+function modalTab(e, type) {
+  document.querySelectorAll('.modal .chart-tab').forEach(t => t.classList.remove('active'));
+  e.target.classList.add('active');
+  document.getElementById('modal-price-wrap').style.display = type==='price'?'block':'none';
+  document.getElementById('modal-rsi-wrap').style.display = type==='rsi'?'block':'none';
+  document.getElementById('modal-macd-wrap').style.display = type==='macd'?'block':'none';
+  document.getElementById('modal-signals-wrap').style.display = type==='signals'?'block':'none';
+}
+
+function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalBtn(); }
+function closeModalBtn() { document.getElementById('modalOverlay').classList.remove('visible'); }
+
+function setStatus(type, msg) {
+  const el = document.getElementById('status');
+  if (type === 'loading') el.innerHTML = `<div class="spinner"></div><span>${msg}</span>`;
+  else if (type === 'done') el.innerHTML = `<span style="color:#10b981">✓</span><span>${msg}</span>`;
+  else el.innerHTML = `<span style="color:#ef4444">✗</span><span>${msg}</span>`;
+}
 </script>
+
+<div class="edu-modal" id="eduModal" onclick="closeEduModal(event)">
+  <div class="edu-box">
+    <button class="edu-close" onclick="document.getElementById('eduModal').classList.remove('open')">✕</button>
+    <div class="edu-tag" id="eduTag"></div>
+    <div class="edu-title" id="eduTitle"></div>
+    <div class="edu-body" id="eduBody"></div>
+    <div class="edu-when" id="eduWhen"></div>
+  </div>
+</div>
+<footer style="margin-top:48px;padding:24px 32px;border-top:1px solid #dddbd2;background:#efede6">
+  <div style="max-width:1200px;margin:0 auto;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:flex-start">
+    <div style="font-size:11px;color:#888;max-width:560px;line-height:1.7">
+      <strong style="color:#534AB7">BistScan</strong> — Burada yer alan bilgiler yatırım tavsiyesi niteliği taşımaz. 
+      Teknik analiz sonuçları bilgilendirme amaçlıdır. Veriler gecikmeli olabilir ve doğruluğu garanti edilmez. 
+      Yatırım kararlarınızı kendi araştırmanıza ve bir finansal danışmana dayandırınız. 
+      BistScan, kullanıcıların aldığı yatırım kararlarından doğan zararlardan sorumlu tutulamaz.
+    </div>
+    <div style="display:flex;gap:20px;font-size:11px;align-items:center;">
+      <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(135deg, #FFD700 0%, #FF3333 100%); color:#000; padding:6px 12px; border-radius:6px; text-decoration:none; font-size:12px; font-weight:700; transition:all 0.3s ease; box-shadow:0 3px 10px rgba(255, 51, 51, 0.2);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 15px rgba(255, 51, 51, 0.3)'; this.style.background='linear-gradient(135deg, #FFE033 0%, #FF4D4D 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 3px 10px rgba(255, 51, 51, 0.2)'; this.style.background='linear-gradient(135deg, #FFD700 0%, #FF3333 100%)';">
+        <svg viewBox="0 0 24 24" aria-hidden="true" style="width:12px; height:12px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
+        <span>Takip Et</span>
+      </a>
+      <a href="/kvkk" style="color:#888;text-decoration:none">KVKK</a>
+      <a href="/kullanim-sartlari" style="color:#888;text-decoration:none">Kullanım Şartları</a>
+      <a href="/yasal-uyari" style="color:#888;text-decoration:none">Yasal Uyarı</a>
+      <a href="/cerez-politikasi" style="color:#888;text-decoration:none">Çerez Politikası</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
