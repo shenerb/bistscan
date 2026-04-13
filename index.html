@@ -19,13 +19,13 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;overflow-x:hidden}
 section{background:var(--bg)}
-.ticker-outer{background:var(--bg);padding:12px 0;border-bottom:1px solid rgba(0,0,0,0.05);overflow:hidden}
-.ticker-track{display:flex;gap:1.5rem;animation:ticker 40s linear infinite;white-space:nowrap}
+.ticker-outer{background:#111111;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);overflow:hidden;}
+.ticker-track{display:flex;gap:2.5rem;animation:ticker 45s linear infinite;white-space:nowrap}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tick{font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;background:#ffffff;padding:6px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(0,0,0,0.05);box-shadow:0 2px 8px rgba(0,0,0,0.03)}
-.tick .up{color:#00d873;font-weight:800;text-shadow:0 0 8px rgba(0,216,115,.3)}.tick .dn{color:#ff3355;font-weight:800;text-shadow:0 0 8px rgba(255,51,85,.3)}
+.tick{font-family:'DM Sans',sans-serif;font-size:13px;display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.7);}
+.tick .up{color:#10b981;font-weight:700;} .tick .dn{color:#ef4444;font-weight:700;}
 .text-gradient{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:bold;}
-.tick-name{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;font-weight:800;font-size:13px;letter-spacing:0.02em}
+.tick-name{color:#fff;font-weight:700;letter-spacing:0.05em;}
 .tick-model{font-size:11px;font-weight:500;letter-spacing:.04em}
 nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(221, 219, 210, 0.5);padding:0 40px;height:70px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 4px 30px rgba(0,0,0,0.03)}
 .nav-logo{font-family:'DM Sans',sans-serif;font-size:32px;font-weight:800;letter-spacing:-0.02em;color:#0a1930;text-transform:none;filter:drop-shadow(0 4px 6px rgba(0,0,0,0.1))}
@@ -33,8 +33,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.85);backdrop-
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:13px;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-.nav-cta{border:1px solid rgba(43,128,255,0.3);color:#2b80ff;background:rgba(43,128,255,0.04);padding:10px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:all .3s ease;box-shadow:0 2px 8px rgba(43,128,255,0.05)}
-.nav-cta:hover{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;border-color:transparent;transform:translateY(-2px);box-shadow:0 4px 15px rgba(165,65,255,0.3)}
+.nav-cta{padding:10px 22px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;}
 .hero{padding:100px 40px 80px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
 .hero-label{font-size:11px;background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;color:transparent;letter-spacing:.15em;font-weight:700;margin-bottom:16px;animation:fadeUp .5s .1s both;display:inline-block}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:24px;animation:fadeUp .5s .2s both;color:var(--text)}
@@ -43,8 +42,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(239,237,230,.85);backdrop-
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .5s .4s both}
 .scan-words{margin-bottom:28px;animation:fadeUp .5s .35s both;line-height:1.9;max-width:420px}
 .scan-word{font-size:14px;font-weight:500;margin-right:6px;transition:opacity .3s}
-.btn-primary{background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%);color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(165,65,255,0.25)}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(165,65,255,0.4)}
+.btn-primary{padding:14px 32px;border-radius:12px;font-size:15px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:8px;}
+
+/* NEON BUTTONS (btn-primary & nav-cta) */
+.nav-cta, .btn-primary {
+  background: #0a0a0a !important; color: #fff !important;
+  position: relative; border: 1px solid transparent; background-clip: padding-box;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 15px rgba(255, 51, 51, 0.2), 0 0 0 1px rgba(255, 215, 0, 0.3); z-index: 1;
+}
+.nav-cta::before, .btn-primary::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 12px; z-index: -1; margin: -1.5px;
+  background: linear-gradient(45deg, #FF3366, #FF9900, #FFD700); opacity: 0.85; transition: opacity 0.3s;
+}
+.nav-cta:hover, .btn-primary:hover {
+  transform: translateY(-3px); text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  box-shadow: 0 8px 25px rgba(255, 51, 51, 0.4), 0 0 0 1px rgba(255, 215, 0, 0.5);
+}
 .btn-navy{background:#0a1930;color:#fff;padding:14px 32px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);display:inline-flex;align-items:center;gap:8px;box-shadow:0 4px 15px rgba(10,25,48,0.25)}
 .btn-navy:hover{transform:translateY(-3px);box-shadow:0 8px 25px rgba(10,25,48,0.4)}
 .btn-secondary{background:#fff;border:1px solid rgba(43,128,255,0.2);color:#0a1930;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 2px 8px rgba(0,0,0,0.02)}
@@ -101,16 +116,25 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
 .footer-by span{color:var(--gold)}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:768px){
-  nav{padding:0 20px}
+  nav{padding:16px 20px; height:auto; flex-direction:column; gap:16px; align-items:center}
+  .nav-logo{font-size:28px;}
   .nav-links{display:none}
-  .hero{grid-template-columns:1fr;padding:60px 20px 40px;gap:40px}
+  .nav-actions { width:100%; display:flex; justify-content:space-between; gap:6px;}
+  .nav-actions a { flex:1; text-align:center; padding:10px 4px !important; font-size:12px !important; justify-content:center; letter-spacing:-0.02em;}
+  
+  .hero{grid-template-columns:1fr;padding:40px 20px 30px;gap:32px}
+  .hero-title{font-size:clamp(40px, 12vw, 48px); margin-bottom:16px;}
+  .hero-desc{font-size:14px; line-height:1.6; margin-bottom:24px}
+  .hero-btns {flex-direction:column; gap:12px; width:100%;}
+  .hero-btns a {width:100%; justify-content:center; text-align:center;}
+  
   .stats{grid-template-columns:1fr}
   .stat-item{border-right:none;border-bottom:1px solid var(--border);padding:24px 20px}
   .steps{grid-template-columns:1fr}
   .step{border-right:none;border-bottom:1px solid var(--border);padding:32px 20px}
-  .section{padding:48px 20px}
-  footer{flex-direction:column;text-align:center}
-  .cta-section{padding:60px 20px}
+  .section{padding:40px 20px}
+  footer{flex-direction:column;text-align:center; gap:20px}
+  .cta-section{padding:50px 20px}
 }
 </style>
 </head>
@@ -130,7 +154,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
     <li><a href="#nasil">Nasıl Çalışır</a></li>
     <li><a href="#hakkinda">Hakkında</a></li>
   </ul>
-  <div style="display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
+  <div class="nav-actions" style="display: flex; gap: 8px; align-items: center; justify-content: center; flex-wrap: wrap;">
     <a href="#" onclick="openIOSModal(); return false;" style="font-weight:700; color:var(--text); text-decoration:none; display:inline-flex; align-items:center; background:#EEEDFE; padding:10px 14px; border-radius:12px; font-size:13px; border:1px solid #ddd; transition:all 0.3s; white-space:nowrap;">📱 Kur</a>
     <a href="https://x.com/bistscan_app?s=11" target="_blank" style="display:inline-flex; align-items:center; gap:6px; background:linear-gradient(90deg, #2b80ff 0%, #a541ff 100%); color:#fff; padding:10px 16px; border-radius:12px; text-decoration:none; font-size:13px; font-weight:700; transition:all 0.3s ease; box-shadow:0 4px 15px rgba(165, 65, 255, 0.3); white-space:nowrap;" onmouseover="this.style.transform='translateY(-3px) scale(1.02)'; this.style.boxShadow='0 10px 20px rgba(165, 65, 255, 0.4)'; this.style.background='linear-gradient(90deg, #4b94ff 0%, #ba63ff 100%)';" onmouseout="this.style.transform='none'; this.style.boxShadow='0 4px 15px rgba(165, 65, 255, 0.3)'; this.style.background='linear-gradient(90deg, #2b80ff 0%, #a541ff 100%)';">
       <svg viewBox="0 0 24 24" aria-hidden="true" style="width:14px; height:14px; fill:currentColor;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L5.09 22.75H1.78l7.505-8.576L1.141 2.25h7.129l4.7 6.136 5.275-6.136h.001zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644z"></path></svg>
