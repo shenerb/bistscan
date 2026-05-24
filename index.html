@@ -487,10 +487,10 @@ footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify
         <svg viewBox="0 0 24 24" aria-hidden="true" style="width:12px; height:12px; fill:currentColor;"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
         <span>Instagram</span>
       </a>
-      <a href="#" onclick="openLegalModal('gizlilik'); return false;" style="color:#aaa;text-decoration:none">Gizlilik & KVKK</a>
-      <a href="#" onclick="openLegalModal('kullanim'); return false;" style="color:#aaa;text-decoration:none">Kullanım Şartları</a>
-      <a href="#" onclick="openLegalModal('kullanim'); return false;" style="color:#aaa;text-decoration:none">Yasal Uyarı</a>
-      <a href="#" onclick="openLegalModal('gizlilik'); return false;" style="color:#aaa;text-decoration:none">Çerez Politikası</a>
+      <a href="gizlilik.html" style="color:#aaa;text-decoration:none">Gizlilik & KVKK</a>
+      <a href="kullanim.html" style="color:#aaa;text-decoration:none">Kullanım Şartları</a>
+      <a href="yasal-uyari.html" style="color:#aaa;text-decoration:none">Yasal Uyarı</a>
+      <a href="cerez.html" style="color:#aaa;text-decoration:none">Çerez Politikası</a>
     </div>
     <div class="footer-by">Tasarım & Geliştirme: <span>Şener</span></div>
   </div>
@@ -671,39 +671,5 @@ function closeIOSModal() {
 }
 </script>
 
-<div id="legalModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); backdrop-filter:blur(5px); z-index:9999; justify-content:center; align-items:center; opacity:0; transition: opacity 0.3s;" onclick="if(event.target===this) closeLegalModal();">
-  <div style="background:var(--bg); padding:32px; border-radius:24px; max-width:600px; width:90%; position:relative; box-shadow:0 24px 60px rgba(0,0,0,0.2); border:1px solid rgba(0,0,0,0.05); max-height:80vh; overflow-y:auto; text-align:left;">
-    <button onclick="closeLegalModal()" style="position:absolute; top:16px; right:16px; background:transparent; border:none; font-size:24px; cursor:pointer; color:var(--muted2);">&times;</button>
-    <h3 id="legalTitle" style="font-family:'Bebas Neue',sans-serif; font-size:32px; margin-bottom:12px; color:var(--text);"></h3>
-    <div id="legalContent" style="color:var(--text); font-size:14px; line-height:1.7;"></div>
-  </div>
-</div>
-
-<script>
-const legalTexts = {
-  'gizlilik': {
-    title: 'Gizlilik Politikası ve KVKK',
-    content: '<p>BistScan olarak kullanıcılarımızın veri gizliliğine ve güvenliğine büyük önem veriyoruz. Sitemizi ziyaret ettiğinizde herhangi bir kişisel veri (isim, soyisim, TC kimlik vb.) toplanmamaktadır. Yalnızca site performansını artırmak amacıyla anonimleştirilmiş cihaz bilgileri ve tarayıcı verileri (Google Analytics vb. araçlar vasıtasıyla) loglanmaktadır.</p><br><p>Çerezler (Cookies) aracılığıyla elde edilen veriler kesinlikle 3. şahıs veya kurumlarla pazarlama amacıyla paylaşılmaz. Kullanıcılar, tarayıcı ayarlarından çerez kullanımını istedikleri zaman kapatma hakkına sahiptir.</p>'
-  },
-  'kullanim': {
-    title: 'Kullanım Şartları ve Yasal Uyarı',
-    content: '<p>BistScan (bistscan.com) platformu üzerinde sunulan tüm veriler, grafikler ve algoritmik tarama sonuçları tamamen <strong>bilgilendirme ve eğitim</strong> amaçlıdır.</p><br><p>Sitemizde yer alan hiçbir bilgi, sinyal, veri veya analiz kesinlikle <strong>yatırım tavsiyesi (danışmanlık) niteliği taşımamaktadır.</strong> Yatırımcılar, hisse senedi alım-satım kararlarını tamamen kendi araştırmalarına ve risk profillerine göre bağımsız olarak vermelidirler.</p><br><p>Sistem algoritmaları, hisse senetlerinin geçmiş fiyat hareketlerini matematiksel ve istatistiksel olarak hesaplar. Geçmiş performans, gelecekteki getirilerin garantisi veya göstergesi olamaz. Hatalı veri beslemelerinden, teknik arızalardan veya uygulama kullanımından doğabilecek herhangi bir maddi/manevi zarardan BistScan.com ve sistem geliştiricileri sorumlu tutulamaz.</p>'
-  }
-};
-
-function openLegalModal(type) {
-  document.getElementById('legalTitle').innerText = legalTexts[type].title;
-  document.getElementById('legalContent').innerHTML = legalTexts[type].content;
-  const m = document.getElementById('legalModal');
-  m.style.display = 'flex';
-  setTimeout(()=>m.style.opacity='1', 10);
-}
-
-function closeLegalModal() {
-  const m = document.getElementById('legalModal');
-  m.style.opacity = '0';
-  setTimeout(()=>m.style.display='none', 300);
-}
-</script>
 </body>
 </html>
